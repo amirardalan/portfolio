@@ -45,7 +45,7 @@ export default function Uses() {
     {
       title: 'ThinkPad X13 Gen 5',
       items: [
-        { value: 'Windows 11 Pro' },
+        { value: 'Omarchy' },
         { value: '13"' },
         { value: 'Intel® Core™ Ultra 7 165U' },
         { value: '32GB LPDDR5X 6400MHz' },
