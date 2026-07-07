@@ -41,7 +41,7 @@
     "drizzle-kit": "^0.31.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "15.1.4",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.10",
     "postcss-nesting": "^12.1.5",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -51,6 +51,7 @@
   },
   "overrides": {
     "@types/react": "19.0.7",
-    "@types/react-dom": "19.0.3"
+    "@types/react-dom": "19.0.3",
+    "postcss": "^8.5.10"
   }
 }

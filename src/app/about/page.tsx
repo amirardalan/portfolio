@@ -103,17 +103,6 @@ export default function About() {
               </Tooltip>
             </div>
           </div>
-          <div className="mt-6 lg:mt-0" aria-hidden="true">
-            <CldImage
-              src="About/amir-avatar_e6puqu"
-              alt="Amir Ardalan Avatar"
-              width={150}
-              height={150}
-              className="rounded-full"
-              grayscale
-              priority
-            />
-          </div>
         </section>
       </main>
     </Container>
