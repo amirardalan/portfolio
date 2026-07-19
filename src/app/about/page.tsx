@@ -14,16 +14,13 @@ export default function About() {
         </div>
         <section className="mb-4 max-w-7xl font-serif text-xl font-light italic leading-normal md:text-3xl md:leading-normal lg:mb-6 lg:text-4xl lg:leading-normal">
           <p className="mb-4 text-dark md:mb-6 lg:mb-8 dark:text-light">
-            Design Engineer based in Portland, OR.
+            I’m a design-minded software engineer who turns ideas into thoughtful, working products.
           </p>
           <p className="mb-4 text-dark md:mb-6 lg:mb-8 dark:text-light">
-            I&apos;ve shaped digital solutions blending code and design for
-            Nike&apos;s LeBron James Innovation Center, Columbia Sportswear, and
-            KEEN Footwear with BASIC/DEPT®.
+            Over nearly two decades, I’ve helped shape digital experiences for Nike’s LeBron James Innovation Center, Columbia Sportswear, and KEEN Footwear with BASIC/DEPT®.
           </p>
-          <p className="mb-4 text-dark dark:text-light">
-            I craft intuitive, innovative products that elevate user experiences
-            and drive results.
+          <p className="mb-4 text-dark md:mb-6 lg:mb-8 dark:text-light">
+            I like challenging problems, close collaboration, and looking closely at the spaces where ideas, people, and systems meet.
           </p>
         </section>
 
