@@ -14,7 +14,7 @@ export default function About() {
         </div>
         <section className="mb-4 max-w-7xl font-serif text-xl font-light italic leading-normal md:text-3xl md:leading-normal lg:mb-6 lg:text-4xl lg:leading-normal">
           <p className="mb-4 text-dark md:mb-6 lg:mb-8 dark:text-light">
-            Frontend Engineer based in Portland, OR.
+            Design Engineer based in Portland, OR.
           </p>
           <p className="mb-4 text-dark md:mb-6 lg:mb-8 dark:text-light">
             I&apos;ve shaped digital solutions blending code and design for

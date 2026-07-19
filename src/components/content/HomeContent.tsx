@@ -26,7 +26,7 @@ export default function HomeContent() {
           className="my-2 text-sm font-medium uppercase tracking-widest text-zinc-600 sm:text-md md:text-xl lg:my-5 lg:text-2xl dark:text-zinc-400"
           id="page-subtitle"
         >
-          Frontend Engineer & UI/UX Designer
+          Design Engineer
         </h2>
         <nav className="mt-8 flex space-x-4" aria-label="Main navigation">
           <Link href="/blog" aria-label="Read my blog posts">

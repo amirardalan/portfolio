@@ -92,11 +92,11 @@ export default function Uses() {
     },
     {
       title: 'Code',
-      items: [{ value: 'VS Code' }, { value: 'Zed' }, { value: 'Neovim' }],
+      items: [{ value: 'Zed' }, { value: 'Neovim' }],
     },
     {
       title: 'Design',
-      items: [{ value: 'Figma' }, { value: 'Aseprite' }],
+      items: [{ value: 'Figma' }, { value: 'Aseprite' }, { value: 'Paper + Pencil' }],
     },
     {
       title: 'Music',
@@ -108,17 +108,11 @@ export default function Uses() {
     },
   ];
 
-  const stack = [
+  const tools = [
     {
-      title: 'Web',
+      title: 'Code',
       items: [
-        { value: 'TypeScript' },
-        { value: 'Next.js' },
-        { value: 'Tailwind' },
-        { value: 'Postgres' },
-        { value: 'Supabase' },
-        { value: 'Drizzle' },
-        { value: 'MDX' },
+        { value: 'Codex' },
       ],
     },
     {
@@ -127,10 +121,6 @@ export default function Uses() {
         { value: 'Ghostty' },
         { value: 'Yazi' },
         { value: 'Neovim' },
-        { value: 'Node' },
-        { value: 'Powerlevel10k' },
-        { value: 'GitHub CLI' },
-        { value: 'GitHub Copilot' },
       ],
     },
   ];
@@ -142,7 +132,7 @@ export default function Uses() {
 
         <div className="mb-10 max-w-7xl font-serif text-2xl md:mb-14 md:text-3xl">
           <p className="mb-6 font-light italic text-dark dark:text-light">
-            Things I use to make things...
+            Things I use to make things:
           </p>
         </div>
 
@@ -203,17 +193,17 @@ export default function Uses() {
           </UsesItemGrid>
         </section>
 
-        <section className="mb-12" aria-labelledby="stack-heading">
+        <section className="mb-12" aria-labelledby="tools-heading">
           <h2
-            id="stack-heading"
+            id="tools-heading"
             className="mb-8 border-b-2 border-primary pb-4 text-xl text-dark dark:text-light"
           >
-            Stack
+            Tools
           </h2>
-          <UsesItemGrid columns={2} aria-labelledby="stack-heading">
-            {stack.map((item, index) => (
+          <UsesItemGrid columns={2} aria-labelledby="tools-heading">
+            {tools.map((item, index) => (
               <UsesItemCard
-                key={`stack-${index}`}
+                key={`tools-${index}`}
                 title={item.title}
                 items={item.items}
                 aria-label={`${item.title} technology stack`}

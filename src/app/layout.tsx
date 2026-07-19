@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const getPageTitle = (path: string): string => {
     if (path === '/') {
-      return 'Amir Ardalan — Frontend Engineer & UI/UX Designer';
+      return 'Amir Ardalan — Design Engineer';
     }
     if (path.startsWith('/blog/')) {
       const slug = path.split('/blog/')[1];
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
     if (path.length > 1) {
       return `${path.slice(1).charAt(0).toUpperCase()}${path.slice(2)} — Amir Ardalan`;
     }
-    return 'Amir Ardalan — Frontend Engineer & UI/UX Designer';
+    return 'Amir Ardalan — Design Engineer';
   };
 
   const title = getPageTitle(pathname);
