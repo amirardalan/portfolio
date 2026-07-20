@@ -117,7 +117,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
       </div>
       <input
         type="text"
-        placeholder="Search posts..."
+        placeholder="Search writing"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="mb-2 w-full rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-dark outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-light"
@@ -137,12 +137,12 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
           {searchTerm && (
             <button
               onClick={handleClearFilters}
-              title="Clear Search"
+              title="Clear search"
               className="flex items-center"
             >
               <IconClose size={20} color="var(--color-primary)" />
               <span className="pl-1 text-sm text-dark dark:text-light">
-                Clear Search
+                Clear
               </span>
             </button>
           )}
@@ -150,7 +150,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
       </div>
       {paginatedPosts.length > 0 || showFeaturedPost ? (
         <ul
-          className={clsx('pb-8 pt-6 last-of-type:mb-12', searchTerm && 'pt-2')}
+          className={clsx('pb-6 pt-4 last-of-type:mb-8', searchTerm && 'pt-2')}
         >
           {showFeaturedPost && (
             <BlogPostCard post={featuredPost} featured={true} />
@@ -161,14 +161,14 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
         </ul>
       ) : (
         <p className="pt-6 text-dark dark:text-light">
-          No posts match your search.
+          No posts match that search.
         </p>
       )}
       <ClientPagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
-        className="mb-16"
+        className="mb-10"
       />
     </div>
   );

@@ -60,7 +60,7 @@ export default function MobileNavigation() {
         }}
       >
         <div
-          className={`${isLandscape ? 'mb-4' : 'mb-20'} flex items-center justify-between`}
+          className={`${isLandscape ? 'mb-2' : 'mb-10'} flex items-center justify-between`}
         >
           <IconMobileNav
             isOpen={true}
@@ -70,7 +70,7 @@ export default function MobileNavigation() {
         </div>
 
         <nav className="flex flex-1 flex-col">
-          <div className="flex flex-col space-y-1 pl-8">
+          <div className="flex flex-col space-y-1 pl-5">
             <div className="flex justify-start">
               <AuthMenu />
             </div>

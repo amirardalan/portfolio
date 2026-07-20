@@ -7,7 +7,6 @@ export { size, contentType };
 export default async function Image() {
   return generateTwitterImage({
     title: 'Uses — Amir Ardalan',
-    description:
-      'Things I use to make things... hardware, software, and other tools.',
+    description: 'Hardware, software, and tools I use.',
   });
 }

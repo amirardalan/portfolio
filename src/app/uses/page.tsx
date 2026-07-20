@@ -24,12 +24,12 @@ export default function Uses() {
         { value: 'Windows 11' },
         { value: 'NZXT H7 Flow w/ ARCTIC P14' },
         { value: 'Intel i7-14700KF 5.6GHz' },
-        { value: 'MSI PRO Z790-A MAX Wifi' },
+        { value: 'MSI PRO Z790-A MAX WIFI' },
         { value: 'Gigabyte RTX 4090 AERO OC 24GB' },
         { value: 'Corsair Vengeance DDR5-6400 CL32 64GB' },
         { value: 'Corsair RM1000x SHIFT 1000W' },
-        { value: 'WD Black SN850X 4TB NVME' },
-        { value: 'Deepcool LT720' },
+        { value: 'WD Black SN850X 4TB NVMe' },
+        { value: 'DeepCool LT720' },
       ],
     },
     {
@@ -59,20 +59,20 @@ export default function Uses() {
       title: 'PC',
       items: [
         { value: 'Alienware AW3423DW 34.2" 175Hz' },
-        { value: 'Logitech G 502X Lightspeed' },
+        { value: 'Logitech G502 X LIGHTSPEED' },
         { value: 'Keychron K2 HE' },
       ],
     },
     {
       title: 'Headphones',
       items: [
-        { value: 'Beyerdynamic DT770Pro' },
+        { value: 'Beyerdynamic DT 770 PRO' },
         { value: 'Sennheiser HD25-1 II' },
         { value: 'Apple AirPods Pro (Gen 2)' },
       ],
     },
     {
-      title: 'Interface & Monitors',
+      title: 'Audio Interface & Monitors',
       items: [{ value: 'MOTU Audio Express' }, { value: 'KRK VXT8' }],
     },
     {
@@ -84,7 +84,7 @@ export default function Uses() {
   const software = [
     {
       title: 'Writing',
-      items: [{ value: 'iaWriter' }],
+      items: [{ value: 'iA Writer' }],
     },
     {
       title: 'Notes',
@@ -96,7 +96,11 @@ export default function Uses() {
     },
     {
       title: 'Design',
-      items: [{ value: 'Figma' }, { value: 'Aseprite' }, { value: 'Paper + Pencil' }],
+      items: [
+        { value: 'Figma' },
+        { value: 'Aseprite' },
+        { value: 'Paper + pencil' },
+      ],
     },
     {
       title: 'Music',
@@ -111,35 +115,27 @@ export default function Uses() {
   const tools = [
     {
       title: 'Code',
-      items: [
-        { value: 'Codex' },
-      ],
+      items: [{ value: 'Codex' }],
     },
     {
       title: 'Shell',
-      items: [
-        { value: 'Ghostty' },
-        { value: 'Yazi' },
-        { value: 'Neovim' },
-      ],
+      items: [{ value: 'Ghostty' }, { value: 'Yazi' }, { value: 'Neovim' }],
     },
   ];
 
   return (
     <Container>
-      <div className="mt-8">
+      <div>
         <PageHeading title={'Uses'} />
 
-        <div className="mb-10 max-w-7xl font-serif text-2xl md:mb-14 md:text-3xl">
-          <p className="mb-6 font-light italic text-dark dark:text-light">
-            Things I use to make things:
-          </p>
+        <div className="mb-8 max-w-7xl text-xl md:mb-12 md:text-2xl">
+          <p className="text-dark dark:text-light">Tools I use.</p>
         </div>
 
-        <section className="mb-12" aria-labelledby="computers-heading">
+        <section className="mb-10" aria-labelledby="computers-heading">
           <h2
             id="computers-heading"
-            className="mb-8 border-b-2 border-primary pb-4 text-xl text-dark dark:text-light"
+            className="mb-5 border-b border-zinc-200 pb-3 text-lg font-medium text-dark dark:border-zinc-800 dark:text-light"
           >
             Computers
           </h2>
@@ -155,10 +151,10 @@ export default function Uses() {
           </UsesItemGrid>
         </section>
 
-        <section className="mb-12" aria-labelledby="peripherals-heading">
+        <section className="mb-10" aria-labelledby="peripherals-heading">
           <h2
             id="peripherals-heading"
-            className="mb-8 border-b-2 border-primary pb-4 text-xl text-dark dark:text-light"
+            className="mb-5 border-b border-zinc-200 pb-3 text-lg font-medium text-dark dark:border-zinc-800 dark:text-light"
           >
             Peripherals
           </h2>
@@ -174,10 +170,10 @@ export default function Uses() {
           </UsesItemGrid>
         </section>
 
-        <section className="mb-12" aria-labelledby="software-heading">
+        <section className="mb-10" aria-labelledby="software-heading">
           <h2
             id="software-heading"
-            className="mb-8 border-b-2 border-primary pb-4 text-xl text-dark dark:text-light"
+            className="mb-5 border-b border-zinc-200 pb-3 text-lg font-medium text-dark dark:border-zinc-800 dark:text-light"
           >
             Software
           </h2>
@@ -193,10 +189,10 @@ export default function Uses() {
           </UsesItemGrid>
         </section>
 
-        <section className="mb-12" aria-labelledby="tools-heading">
+        <section className="mb-10" aria-labelledby="tools-heading">
           <h2
             id="tools-heading"
-            className="mb-8 border-b-2 border-primary pb-4 text-xl text-dark dark:text-light"
+            className="mb-5 border-b border-zinc-200 pb-3 text-lg font-medium text-dark dark:border-zinc-800 dark:text-light"
           >
             Tools
           </h2>

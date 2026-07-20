@@ -16,7 +16,7 @@ export default function ClientLikeCount({ postId }: ClientLikeCountProps) {
   }, [fetchLikes, postId]);
 
   if (error[postId]) {
-    return <div className="leading-none">Error loading likes.</div>;
+    return <div className="leading-none">Likes unavailable.</div>;
   }
 
   const count = likes[postId] || 0;

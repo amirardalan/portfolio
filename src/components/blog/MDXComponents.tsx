@@ -15,16 +15,16 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="mb-0 pt-12 text-dark dark:text-light" {...props} />
+    <h1 className="mb-0 pt-10 text-dark dark:text-light" {...props} />
   ),
   h2: (props: HeadingProps) => (
-    <h2 className="mb-3 mt-8 text-dark dark:text-light" {...props} />
+    <h2 className="mb-3 mt-7 text-dark dark:text-light" {...props} />
   ),
   h3: ({ children, ...props }: HeadingProps) => {
     if (typeof children !== 'string' && !Array.isArray(children)) {
       return (
         <h3
-          className="mb-4 mt-8 text-2xl font-medium text-dark dark:text-light"
+          className="mb-3 mt-7 text-2xl font-medium text-dark dark:text-light"
           {...props}
         >
           {children}
@@ -41,7 +41,7 @@ export const components = {
     return (
       <a
         href={`#${slug}`}
-        className="group relative mb-4 mt-8 block scroll-mt-24 text-2xl leading-tight text-dark outline-none lg:leading-normal dark:text-light"
+        className="group relative mb-3 mt-7 block scroll-mt-24 text-2xl leading-tight text-dark outline-none lg:leading-normal dark:text-light"
         id={slug}
         aria-label={`Link to ${children}`}
       >
@@ -68,7 +68,7 @@ export const components = {
   h4: (props: HeadingProps) => <h4 className="" {...props} />,
   p: (props: ParagraphProps) => (
     <p
-      className="my-6 font-serif text-lg font-medium leading-normal"
+      className="my-5 font-serif text-lg font-medium leading-normal"
       {...props}
     />
   ),
@@ -80,7 +80,7 @@ export const components = {
   ),
   ul: (props: ListProps) => (
     <ul
-      className="my-8 list-disc space-y-1 pl-5 text-dark dark:text-light"
+      className="my-6 list-disc space-y-1 pl-5 text-dark dark:text-light"
       {...props}
     />
   ),
@@ -201,7 +201,7 @@ export const components = {
     return (
       <div className="group relative">
         <pre
-          className="overflow-y-none line-highlight-enabled my-8 overflow-x-auto rounded-lg bg-zinc-100 p-6 font-mono text-sm scrollbar scrollbar-track-zinc-600 scrollbar-thumb-zinc-500 dark:bg-zinc-900"
+          className="overflow-y-none line-highlight-enabled my-6 overflow-x-auto rounded-lg bg-zinc-100 p-5 font-mono text-sm scrollbar scrollbar-track-zinc-600 scrollbar-thumb-zinc-500 dark:bg-zinc-900"
           {...props}
         >
           {children}

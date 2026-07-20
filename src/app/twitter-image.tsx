@@ -6,8 +6,8 @@ export { size, contentType };
 
 export default async function Image() {
   return generateTwitterImage({
-    title: 'Amir Ardalan — amir.sh',
+    title: 'Amir Ardalan — Design Engineer',
     description:
-      'Design Engineer with 10+ years of experience creating innovative digital solutions.',
+      'I design and build thoughtful software, from early exploration through interaction design to production code.',
   });
 }

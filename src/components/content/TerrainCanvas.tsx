@@ -19,7 +19,6 @@ import {
 } from 'three';
 import { createNoise2D } from 'simplex-noise';
 import { useTheme } from '@/store/theme';
-import TooltipCursor from '@/components/ui/TooltipCursor';
 
 type Offset = { x: number; z: number };
 
@@ -104,6 +103,7 @@ function Terrain({
   rotation,
 }: TerrainProps) {
   const theme = useTheme();
+  const [reduceMotion, setReduceMotion] = useState(false);
   const canvasColor = useMemo(() => {
     const lightColor = '#C9C1C1';
     const darkColor = '#1F1D1D';
@@ -117,8 +117,16 @@ function Terrain({
   const ref = useRef<PlaneGeometryRef>(null);
   const mesh = useRef<Mesh<BufferGeometry, Material | Material[]>>(null);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updatePreference = () => setReduceMotion(mediaQuery.matches);
+    updatePreference();
+    mediaQuery.addEventListener('change', updatePreference);
+    return () => mediaQuery.removeEventListener('change', updatePreference);
+  }, []);
+
   useFrame(() => {
-    if (mesh.current) {
+    if (mesh.current && !reduceMotion) {
       mesh.current.rotation.y += rotation / 20000;
     }
   });
@@ -204,22 +212,21 @@ export default function TerrainCanvas() {
   );
 
   return (
-    <TooltipCursor text="Randomize">
-      <button
-        id="three-canvas"
-        onClick={randomizeTerrain}
-        className="animate-fade-in-bottom absolute z-0 m-0 block h-screen w-screen cursor-pointer overflow-hidden border-none bg-transparent p-0 outline-none md:bottom-0"
-        aria-label="Randomize terrain"
+    <button
+      id="three-canvas"
+      onClick={randomizeTerrain}
+      className="animate-fade-in absolute inset-0 z-0 m-0 block h-full w-full cursor-pointer overflow-hidden border-none bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+      aria-label="Regenerate the interactive terrain study"
+      title="Click to regenerate"
+    >
+      <Canvas
+        gl={{ antialias: true }}
+        dpr={pixelRatio}
+        onCreated={({ camera }) => camera.lookAt(0.2, 0.2, 0.1)}
+        camera={{ position: [0.15, 0.4, 0.4] }}
       >
-        <Canvas
-          gl={{ antialias: true }}
-          dpr={pixelRatio}
-          onCreated={({ camera }) => camera.lookAt(0.2, 0.2, 0.1)}
-          camera={{ position: [0.15, 0.4, 0.4] }}
-        >
-          <Terrain {...terrainProps} />
-        </Canvas>
-      </button>
-    </TooltipCursor>
+        <Terrain {...terrainProps} />
+      </Canvas>
+    </button>
   );
 }

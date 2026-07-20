@@ -5,7 +5,7 @@ import {
   contentType,
 } from '@/components/og/OgImageTemplate';
 
-export const alt = 'Blog post';
+export const alt = 'Writing by Amir Ardalan';
 export { size, contentType };
 
 export async function generateStaticParams() {
@@ -19,14 +19,14 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
     if (!post) {
       return generateOgImage({
-        title: 'Blog Post',
-        description: 'Read this post on amir.sh',
+        title: 'Writing — Amir Ardalan',
+        description: 'Read this post on amir.sh.',
       });
     }
 
     return generateOgImage({
       title: post.title,
-      description: post.excerpt || 'Read this post on amir.sh',
+      description: post.excerpt || 'Read this post on amir.sh.',
       category: post.category?.name || undefined,
     });
   } catch (error) {
@@ -34,8 +34,8 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
     // Fallback OG
     return generateOgImage({
-      title: 'Blog — amir.sh',
-      description: 'Read this post on amir.sh',
+      title: 'Writing — Amir Ardalan',
+      description: 'Read this post on amir.sh.',
     });
   }
 }

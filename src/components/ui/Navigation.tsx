@@ -32,12 +32,12 @@ const getNavLinkStyles = (
     }),
     footer: clsx({
       'mr-6': !isLast,
-      'text-light dark:text-dark': !isActive,
-      'pb-1 border-b-2 border-light text-light dark:border-dark dark:text-dark':
+      'text-dark dark:text-light': !isActive,
+      'pb-1 border-b-2 border-dark text-dark dark:border-light dark:text-light':
         isActive,
     }),
     mobile: clsx({
-      'block w-full text-md font-medium mt-6': true,
+      'block w-full text-md font-medium mt-4': true,
       'text-dark dark:text-light': !isActive,
       'text-primary border-none': isActive,
     }),
@@ -56,16 +56,23 @@ export const NavLinks = ({
   const { isActive } = useActiveLink();
 
   const links = [
-    { href: '/', label: 'Home' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/', label: 'Work' },
     { href: '/about', label: 'About' },
-    { href: '/uses', label: 'Uses' },
+    { href: '/blog', label: 'Writing' },
+    { href: '/resume', label: 'Resume', external: true },
+    ...(variant === 'footer' ? [{ href: '/uses', label: 'Uses' }] : []),
   ];
 
   return (
     <>
       {links.map((link, index) => (
-        <Link key={link.href} href={link.href} onClick={onClick}>
+        <Link
+          key={link.href}
+          href={link.href}
+          onClick={onClick}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+        >
           <span
             className={getNavLinkStyles(
               variant,

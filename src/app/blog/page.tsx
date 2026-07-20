@@ -9,8 +9,9 @@ import { BlogPost } from '@/types/blog';
 export const generateMetadata = () => {
   return {
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
-    title: 'Blog — Amir Ardalan',
-    description: 'Articles on web development, design, and technology',
+    title: 'Writing — Amir Ardalan',
+    description:
+      'Writing about product design, interaction design, frontend engineering, and creative technology.',
     alternates: {
       canonical: '/blog',
     },
@@ -29,13 +30,13 @@ export default async function Blog() {
 
   return (
     <Container>
-      <div className="mt-8">
-        <PageHeading title="Blog" />
+      <div>
+        <PageHeading title="Writing" />
         <div className="text-dark dark:text-light">
           {posts.length > 0 ? (
             <BlogPosts posts={posts} />
           ) : (
-            <p>No blog posts available at the moment.</p>
+            <p>Nothing published yet.</p>
           )}
         </div>
       </div>

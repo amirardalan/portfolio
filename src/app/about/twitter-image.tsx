@@ -8,6 +8,6 @@ export default async function Image() {
   return generateTwitterImage({
     title: 'About — Amir Ardalan',
     description:
-      'Design Engineer with 10+ years of experience creating innovative digital solutions.',
+      'About Amir Ardalan, a design engineer working across interaction design and frontend engineering.',
   });
 }

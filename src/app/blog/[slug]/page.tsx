@@ -47,7 +47,7 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} — Amir Ardalan`,
-    description: post.excerpt || 'Read this article on the blog',
+    description: post.excerpt || 'Read this post on amir.sh.',
     alternates: {
       canonical: `/blog/${slug}`,
     },
@@ -107,7 +107,7 @@ export default async function BlogPost({
     content = await compilePostContent(post.content);
   } catch (error) {
     console.error('Error compiling post content:', error);
-    content = '<p>Error loading content.</p>';
+    content = '<p>We couldn’t load this post.</p>';
   }
 
   const adjacentPosts = post.published
@@ -116,8 +116,8 @@ export default async function BlogPost({
 
   return (
     <Container>
-      <article className="mt-16 text-dark md:mt-24 dark:text-light">
-        <div className="mb-8 flex items-center justify-between">
+      <article className="mt-12 text-dark md:mt-20 dark:text-light">
+        <div className="mb-6 flex items-center justify-between">
           <AdminPostControls
             slug={post.slug}
             published={post.published ?? false}
@@ -148,10 +148,10 @@ export default async function BlogPost({
             <ClientLikeCount postId={post.id} />
           </span>
         </div>
-        <h1 className="mt-8 text-3xl lg:text-4xl" id="post-title">
+        <h1 className="mt-6 text-3xl lg:text-4xl" id="post-title">
           {post.title}
         </h1>
-        <div className="mt-8 flex w-full items-center justify-between text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="mt-6 flex w-full items-center justify-between text-sm text-zinc-500 dark:text-zinc-400">
           <div className="flex items-center">
             <time
               className="text-xs uppercase"
@@ -176,7 +176,7 @@ export default async function BlogPost({
             <SocialActions postId={post.id} />
           </span>
         </div>
-        <div className="mdx-content mt-10" aria-labelledby="post-title">
+        <div className="mdx-content mt-8" aria-labelledby="post-title">
           {content}
         </div>
         <BlogSupport postId={post.id} />
