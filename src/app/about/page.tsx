@@ -1,20 +1,21 @@
 import Container from '@/components/content/Container';
+import SectionGlyph from '@/components/ui/SectionGlyph';
 
 const process = [
   {
     number: '01',
     title: 'Pay attention',
-    body: 'I start with people, context, goals, and constraints. I treat early assumptions as provisional and stay alert to what changes.',
+    body: 'Start with people, context, goals, and constraints. Treat early assumptions as provisional and stay alert to what changes.',
   },
   {
     number: '02',
     title: 'Make to learn',
-    body: 'Sketches, prototypes, and code give me something concrete to observe and respond to. They open up possibilities without forcing a single answer.',
+    body: 'Sketches, prototypes, and code make ideas concrete enough to observe and respond to. They reveal directions without forcing a single answer.',
   },
   {
     number: '03',
-    title: 'Commit with care',
-    body: 'When a direction holds up, I carry it into production with attention to accessibility, performance, and edge cases.',
+    title: 'Put it in motion',
+    body: 'Take the strongest direction into production. Watch what happens, learn from it, and begin again.',
   },
 ];
 
@@ -29,7 +30,7 @@ const principles = [
   },
   {
     title: 'Code is a design material',
-    body: 'Real content and behavior reveal possibilities that static designs cannot.',
+    body: 'Working in code can be a useful way to explore how an idea behaves and responds in use.',
   },
   {
     title: 'Work in the open',
@@ -49,8 +50,8 @@ export default function About() {
     <Container>
       <article className="pb-10 pt-16 text-dark lg:pb-16 lg:pt-24 dark:text-light">
         <header>
-          <p className="text-xxs uppercase tracking-[0.22em] text-primary">
-            About me
+          <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-primary">
+            <SectionGlyph /> About
           </p>
           <h1 className="mt-6 text-balance font-serif text-4xl font-normal italic leading-tight sm:text-5xl lg:text-6xl">
             I’m Amir. I design products and build them.
@@ -68,51 +69,51 @@ export default function About() {
           </div>
         </header>
 
-        <section
-          className="mt-14 border-t border-zinc-200 pt-6 lg:mt-20 lg:pt-8 dark:border-zinc-800"
-          aria-labelledby="process-heading"
-        >
-          <p className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-            How I work
-          </p>
-          <h2
-            id="process-heading"
-            className="mt-4 max-w-2xl text-3xl font-medium leading-snug sm:text-4xl"
-          >
-            I keep the possibilities open and the work grounded.
-          </h2>
+        <section className="mt-12 lg:mt-16" aria-labelledby="process-heading">
+          <div className="rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-6 text-light sm:p-8 dark:to-fuchsia-950/25">
+            <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-400">
+              <SectionGlyph className="text-[var(--color-primary-dark)]" /> How
+              I work
+            </p>
+            <h2
+              id="process-heading"
+              className="mt-4 max-w-2xl text-3xl font-medium leading-snug sm:mx-2 sm:text-4xl"
+            >
+              I keep possibilities open and the work grounded.
+            </h2>
 
-          <ol className="mt-8">
-            {process.map((step) => (
-              <li
-                key={step.number}
-                className="grid gap-3 border-t border-zinc-200 py-6 sm:grid-cols-[3rem_1fr] sm:items-baseline sm:gap-5 dark:border-zinc-800"
-              >
-                <span className="font-mono text-xs text-primary sm:relative sm:-top-0.5">
-                  {step.number}
-                </span>
-                <div>
-                  <h3 className="text-lg font-medium sm:text-xl">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 leading-relaxed text-zinc-600 dark:text-zinc-300">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+            <ol className="mt-8 sm:mx-2">
+              {process.map((step) => (
+                <li
+                  key={step.number}
+                  className="grid gap-3 border-t border-white/10 py-6 first:border-t-0 sm:grid-cols-[3rem_1fr] sm:items-baseline sm:gap-5"
+                >
+                  <span className="font-mono text-xs text-[var(--color-primary-dark)] sm:relative sm:-top-0.5">
+                    {step.number}
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-medium sm:text-xl">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 leading-relaxed text-zinc-300">
+                      {step.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
 
         <section
-          className="mt-12 border-t border-zinc-200 pt-6 lg:mt-16 lg:pt-8 dark:border-zinc-800"
+          className="mt-12 lg:mt-16"
           aria-labelledby="principles-heading"
         >
           <p
             id="principles-heading"
-            className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
+            className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
           >
-            Principles
+            <SectionGlyph /> Principles
           </p>
           <div className="mt-6 grid gap-x-10 gap-y-7 sm:grid-cols-2 sm:gap-y-8">
             {principles.map((principle) => (
@@ -132,8 +133,8 @@ export default function About() {
           className="mt-14 border-t border-zinc-200 pt-6 lg:mt-20 lg:pt-8 dark:border-zinc-800"
           aria-labelledby="experience-heading"
         >
-          <p className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-            Experience
+          <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
+            <SectionGlyph /> Experience
           </p>
           <h2
             id="experience-heading"
@@ -142,39 +143,32 @@ export default function About() {
             Independent products and global brands.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
-            I’ve worked with Nike’s LeBron James Innovation Center, Columbia
-            Sportswear, and KEEN Footwear in collaboration with BASIC/DEPT®. I
-            also build independent products from initial idea to working
-            software.
+            I’ve collaborated with teams at Nike’s LeBron James Innovation
+            Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN
+            Footwear through BASIC/DEPT®. I also build independent products
+            from initial idea to working software.
           </p>
           <a
             href="/resume"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-3 border-b-2 border-primary pb-2 text-sm uppercase tracking-wide text-primary"
+            className="mt-6 inline-flex items-center gap-3 text-sm uppercase tracking-wide text-primary"
           >
             View my resume <span aria-hidden="true">↗</span>
           </a>
         </section>
 
         <section
-          className="mt-14 border-t border-zinc-200 pt-6 lg:mt-20 lg:pt-8 dark:border-zinc-800"
+          className="mt-10 border-t border-zinc-200 pt-5 lg:mt-14 lg:pt-6 dark:border-zinc-800"
           aria-labelledby="contact-heading"
         >
-          <p className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-            Get in touch
-          </p>
-          <h2
+          <p
             id="contact-heading"
-            className="mt-4 text-2xl font-medium sm:text-3xl"
+            className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
           >
-            Have an interesting problem?
-          </h2>
-          <p className="mt-4 leading-relaxed text-zinc-600 dark:text-zinc-300">
-            I’m always glad to hear about a thoughtful product or a hard
-            problem.
+            <SectionGlyph /> Get in touch
           </p>
-          <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide">
+          <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3 text-xs uppercase tracking-wide">
             {links.map((link) => (
               <a
                 key={link.label}

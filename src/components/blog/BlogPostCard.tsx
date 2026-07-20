@@ -18,7 +18,7 @@ export default function BlogPostCard({
   const readTime = calculateReadTime(post.content);
 
   return (
-    <li className="relative mb-7 text-xl last:mb-0 md:mb-10">
+    <li className="relative border-t border-zinc-200 py-6 text-xl md:py-8 dark:border-zinc-800">
       {featured && (
         <div className="absolute -left-6 top-0 h-full w-1 bg-primary md:-left-8"></div>
       )}
@@ -42,7 +42,7 @@ export default function BlogPostCard({
               Featured
             </span>
           )}
-          <h2 className="relative pr-12 text-xl font-medium leading-tight md:text-2xl md:group-hover:underline">
+          <h2 className="relative pr-12 text-xl font-medium leading-tight transition-colors md:text-2xl md:group-hover:text-primary">
             {post.title}
           </h2>
           <p className="mt-1 text-sm leading-relaxed text-zinc-500 md:text-base dark:text-zinc-400">

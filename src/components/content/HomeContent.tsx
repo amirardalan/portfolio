@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import TerrainCanvas from '@/components/content/TerrainCanvas';
 import ManifoldSlideshow from '@/components/content/ManifoldSlideshow';
+import SectionGlyph from '@/components/ui/SectionGlyph';
 
 const Arrow = ({ external = false }: { external?: boolean }) => (
   <span aria-hidden="true">{external ? '↗' : '→'}</span>
@@ -16,8 +17,8 @@ export default function HomeContent() {
 
         <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-10 pt-10 md:px-10 md:py-32 lg:px-16">
           <div className="max-w-3xl">
-            <p className="mb-4 text-xxs uppercase tracking-[0.22em] text-primary md:mb-6">
-              Design engineer
+            <p className="mb-4 flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-primary md:mb-6">
+              <SectionGlyph /> Design Engineer
             </p>
             <h1 className="text-balance font-serif text-5xl font-normal italic leading-[0.98] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]">
               I design and build thoughtful software.
@@ -29,7 +30,7 @@ export default function HomeContent() {
             <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-10">
               <a
                 href="#selected-work"
-                className="group pointer-events-auto inline-flex items-center gap-3 border-b-2 border-primary pb-2 text-primary"
+                className="group pointer-events-auto inline-flex items-center gap-3 text-primary"
               >
                 View selected work
                 <span
@@ -41,7 +42,7 @@ export default function HomeContent() {
               </a>
               <Link
                 href="/about"
-                className="group pointer-events-auto inline-flex items-center gap-3 border-b-2 border-zinc-300 pb-2 dark:border-zinc-700"
+                className="group pointer-events-auto inline-flex items-center gap-3"
               >
                 About me <Arrow />
               </Link>
@@ -59,9 +60,9 @@ export default function HomeContent() {
           <div className="mb-8 flex items-baseline justify-between gap-6 md:mb-12">
             <h2
               id="selected-work-heading"
-              className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
+              className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
             >
-              Selected work
+              <SectionGlyph /> Selected work
             </h2>
             <span className="font-mono text-xs text-zinc-400">01 / 01</span>
           </div>
@@ -69,17 +70,17 @@ export default function HomeContent() {
           <article className="group grid overflow-hidden rounded-3xl bg-zinc-100 text-dark md:grid-cols-12 dark:bg-zinc-900 dark:text-light">
             <ManifoldSlideshow />
 
-            <div className="flex flex-col justify-between bg-gradient-to-br from-zinc-50 via-zinc-100 to-pink-100/70 p-7 md:col-span-5 md:p-10 dark:from-zinc-900 dark:via-zinc-900 dark:to-fuchsia-950/40">
+            <div className="flex flex-col justify-between bg-gradient-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-7 text-light md:col-span-5 md:p-10 dark:to-fuchsia-950/25">
               <div>
                 <h3 className="text-3xl font-medium leading-tight sm:text-4xl">
                   manifold.observer
                 </h3>
-                <p className="mt-4 max-w-lg text-base font-normal leading-relaxed text-black/65 md:mt-6 dark:text-white/70">
+                <p className="mt-4 max-w-lg text-base font-normal leading-relaxed text-white/70 md:mt-6">
                   An audiovisual experiment that gives information another
                   shape. Add a source, change the conditions, and watch a
                   responsive form reorganize in real time.
                 </p>
-                <p className="mt-6 text-xxs uppercase leading-relaxed tracking-wide text-black/50 dark:text-white/60">
+                <p className="mt-6 text-xxs uppercase leading-relaxed tracking-wide text-white/60">
                   Product design · Interaction design · Frontend engineering ·
                   Creative coding
                 </p>
@@ -87,7 +88,7 @@ export default function HomeContent() {
               <div className="mt-10 flex flex-col items-start gap-4 text-sm uppercase tracking-wide md:mt-14">
                 <Link
                   href="/blog/manifold-observer"
-                  className="group/link inline-flex items-center gap-3 border-b border-current pb-1"
+                  className="group/link inline-flex items-center gap-3"
                 >
                   Read the project note
                   <span className="transition-transform group-hover/link:translate-x-1">
@@ -98,7 +99,7 @@ export default function HomeContent() {
                   href="https://manifold.observer"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/link inline-flex items-center gap-3 text-black/50 dark:text-white/60"
+                  className="group/link inline-flex items-center gap-3 text-white/60"
                 >
                   Visit the project
                   <span className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5">
@@ -114,12 +115,12 @@ export default function HomeContent() {
       <section className="border-t border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto grid max-w-[1440px] gap-6 px-6 py-14 md:grid-cols-12 md:gap-10 md:px-10 md:py-20 lg:px-16 lg:py-24">
           <div className="md:col-span-4">
-            <p className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-              How I work
+            <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
+              <SectionGlyph /> How I work
             </p>
           </div>
           <div className="md:col-span-8">
-            <h2 className="text-balance text-4xl font-medium leading-[1.08] lg:text-5xl">
+            <h2 className="text-balance text-4xl font-medium leading-[1.08] text-zinc-800 lg:text-5xl dark:text-zinc-200">
               I work across product design, interaction design, and frontend
               engineering.
             </h2>
@@ -129,7 +130,7 @@ export default function HomeContent() {
             </p>
             <Link
               href="/about"
-              className="group mt-7 inline-flex items-center gap-3 border-b-2 border-primary pb-2 text-sm uppercase tracking-wide text-primary md:mt-8"
+              className="group mt-7 inline-flex items-center gap-3 text-sm uppercase tracking-wide text-primary md:mt-8"
             >
               How I work <Arrow />
             </Link>
@@ -140,14 +141,15 @@ export default function HomeContent() {
       <section className="border-t border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto grid max-w-[1440px] gap-6 px-6 py-14 md:grid-cols-12 md:gap-10 md:px-10 md:py-20 lg:px-16 lg:py-24">
           <div className="md:col-span-4">
-            <p className="text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-              Selected experience
+            <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
+              <SectionGlyph /> Selected experience
             </p>
           </div>
           <div className="md:col-span-8">
-            <p className="max-w-3xl text-xl font-normal leading-relaxed sm:text-2xl">
-              My work includes Nike’s LeBron James Innovation Center, Columbia
-              Sportswear, and KEEN Footwear in collaboration with BASIC/DEPT®.
+            <p className="max-w-3xl text-xl font-normal leading-relaxed text-zinc-800 sm:text-2xl dark:text-zinc-200">
+              I’ve collaborated with teams at Nike’s LeBron James Innovation
+              Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN
+              Footwear through BASIC/DEPT®.
             </p>
             <div className="mt-7 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-8">
               <Link

@@ -128,10 +128,6 @@ export default function Uses() {
       <div>
         <PageHeading title={'Uses'} />
 
-        <div className="mb-8 max-w-7xl text-xl md:mb-12 md:text-2xl">
-          <p className="text-dark dark:text-light">Tools I use.</p>
-        </div>
-
         <section className="mb-10" aria-labelledby="computers-heading">
           <h2
             id="computers-heading"

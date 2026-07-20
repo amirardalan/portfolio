@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const images = [
-  '/images/manifold-observer.png',
-  '/images/manifold-observer-2.png',
   '/images/manifold-observer-3.png',
+  '/images/manifold-observer-2.png',
+  '/images/manifold-observer.png',
 ];
 
 const FRAME_DURATION = 9000;

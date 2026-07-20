@@ -11,8 +11,8 @@
   /* Colors */
   --color-light: oklch(0.985 0 0);
   --color-dark: oklch(0.141 0.005 285.823);
-  --color-primary: oklch(0.5 0.15 200);
-  --color-primary-dark: oklch(0.78 0.14 190);
+  --color-primary: oklch(0.42 0.12 320);
+  --color-primary-dark: oklch(0.82 0.16 110);
   --color-selection-text: var(--color-light);
   --color-skeleton-light: oklch(0.95 0.01 240);
   --color-skeleton-dark: oklch(0.3 0.01 240);
