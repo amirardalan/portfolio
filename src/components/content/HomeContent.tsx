@@ -21,11 +21,10 @@ export default function HomeContent() {
               <SectionGlyph /> Design Engineer
             </p>
             <h1 className="text-balance font-serif text-5xl font-normal italic leading-[0.98] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-              I design and build thoughtful software.
+              I design and engineer thoughtful software.
             </h1>
             <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed text-zinc-600 md:mt-8 md:text-xl dark:text-zinc-300">
-              I’m Amir. I take ideas from early exploration through interaction
-              design to production code.
+              I’m Amir, a Design Engineer. I take ideas from early exploration through interaction design all the way to production code.
             </p>
             <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-10">
               <a
@@ -76,13 +75,10 @@ export default function HomeContent() {
                   manifold.observer
                 </h3>
                 <p className="mt-4 max-w-lg text-base font-normal leading-relaxed text-white/70 md:mt-6">
-                  An audiovisual experiment that gives information another
-                  shape. Add a source, change the conditions, and watch a
-                  responsive form reorganize in real time.
+                  An audiovisual experiment that gives information another shape. Add a source, change the conditions, and watch a responsive form reorganize in real time.
                 </p>
                 <p className="mt-6 text-xxs uppercase leading-relaxed tracking-wide text-white/60">
-                  Product design · Interaction design · Frontend engineering ·
-                  Creative coding
+                  Product design · Interaction design · Frontend engineering
                 </p>
               </div>
               <div className="mt-10 flex flex-col items-start gap-4 text-sm uppercase tracking-wide md:mt-14">
@@ -121,12 +117,10 @@ export default function HomeContent() {
           </div>
           <div className="md:col-span-8">
             <h2 className="text-balance text-4xl font-medium leading-[1.08] text-zinc-800 lg:text-5xl dark:text-zinc-200">
-              I work across product design, interaction design, and frontend
-              engineering.
+              I work across product design, interaction design, and frontend engineering.
             </h2>
             <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed text-zinc-600 md:mt-6 md:text-lg dark:text-zinc-300">
-              I’m especially useful early, while the problem is still taking
-              shape and the important decisions are being made.
+              I am especially effective early, when the problem is still taking shape and the important decisions are being made.
             </p>
             <Link
               href="/about"
@@ -147,9 +141,7 @@ export default function HomeContent() {
           </div>
           <div className="md:col-span-8">
             <p className="max-w-3xl text-xl font-normal leading-relaxed text-zinc-800 sm:text-2xl dark:text-zinc-200">
-              I’ve collaborated with teams at Nike’s LeBron James Innovation
-              Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN
-              Footwear &amp; BASIC/DEPT®.
+              I’ve collaborated with teams at Nike’s LeBron James Innovation Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN Footwear.
             </p>
             <div className="mt-7 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-8">
               <Link
