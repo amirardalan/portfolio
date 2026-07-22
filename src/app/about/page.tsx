@@ -63,7 +63,7 @@ export default function About() {
           <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-primary">
             <SectionGlyph /> About
           </p>
-          <h1 className="mt-6 text-balance font-serif text-4xl font-normal italic leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-balance font-serif text-4xl font-normal italic leading-[1.1] sm:text-5xl lg:text-6xl">
             I’m Amir. I turn ideas into working products.
           </h1>
           <div className="mt-7 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
@@ -87,12 +87,12 @@ export default function About() {
             </p>
             <h2
               id="process-heading"
-              className="mt-4 max-w-2xl text-balance font-serif text-3xl font-normal italic leading-snug sm:mx-2 sm:text-4xl"
+              className="mt-4 max-w-2xl text-balance font-serif text-[2rem] font-normal italic leading-[1.2] sm:mx-2 sm:text-[2.5rem]"
             >
               I keep possibilities open and the work grounded.
             </h2>
 
-            <ol className="mt-8 sm:mx-2">
+            <ol className="mt-7 sm:mx-2">
               {process.map((step) => (
                 <li
                   key={step.number}
