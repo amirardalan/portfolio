@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
-import { auth } from '@/lib/auth';
+import { getAuthorizedSession } from '@/lib/auth';
 import { AuthProvider } from '@/context/AuthProvider';
 import { PostHogProvider } from '@/context/PostHogProvider';
 
@@ -91,7 +91,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const theme = await getTheme();
-  const session = await auth();
+  const session = await getAuthorizedSession();
 
   return (
     <AuthProvider session={session}>

@@ -1,15 +1,15 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { getAuthorizedSession } from '@/lib/auth';
+import { notFound } from 'next/navigation';
 import { getUserIdByEmail } from '@/db/queries/users';
 
 import AdminPageHeading from '@/components/admin/AdminPageHeading';
 import CreatePostForm from '@/components/blog/NewPostForm';
 
 export default async function NewBlogPost() {
-  const session = await auth();
+  const session = await getAuthorizedSession();
 
-  if (!session?.user) {
-    redirect('/api/auth/signin?callbackUrl=/admin/blog/new');
+  if (!session) {
+    notFound();
   }
 
   const userId = await getUserIdByEmail(session.user.email!);

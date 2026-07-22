@@ -9,9 +9,14 @@ import { categories } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { revalidateTag } from 'next/cache';
 import { getPostsByCategoryId } from '@/db/queries/posts';
+import { isAuthorized } from '@/lib/auth';
 
 // Get all categories
 export async function GET() {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const result = await getCategories();
     return NextResponse.json(result);
@@ -26,6 +31,10 @@ export async function GET() {
 
 // Create a new category
 export async function POST(request: NextRequest) {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { name, slug } = await request.json();
 
@@ -68,6 +77,10 @@ export async function POST(request: NextRequest) {
 
 // Update a category
 export async function PUT(request: NextRequest) {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { id, name, slug } = await request.json();
 
@@ -115,6 +128,10 @@ export async function PUT(request: NextRequest) {
 
 // Delete a category
 export async function DELETE(request: NextRequest) {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { id } = await request.json();
 

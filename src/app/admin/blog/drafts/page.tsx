@@ -1,5 +1,5 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { getAuthorizedSession } from '@/lib/auth';
+import { notFound } from 'next/navigation';
 import { getDraftPosts } from '@/db/queries/posts';
 import AdminPostList from '@/components/admin/AdminPostList';
 import Container from '@/components/content/Container';
@@ -21,10 +21,10 @@ export default async function Drafts({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-  const session = await auth();
+  const session = await getAuthorizedSession();
 
-  if (!session?.user) {
-    redirect('/api/auth/signin?callbackUrl=/admin/blog/drafts');
+  if (!session) {
+    notFound();
   }
 
   const params = (await searchParams) ?? {};

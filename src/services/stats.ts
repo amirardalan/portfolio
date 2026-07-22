@@ -1,7 +1,7 @@
 'use server';
 
 import { getPublishedPostsCount, getDraftPostsCount } from '@/db/queries/posts';
-import { auth } from '@/lib/auth';
+import { getAuthorizedSession } from '@/lib/auth';
 
 // Interface for the return type
 interface PostCounts {
@@ -10,10 +10,8 @@ interface PostCounts {
 }
 
 export async function getPostCounts(): Promise<PostCounts> {
-  // Optional: Add auth check if needed, though counts might not be sensitive
-  const session = await auth();
-  if (!session?.user) {
-    // You might want to handle this differently, e.g., return null or specific error codes
+  const session = await getAuthorizedSession();
+  if (!session) {
     throw new Error('Not authenticated');
   }
 

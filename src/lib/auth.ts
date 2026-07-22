@@ -2,58 +2,75 @@ import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 import { userExists, createUser } from '@/db/queries/users';
 
-/**
- * Check if an email is authorized based on environment variables
- */
-export function isAuthorizedEmail(email: string | null | undefined): boolean {
-  if (!email) return false;
+const OWNER_EMAIL = 'hi@amir.sh';
+const OWNER_GITHUB_ID = '6297460';
 
-  // Get allowed emails from environment variable
-  const allowedEmails =
-    process.env.ALLOWED_EMAILS?.split(',').map((e) => e.trim()) || [];
-  if (allowedEmails.includes(email)) return true;
-
-  // Get allowed domains from environment variable
-  const allowedDomains =
-    process.env.ALLOWED_EMAIL_DOMAINS?.split(',').map((d) => d.trim()) || [];
-  const emailDomain = email.split('@')[1];
-  if (emailDomain && allowedDomains.includes(emailDomain)) return true;
-
-  return false;
+export function isOwnerIdentity(
+  email: string | null | undefined,
+  githubId: string | null | undefined
+): boolean {
+  return (
+    email?.trim().toLowerCase() === OWNER_EMAIL && githubId === OWNER_GITHUB_ID
+  );
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
+  session: {
+    strategy: 'jwt',
+    maxAge: 8 * 60 * 60,
+  },
   callbacks: {
-    async signIn({ user }) {
-      // Check if user's email is in our allowlist
-      if (!isAuthorizedEmail(user.email)) {
+    async signIn({ user, account }) {
+      if (
+        account?.provider !== 'github' ||
+        !isOwnerIdentity(user.email, account.providerAccountId)
+      ) {
         return false;
       }
 
-      // Check if the user already exists in the database
       const exists = await userExists(user.email!);
 
-      // If the user does not exist, insert them into the database
       if (!exists) {
         await createUser(user.name || 'Unknown User', user.email!);
       }
 
       return true;
     },
-    async redirect({ baseUrl }) {
-      // Always redirect to /admin after sign-in
-      return `${baseUrl}/admin`;
+    async jwt({ token, account }) {
+      if (account?.provider === 'github') {
+        token.githubId = account.providerAccountId;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.githubId =
+        typeof token.githubId === 'string' ? token.githubId : undefined;
+      return session;
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
+      if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/auth/owner',
     error: '/auth/error',
   },
 });
 
-// Helper function to check if the current user is authorized
-export async function isAuthorized() {
+export async function getAuthorizedSession() {
   const session = await auth();
-  return !!session?.user && isAuthorizedEmail(session.user.email);
+
+  if (!isOwnerIdentity(session?.user?.email, session?.user?.githubId)) {
+    return null;
+  }
+
+  return session;
+}
+
+export async function isAuthorized() {
+  return (await getAuthorizedSession()) !== null;
 }

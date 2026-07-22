@@ -1,160 +1,166 @@
-# portfolio (amir.sh)
+# amir.sh
 
-A Markdown Blog and CMS written in TypeScript with React Server Components. Create, edit, and manage blog posts and categories inside a custom CMS. Update static posts without a build leveraging the power of on-demand revalidation.
+The source for [amir.sh](https://amir.sh): a portfolio, MDX blog, and custom content management system built with TypeScript and React Server Components.
 
-### Stack
+The CMS supports creating, editing, publishing, and organizing posts without a full redeploy by using on-demand revalidation.
 
-- TypeScript
-- [Next.js](https://nextjs.org/docs/getting-started) App Router
-- [Auth.js](https://authjs.dev/) auth
-- [Tailwind CSS](https://tailwindcss.com/docs/installation) styles
-- [Supabase](https://supabase.com/docs/guides/database/overview) Postgres database
-- [Drizzle ORM](https://orm.drizzle.team/) for Postgres
-- [MDX](https://mdxjs.com/) Markdown
-- [Sugar High](https://github.com/huozhi/sugar-high) syntax highlighting
-- [Zustand](https://github.com/pmndrs/zustand) state management
-- [CLSX](https://github.com/lukeed/clsx) `className` logic
+## Stack
 
-### Features
+- [Next.js](https://nextjs.org/docs) App Router and React Server Components
+- [TypeScript](https://www.typescriptlang.org/)
+- [Auth.js](https://authjs.dev/) with GitHub OAuth
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Supabase Postgres](https://supabase.com/docs/guides/database/overview)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [MDX](https://mdxjs.com/) with [Sugar High](https://github.com/huozhi/sugar-high) syntax highlighting
+- [Zustand](https://github.com/pmndrs/zustand) for client state
+- [Cloudinary](https://cloudinary.com/) for CMS media
+- [PostHog](https://posthog.com/) for analytics and post views
+- [Upstash Redis](https://upstash.com/) for post likes
 
-- Custom CMS (Publish, Edit, Manage Drafts and Categories)
-- Light/Dark/System Theme toggle
-- Dynamic (theme-based) favicon
-- Dynamic Metadata and Page Titles
-- Route-based active navigation highlighting
-- Dynamic footer copyright date
-- Custom Tooltip, Modal, and Toast components
-- Next.js [optimized fonts](https://nextjs.org/learn/dashboard-app/optimizing-fonts-images)
-- [OG Image](https://vercel.com/docs/functions/og-image-generation) metadata
-- Dynamically-generated [sitemap.xml](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
-- Custom [Cloudinary](https://cloudinary.com/) CMS Media Gallery
-- [PostHog](https://posthog.com/) analytics and blog post view count
-- Blog likes with [Upstash](https://upstash.com/) Redis
-- Accessibility, performance, and SEO best practices
-- 100% Lighthouse score
+## Features
 
-## Getting Started
+- Custom CMS for posts, drafts, and categories
+- Owner-only GitHub OAuth
+- Light, dark, and system themes
+- Dynamic metadata, social images, sitemap, favicon, and page titles
+- Cloudinary-backed media gallery
+- PostHog analytics and post view counts
+- Redis-backed post likes
+- Custom tooltip, modal, toast, and navigation components
+- Responsive and accessible interface
 
-### Setup
+## Local Development
+
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-Then, set up your [GitHub OAuth app](https://authjs.dev/getting-started/providers/github?framework=next-js) and add your GitHub Client ID and Secret in a `.env.local` file:
+### Configure the environment
 
-```
-// .env.local
+Create a `.env` file in the project root. It is ignored by Git.
 
-# Set for each environment
+```dotenv
+# Application
 NEXT_PUBLIC_URL="http://localhost:3000"
+RESUME_URL="https://example.com/resume.pdf"
 
-# Set your timezone
-NEXT_PUBLIC_TIMEZONE="America/Los_Angeles"
+# Auth.js and GitHub OAuth
+AUTH_SECRET="your-auth-secret"
+AUTH_TRUST_HOST="true"
+AUTH_GITHUB_ID="your-github-client-id"
+AUTH_GITHUB_SECRET="your-github-client-secret"
 
-# Resume Link (redirect in next.config.ts)
-RESUME_URL=<your-resume-url>
-
-# Auth.js
-AUTH_SECRET=<your-auth-secret>
-AUTH_TRUST_HOST="NEXT_PUBLIC_URL"
-
-# GitHub OAuth
-AUTH_GITHUB_ID=<your-github-client-id>
-AUTH_GITHUB_SECRET=<your-github-client-secret>
-
-# Email verification (CMS Users)
-ALLOWED_EMAILS=<you@email.com, other@email.com>
-ALLOWED_EMAIL_DOMAINS=<gmail.com, your-domain.com>
-
-# Supabase (CMS Database)
-DB_URL=<your-supabase-transaction-pooler-url>
-DB_API_KEY=<your-supabase-api-key>
-
-# Cloudinary (CMS Media Gallery)
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=<your-cloudinary-cloud-name>
-CLOUDINARY_URL=<your-cloudinary-url>
-CLOUDINARY_API_KEY=<your-cloudinary-api-key>
-CLOUDINARY_API_SECRET=<your-cloudinary-api-secret>
-
-# PostHog (Analytics)
-NEXT_PUBLIC_POSTHOG_KEY=<your-posthog-key>
-NEXT_PUBLIC_POSTHOG_HOST=<your-posthog-host>
-POSTHOG_API_KEY=<your-posthog-api-key>
-POSTHOG_PROJECT_ID=<your-posthog-project-id>
-
-# Upstash/Redis (Blog Likes)
-ENABLE_DEV_CACHE="true"
-KV_URL=<your-upstash-kv-url>
-KV_REST_API_READ_ONLY_TOKEN=<your-kv-rest-api-read-only-token>
-REDIS_URL=<your-redis-url>
-KV_REST_API_TOKEN=<your-kv-rest-api-token>
-KV_REST_API_URL=<your-kv-rest-api-url>
+# Postgres
+DB_URL="your-postgres-connection-string"
 ```
 
-Finally, generate an Auth.js secret, which will automatically overwrite the placeholder in the `.env.local` file:
+Create the GitHub OAuth app using the [Auth.js GitHub provider guide](https://authjs.dev/getting-started/providers/github). CMS authorization is restricted in `src/lib/auth.ts` to the repository owner's exact GitHub account ID and primary email. Forks must replace both owner identity constants before the CMS can be accessed by a different account.
+
+Generate `AUTH_SECRET` with:
 
 ```bash
 npx auth secret
 ```
 
-### Database
+The optional integrations use these additional variables:
+
+```dotenv
+# Cloudinary media gallery
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
+
+# PostHog analytics and post views
+NEXT_PUBLIC_POSTHOG_KEY="your-project-key"
+NEXT_PUBLIC_POSTHOG_HOST="https://us.i.posthog.com"
+POSTHOG_API_KEY="your-personal-api-key"
+POSTHOG_PROJECT_ID="your-project-id"
+# POSTHOG_API_HOST="https://app.posthog.com"
+
+# Upstash Redis post likes
+KV_REST_API_URL="your-rest-url"
+KV_REST_API_TOKEN="your-rest-token"
+# Avoid Redis writes while developing when the in-memory cache is warm
+ENABLE_DEV_CACHE="true"
+```
+
+### Initialize the database
 
 ```bash
 npx drizzle-kit push
 ```
 
-> [!NOTE]
-> This command will create the database tables and columns based on the schema defined in `./src/db/schema.ts` file.
+This applies the schema in `src/db/schema.ts` to the database configured by `DB_URL`.
 
-### Run
+### Run the app
 
 ```bash
 npm run dev
 ```
 
-### Preview
+The development site is available at [http://localhost:3000](http://localhost:3000).
 
-To test on-demand revalidation of blog posts and ensure the app is in good shape for production, compile a preview build.
+### Production preview
 
 ```bash
 npm run preview
 ```
 
-> [!NOTE]
-> This script will format the project using Prettier, check linting, and then compile a preview build.
+This command formats the repository with Prettier, runs ESLint, creates a production build, and starts the production server. It modifies files when formatting changes are needed.
 
 ### Drizzle Studio
-
-To interact with the postgres database locally:
 
 ```bash
 npx drizzle-kit studio
 ```
 
 > [!NOTE]
-> If using Brave browser you must turn Brave Shield off for `https://local.drizzle.studio/`
+> If you use Brave, you may need to disable Shields for `https://local.drizzle.studio/`.
 
-### Markdown Features
+## Writing Posts
 
-#### Images
+Posts support Markdown and MDX.
 
-Blog posts are written in Markdown. Markdown images will utilize the Next Image component for optimized loading. The markdown image can be passed a priority prop:
+### Images
+
+Markdown images use the Next.js Image component. Set the optional title to `priority` for an image above the fold:
 
 ```markdown
 ![Alt text](https://example.com/image.png 'priority')
 ```
 
-Or you can use an image wrapped in a custom MDX `<Figure>` component to add a caption (this also works with an optional priority prop for images above the fold):
+Use the custom `Figure` component to add a caption:
 
-```markdown
-<Figure src="your-image-src.png" alt="Your Image Alt" caption="Your Image Caption" priority />
+```mdx
+<Figure
+  src="https://example.com/image.png"
+  alt="Descriptive alt text"
+  caption="Image caption"
+  priority
+/>
 ```
 
-#### Code
+### Highlighted code lines
 
-Highlight individual lines or blocks of code (line 2 and lines 3-5):
+Add line numbers or ranges after the language identifier:
 
-````
+````markdown
 ```typescript{2,3-5}
+const first = true;
+const second = true;
+const third = true;
+const fourth = true;
+const fifth = true;
+```
 ````
+
+## Security
+
+Please report vulnerabilities according to the [security policy](SECURITY.md). Do not disclose suspected vulnerabilities in a public issue.
+
+## License
+
+This project is available under its [custom source-available license](LICENSE.txt). Derivative works must preserve attribution, remain publicly available, use the same terms, and substantially differ in content, visual design, and branding.

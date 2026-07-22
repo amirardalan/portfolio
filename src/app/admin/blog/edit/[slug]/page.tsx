@@ -1,5 +1,5 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { getAuthorizedSession } from '@/lib/auth';
+import { notFound } from 'next/navigation';
 import { getUserIdByEmail } from '@/db/queries/users';
 import { getPostBySlug } from '@/db/queries/posts';
 
@@ -11,7 +11,7 @@ export default async function EditBlogPost({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const session = await auth();
+  const session = await getAuthorizedSession();
 
   const params = await paramsPromise;
   const { slug } = params;
@@ -20,8 +20,8 @@ export default async function EditBlogPost({
     throw new Error('Invalid slug format.');
   }
 
-  if (!session?.user) {
-    redirect(`/api/auth/signin?callbackUrl=/admin/blog/edit/${slug}`);
+  if (!session) {
+    notFound();
   }
 
   const userId = await getUserIdByEmail(session.user.email!);
@@ -36,7 +36,7 @@ export default async function EditBlogPost({
 
   if (!post) {
     return (
-      <div className="mt-8 text-center text-dark dark:text-light">
+      <div className="text-dark dark:text-light mt-8 text-center">
         <h2 className="mb-6 text-2xl">Post Not Found</h2>
         <p>The post you&apos;re trying to edit could not be found.</p>
         <a href="/admin/blog/drafts" className="mt-4 text-blue-500 underline">

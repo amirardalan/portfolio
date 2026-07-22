@@ -6,7 +6,7 @@ import {
   getAdjacentPosts,
 } from '@/db/queries/posts';
 
-import { auth, isAuthorizedEmail } from '@/lib/auth';
+import { getAuthorizedSession } from '@/lib/auth';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { components } from '@/components/blog/MDXComponents';
 
@@ -37,7 +37,7 @@ export async function generateMetadata({
   const { slug } = await paramsPromise;
   const post = await getPostBySlug(slug);
 
-  if (!post) {
+  if (!post || (!post.published && !(await getAuthorizedSession()))) {
     return {
       metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
       title: 'Post Not Found',
@@ -95,9 +95,7 @@ export default async function BlogPost({
   }
 
   if (!post.published) {
-    const session = await auth();
-    const isAdmin = !!session?.user && isAuthorizedEmail(session.user.email);
-    if (!isAdmin) {
+    if (!(await getAuthorizedSession())) {
       notFound();
     }
   }
@@ -116,7 +114,7 @@ export default async function BlogPost({
 
   return (
     <Container>
-      <article className="mt-12 text-dark md:mt-20 dark:text-light">
+      <article className="text-dark dark:text-light mt-12 md:mt-20">
         <div className="mb-6 flex items-center justify-between">
           <AdminPostControls
             slug={post.slug}
@@ -125,8 +123,8 @@ export default async function BlogPost({
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex flex-row text-xxs uppercase">
-            <span className="pr-2 text-xxs uppercase text-primary">
+          <div className="text-xxs flex flex-row uppercase">
+            <span className="text-xxs text-primary pr-2 uppercase">
               <Link
                 href={`/blog?category=${encodeURIComponent(post.category?.name ?? 'uncategorized')}`}
               >
@@ -142,7 +140,7 @@ export default async function BlogPost({
             className="mx-4 w-full border-t-[1px] border-zinc-300 dark:border-zinc-700"
             aria-hidden="true"
           />
-          <div className="flex items-center whitespace-nowrap text-xxs uppercase">
+          <div className="text-xxs flex items-center whitespace-nowrap uppercase">
             <ClientViewCount
               route={`/blog/${post.slug}`}
               textColor="text-zinc-500 dark:text-zinc-400"

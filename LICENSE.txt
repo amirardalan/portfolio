@@ -1,6 +1,13 @@
-This project (amirardalan.com) is licensed under the following terms:
-1. You may use, modify, and distribute this software, provided the source code remains publicly available.
-2. Derivatives must include attribution to Amir Ardalan as the original author.
-3. Derivatives must substantially modify the content, visual theme, and branding to avoid resemblance to the original work.
-4. Derivatives must be licensed under these same terms.
-5. Any use must comply with applicable laws and not misrepresent the original authorship.
+Custom Source-Available License
+
+Copyright (c) 2021-present Amir Ardalan
+
+This project (amir.sh) is licensed under the following terms:
+
+1. You may use, modify, and distribute this software, provided that its source code remains publicly available.
+2. Any derivative work must include attribution to Amir Ardalan as the original author.
+3. Any derivative work must substantially change the content, visual design, and branding so that it does not resemble or misrepresent the original project.
+4. Any derivative work must be licensed under these same terms.
+5. Any use of this software must comply with applicable law and must not misrepresent its authorship or origin.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE AUTHOR SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.

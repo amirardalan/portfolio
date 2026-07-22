@@ -1,5 +1,5 @@
 import { dbDeletePost } from '@/db/queries/posts';
-import { auth } from '@/lib/auth';
+import { getAuthorizedSession } from '@/lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidateTag, revalidatePath } from 'next/cache';
 
@@ -8,7 +8,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
-    const session = await auth();
+    const session = await getAuthorizedSession();
 
     if (!session?.user) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });

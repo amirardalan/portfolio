@@ -1,8 +1,14 @@
 import AdminCategories from '@/components/admin/AdminCategories';
 import AdminPageHeading from '@/components/admin/AdminPageHeading';
 import Container from '@/components/content/Container';
+import { getAuthorizedSession } from '@/lib/auth';
+import { notFound } from 'next/navigation';
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  if (!(await getAuthorizedSession())) {
+    notFound();
+  }
+
   return (
     <Container>
       <AdminPageHeading title="Category Manager" />

@@ -1,8 +1,13 @@
 import { getCloudinaryImages } from '@/lib/cloudinary';
 import { v2 as cloudinary } from 'cloudinary';
 import { NextResponse } from 'next/server';
+import { isAuthorized } from '@/lib/auth';
 
 export async function GET() {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const images = await getCloudinaryImages('blog');
     return NextResponse.json({
@@ -18,6 +23,10 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File;
@@ -51,6 +60,10 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+  if (!(await isAuthorized())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { publicId } = await req.json();
 

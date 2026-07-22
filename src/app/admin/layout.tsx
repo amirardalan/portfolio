@@ -1,7 +1,7 @@
-import { auth } from '@/lib/auth';
+import { getAuthorizedSession } from '@/lib/auth';
+import { notFound } from 'next/navigation';
 import { ToastProvider } from '@/components/ui/ToastContext';
 
-import SignedOut from '@/components/auth/SignedOut';
 import AdminMenu from '@/components/admin/AdminMenu';
 
 export default async function AdminLayout({
@@ -9,10 +9,10 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = await getAuthorizedSession();
 
-  if (!session?.user) {
-    return <SignedOut callbackUrl="/admin" message="to access admin panel." />;
+  if (!session) {
+    notFound();
   }
 
   return (

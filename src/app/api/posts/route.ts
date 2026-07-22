@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidateTag, revalidatePath } from 'next/cache';
-import { auth } from '@/lib/auth';
+import { getAuthorizedSession } from '@/lib/auth';
 import { dbCreatePost, dbUpdatePost } from '@/db/queries/posts';
 import { getUserIdByEmail } from '@/db/queries/users';
 import { BlogPost } from '@/types/blog';
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
+    const session = await getAuthorizedSession();
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const session = await auth();
+  const session = await getAuthorizedSession();
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

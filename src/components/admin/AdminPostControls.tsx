@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/context/AuthProvider';
 
 interface AdminPostControlsProps {
   slug: string;
@@ -12,26 +12,15 @@ export default function AdminPostControls({
   slug,
   published,
 }: AdminPostControlsProps) {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { session } = useAuth();
 
-  useEffect(() => {
-    fetch('/api/auth/session')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.user) setIsAdmin(true);
-      })
-      .catch((error) => {
-        console.error('Failed to fetch session:', error);
-      });
-  }, []);
-
-  if (!isAdmin) return null;
+  if (!session?.user) return null;
 
   return (
     <div className="flex w-full justify-between space-x-2">
       <Link
         href={`/admin/blog/edit/${slug}`}
-        className="rounded bg-zinc-800 px-2 py-1 text-sm text-light dark:bg-zinc-50 dark:text-dark"
+        className="text-light dark:text-dark rounded bg-zinc-800 px-2 py-1 text-sm dark:bg-zinc-50"
       >
         Edit Post
       </Link>

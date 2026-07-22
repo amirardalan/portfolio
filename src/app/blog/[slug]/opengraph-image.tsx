@@ -4,6 +4,7 @@ import {
   size,
   contentType,
 } from '@/components/og/OgImageTemplate';
+import { getAuthorizedSession } from '@/lib/auth';
 
 export const alt = 'Writing by Amir Ardalan';
 export { size, contentType };
@@ -17,7 +18,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
   try {
     const post = await getPostBySlug(params.slug);
 
-    if (!post) {
+    if (!post || (!post.published && !(await getAuthorizedSession()))) {
       return generateOgImage({
         title: 'Writing — Amir Ardalan',
         description: 'Read this post on amir.sh.',
