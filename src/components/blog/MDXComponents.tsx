@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { generateSlug } from '@/utils/generate-slug';
 import CopyButton from '@/components/icons/IconCopy';
 import Note from '@/components/blog/Note';
+import ProjectCTA from '@/components/blog/ProjectCTA';
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>;
 type ParagraphProps = ComponentPropsWithoutRef<'p'>;
@@ -274,21 +275,39 @@ export const components = {
     alt,
     caption,
     priority = false,
+    aspect = 'natural',
+    position = 'center',
   }: {
     src: string;
     alt?: string;
     caption?: string;
     priority?: boolean;
+    aspect?: 'natural' | 'wide';
+    position?: string;
   }) => (
     <figure className="my-6">
-      <Image
-        src={src}
-        alt={alt ?? ''}
-        width={736}
-        height={552}
-        priority={priority}
-        className="h-auto w-full"
-      />
+      {aspect === 'wide' ? (
+        <div className="relative aspect-video w-full overflow-clip">
+          <Image
+            src={src}
+            alt={alt ?? ''}
+            fill
+            priority={priority}
+            sizes="(min-width: 736px) 672px, calc(100vw - 48px)"
+            className="object-cover"
+            style={{ objectPosition: position }}
+          />
+        </div>
+      ) : (
+        <Image
+          src={src}
+          alt={alt ?? ''}
+          width={736}
+          height={552}
+          priority={priority}
+          className="h-auto w-full"
+        />
+      )}
       {caption && (
         <figcaption className="mt-2 text-right text-xxs uppercase text-gray-600 dark:text-gray-400">
           {caption}
@@ -297,6 +316,7 @@ export const components = {
     </figure>
   ),
   Note,
+  ProjectCTA,
 };
 
 declare global {

@@ -143,6 +143,37 @@ Use the custom `Figure` component to add a caption:
 />
 ```
 
+Set `aspect="wide"` to display a full-width figure in a cropped 16:9 frame.
+Use the optional `position` prop to control the focal point of the crop:
+
+```mdx
+<Figure
+  src="https://example.com/image.png"
+  alt="Descriptive alt text"
+  caption="Image caption"
+  aspect="wide"
+  position="center"
+/>
+```
+
+### Project CTAs
+
+Use the `ProjectCTA` component to give a live project a prominent link within a
+post:
+
+```mdx
+<ProjectCTA
+  href="https://manifold.observer"
+  title="Explore manifold.observer"
+  description="Add a source, change the conditions, and watch the form reorganize in real time."
+  label="Open project"
+/>
+```
+
+The optional `eyebrow` defaults to `Live project`, and the optional `label`
+defaults to `Open project`. External destinations open in a new tab; internal
+paths use Next.js navigation.
+
 ### Highlighted code lines
 
 Add line numbers or ranges after the language identifier:
