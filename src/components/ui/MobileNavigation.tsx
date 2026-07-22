@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { NavLinks } from '@/components/ui/Navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import IconMobileNav from '@/components/icons/IconMobileNav';
+import IconGithub from '@/components/icons/IconGithub';
 import AuthMenu from '@/components/auth/AuthMenu';
 
 export default function MobileNavigation() {
@@ -151,6 +152,25 @@ export default function MobileNavigation() {
                 setIsOpen(false);
               }}
             />
+            <a
+              className="mt-8 flex items-center gap-3 border-t border-black/10 pt-6 text-sm text-dark dark:border-white/10 dark:text-light [&_svg]:size-5"
+              href="https://github.com/amirardalan/portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                shouldManageFocusRef.current = false;
+                setIsOpen(false);
+              }}
+              aria-label="View portfolio source on GitHub (opens in a new tab)"
+            >
+              <span aria-hidden="true">
+                <IconGithub />
+              </span>
+              <span>View source on GitHub</span>
+              <span className="ml-auto" aria-hidden="true">
+                ↗
+              </span>
+            </a>
           </div>
         </nav>
       </div>

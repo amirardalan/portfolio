@@ -82,7 +82,7 @@ export default function HomeContent() {
                 )}
 
                 <div
-                  className={`flex flex-col justify-between bg-gradient-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-7 text-light md:p-8 lg:p-10 dark:to-fuchsia-950/25 ${
+                  className={`work-card-gradient flex flex-col justify-between p-7 text-light md:p-8 lg:p-10 ${
                     project.media && project.liveUrl
                       ? 'md:col-span-5'
                       : 'md:col-span-12'

@@ -90,6 +90,34 @@
 }
 
 @layer components {
+  .work-card-gradient {
+    background: radial-gradient(
+        circle at 8% 8%,
+        oklch(0.42 0.09 230 / 0.24),
+        transparent 38%
+      ),
+      linear-gradient(
+        145deg,
+        oklch(0.16 0.025 250) 0%,
+        oklch(0.18 0.018 290) 58%,
+        oklch(0.28 0.055 325) 100%
+      );
+  }
+
+  .dark .work-card-gradient {
+    background: radial-gradient(
+        circle at 8% 8%,
+        oklch(0.44 0.1 230 / 0.18),
+        transparent 40%
+      ),
+      linear-gradient(
+        145deg,
+        oklch(0.17 0.025 250) 0%,
+        oklch(0.16 0.018 290) 58%,
+        oklch(0.22 0.05 325) 100%
+      );
+  }
+
   .dark {
     .mdx-content {
       --sh-property: oklch(0.77 0.11 202.26);
