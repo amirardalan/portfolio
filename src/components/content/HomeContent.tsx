@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import TerrainCanvas from '@/components/content/TerrainCanvas';
+import StarField from '@/components/content/StarField';
 import ManifoldSlideshow from '@/components/content/ManifoldSlideshow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
 import { selectedProjects } from '@/content/projects';
@@ -11,12 +12,13 @@ const Arrow = ({ external = false }: { external?: boolean }) => (
 export default function HomeContent() {
   return (
     <div className="w-full text-dark dark:text-light">
-      <section className="relative isolate mt-[57px] overflow-hidden md:mt-0 md:flex md:min-h-[720px] md:items-center">
+      <section className="relative isolate overflow-hidden md:flex md:min-h-[720px] md:items-center">
+        <StarField />
         <TerrainCanvas />
-        <div className="bg-light/70 dark:bg-dark/75 pointer-events-none absolute inset-0 z-[1] md:hidden" />
-        <div className="via-light/85 dark:via-dark/85 pointer-events-none absolute inset-0 z-[1] hidden bg-gradient-to-r from-light to-transparent md:block dark:from-dark" />
+        <div className="from-light/55 via-light/40 to-light/20 dark:from-dark/60 dark:via-dark/45 dark:to-dark/20 pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r md:hidden" />
+        <div className="from-light/55 via-light/35 dark:from-dark/55 dark:via-dark/35 pointer-events-none absolute inset-0 z-[1] hidden bg-gradient-to-r to-transparent md:block" />
 
-        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-10 pt-10 md:px-10 md:py-32 lg:px-16">
+        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-10 pt-[97px] md:px-10 md:py-32 lg:px-16">
           <div className="max-w-3xl">
             <p className="mb-4 flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-primary md:mb-6">
               <SectionGlyph /> Amir Ardalan · Design Engineer
