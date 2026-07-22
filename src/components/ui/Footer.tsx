@@ -1,23 +1,16 @@
-import { NavLinks } from '@/components/ui/Navigation';
 import Logo from '@/components/ui/Logo';
 import IconGithub from '@/components/icons/IconGithub';
 
 export default async function Footer() {
   return (
-    <footer className="z-10 border-t border-black/10 bg-gradient-to-br from-zinc-50 via-zinc-100 to-pink-100/70 text-sm text-dark dark:border-white/10 dark:from-zinc-900 dark:via-zinc-900 dark:to-fuchsia-950/40 dark:text-light">
-      <div className="flex w-full flex-row items-center gap-4 px-6 py-4 md:gap-6 lg:px-10 lg:py-6">
+    <footer className="z-10 border-t border-black/10 bg-linear-to-br from-zinc-50 via-zinc-100 to-pink-100/70 text-sm text-dark dark:border-white/10 dark:from-zinc-900 dark:via-zinc-900 dark:to-fuchsia-950/40 dark:text-light">
+      <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-3 px-4 py-4 sm:px-6 lg:px-10 lg:py-6">
         <div className="flex shrink-0 flex-row items-center">
-          <span className="mr-4" aria-label="Copyright">
+          <span className="mr-3" aria-label="Copyright">
             &copy;{new Date().getFullYear()}
           </span>
           <Logo size={20} />
-          <span className="ml-4">amir.sh</span>
-        </div>
-        <div className="hidden md:flex">
-          <span aria-hidden="true">•</span>
-          <nav className="ml-6" aria-label="Footer navigation">
-            <NavLinks variant="footer" />
-          </nav>
+          <span className="ml-3">amir.sh</span>
         </div>
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <a

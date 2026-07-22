@@ -32,7 +32,6 @@
     "simplex-noise": "^4.0.3",
     "sugar-high": "^1.2.1",
     "three": "^0.182.0",
-    "typed.js": "^3.0.0",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
