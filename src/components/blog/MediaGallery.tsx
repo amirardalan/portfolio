@@ -89,7 +89,18 @@ export default function MediaGallery({
     }
   };
 
-  if (loading) return <p className="text-dark dark:text-light">Loading...</p>;
+  if (loading) {
+    return (
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+        {[...Array(8)].map((_, index) => (
+          <div
+            key={index}
+            className="aspect-square animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-800"
+          />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -101,65 +112,84 @@ export default function MediaGallery({
         onChange={handleUpload}
         className="hidden"
       />
-      <div
-        className="grid grid-cols-4 gap-2"
-        style={{ minHeight: `${Math.ceil(imagesPerPage / 4) * 75}px` }}
-      >
-        {paginatedImages.map((url) => (
-          <div
-            key={url}
-            className="group relative aspect-square cursor-pointer overflow-hidden"
-            onClick={() => onSelect(url, cursorPosition)}
-            onContextMenu={(e) => {
-              e.preventDefault();
-              const publicId = url.split('/').slice(-2).join('/').split('.')[0]; // Extract publicId
-              if (publicId) handleDelete(publicId);
-            }}
-          >
-            <CldImage
-              src={url}
-              width="300"
-              height="300"
-              alt="Media"
-              className="h-full w-full object-cover transition duration-200 group-hover:brightness-75"
-            />
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                const publicId = url
-                  .split('/')
-                  .slice(-2)
-                  .join('/')
-                  .split('.')[0];
-                if (publicId) handleDelete(publicId);
-              }}
-              className="absolute right-0 top-0 hidden bg-zinc-500 px-1.5 py-0.5 text-xl leading-none text-light group-hover:block hover:bg-red-600"
-            >
-              ×
-            </button>
-          </div>
-        ))}
-
-        {Array.from({ length: imagesPerPage - paginatedImages.length }).map(
-          (_, index) => (
+      {uploading && (
+        <p
+          className="bg-primary/10 text-primary mb-4 rounded-xl px-4 py-3 text-xs"
+          aria-live="polite"
+        >
+          Uploading selected images…
+        </p>
+      )}
+      {images.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-zinc-300 px-6 py-14 text-center dark:border-zinc-700">
+          <p className="text-dark dark:text-light font-serif text-2xl italic">
+            No images yet.
+          </p>
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+            Upload an image to build your media library.
+          </p>
+        </div>
+      ) : (
+        <div className="grid max-h-[52vh] grid-cols-2 gap-3 overflow-y-auto pr-1 sm:grid-cols-3 md:grid-cols-4">
+          {paginatedImages.map((url) => (
             <div
-              key={`placeholder-${index}`}
-              className="aspect-square bg-zinc-700"
-            />
-          )
-        )}
-      </div>
-      <div className="mt-4 flex justify-center space-x-2">
-        {Array.from({ length: totalPages }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageClick(index + 1)}
-            className={`h-4 w-4 rounded-full ${
-              currentPage === index + 1 ? 'bg-zinc-400' : 'bg-zinc-600'
-            }`}
-          />
-        ))}
-      </div>
+              key={url}
+              className="group relative aspect-square overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800"
+            >
+              <button
+                type="button"
+                className="h-full w-full"
+                onClick={() => onSelect(url, cursorPosition)}
+                aria-label="Insert this image"
+              >
+                <CldImage
+                  src={url}
+                  width="300"
+                  height="300"
+                  alt=""
+                  className="h-full w-full object-cover transition duration-200 group-hover:brightness-75"
+                />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const publicId = url
+                    .split('/')
+                    .slice(-2)
+                    .join('/')
+                    .split('.')[0];
+                  if (publicId) handleDelete(publicId);
+                }}
+                className="text-light absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-950/70 text-lg leading-none opacity-100 backdrop-blur-sm transition hover:bg-red-600 md:opacity-0 md:group-hover:opacity-100"
+                aria-label="Delete image"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      {totalPages > 1 && (
+        <div className="mt-5 flex justify-center space-x-2">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              type="button"
+              key={index}
+              onClick={() => handlePageClick(index + 1)}
+              className={`h-8 min-w-8 rounded-full px-2 font-mono text-xs transition-colors ${
+                currentPage === index + 1
+                  ? 'bg-dark text-light dark:bg-light dark:text-dark'
+                  : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400'
+              }`}
+              aria-label={`Media page ${index + 1}`}
+              aria-current={currentPage === index + 1 ? 'page' : undefined}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

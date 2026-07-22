@@ -17,17 +17,17 @@ export default function AdminPostControls({
   if (!session?.user) return null;
 
   return (
-    <div className="flex w-full justify-between space-x-2">
+    <div className="mb-6 flex items-center gap-2">
       <Link
         href={`/admin/blog/edit/${slug}`}
-        className="text-light dark:text-dark rounded bg-zinc-800 px-2 py-1 text-sm dark:bg-zinc-50"
+        className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark inline-flex min-h-9 cursor-pointer items-center rounded-full px-4 tracking-[0.1em] uppercase transition-colors"
       >
         Edit Post
       </Link>
       {!published && (
         <Link
           href="/admin/blog/drafts"
-          className="rounded bg-yellow-200 px-2 py-1 text-sm text-yellow-800 dark:bg-yellow-800 dark:text-yellow-200"
+          className="text-xxs cursor-pointer rounded-full bg-amber-100 px-3 py-1.5 tracking-[0.1em] text-amber-800 uppercase dark:bg-amber-950 dark:text-amber-300"
           title="View all drafts"
         >
           Draft

@@ -1,9 +1,11 @@
 import { getAuthorizedSession } from '@/lib/auth';
 import { notFound } from 'next/navigation';
 import { getUserIdByEmail } from '@/db/queries/users';
+import { getPinnedPost } from '@/db/queries/posts';
 
 import AdminPageHeading from '@/components/admin/AdminPageHeading';
 import CreatePostForm from '@/components/blog/NewPostForm';
+import Container from '@/components/content/Container';
 
 export default async function NewBlogPost() {
   const session = await getAuthorizedSession();
@@ -12,19 +14,24 @@ export default async function NewBlogPost() {
     notFound();
   }
 
-  const userId = await getUserIdByEmail(session.user.email!);
+  const [userId, pinnedPost] = await Promise.all([
+    getUserIdByEmail(session.user.email!),
+    getPinnedPost(),
+  ]);
 
   if (!userId) {
     throw new Error('An error occurred while fetching user details.');
   }
 
   return (
-    <div>
-      <div className="mx-10">
-        <AdminPageHeading title={'New Post'} />
-      </div>
-      <CreatePostForm userId={userId} />
-    </div>
+    <Container size="wide">
+      <AdminPageHeading
+        title="New post"
+        eyebrow="Writing desk"
+        description="Shape the story, add publishing details, and save it as a draft or send it live."
+      />
+      <CreatePostForm userId={userId} pinnedPost={pinnedPost} />
+    </Container>
   );
 }
 

@@ -10,8 +10,12 @@ export default async function CategoriesPage() {
   }
 
   return (
-    <Container>
-      <AdminPageHeading title="Category Manager" />
+    <Container size="wide">
+      <AdminPageHeading
+        title="Categories"
+        eyebrow="Organization"
+        description="Keep the taxonomy behind your writing clear and easy to reuse."
+      />
       <AdminCategories />
     </Container>
   );

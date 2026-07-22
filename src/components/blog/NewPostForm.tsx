@@ -7,7 +7,7 @@ import { getCategories } from '@/services/category-service';
 import { useToast } from '@/components/ui/ToastContext';
 import { useImageInsertion } from '@/hooks/useImageInsertion';
 import { useUnsavedChanges } from '@/hooks/useUnsavedChanges';
-import { Category } from '@/types/blog';
+import { Category, PinnedPostSummary } from '@/types/blog';
 
 import PostFormFields from '@/components/blog/PostFormFields';
 import Button from '@/components/ui/Button';
@@ -61,11 +61,13 @@ function formReducer(state: FormState, action: FormAction): FormState {
 interface NewPostFormProps {
   userId: number;
   categories?: Category[];
+  pinnedPost?: PinnedPostSummary | null;
 }
 
 export default function NewPostForm({
   userId,
   categories: propCategories = [],
+  pinnedPost = null,
 }: NewPostFormProps) {
   const router = useRouter();
   const { showToast } = useToast();
@@ -130,7 +132,14 @@ export default function NewPostForm({
 
       await createPost(payload);
 
-      showToast('Post created successfully!', 'success');
+      const replacedPinnedPost =
+        state.published && state.featured && pinnedPost;
+      showToast(
+        replacedPinnedPost
+          ? `Post created and pinned. “${pinnedPost.title}” was unpinned.`
+          : 'Post created successfully!',
+        'success'
+      );
       setHasUnsavedChanges(false);
       router.push(
         state.published ? `/blog/${state.slug}` : '/admin/blog/drafts'
@@ -181,10 +190,7 @@ export default function NewPostForm({
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="font-mono text-dark dark:text-light"
-      >
+      <form onSubmit={handleSubmit} className="text-dark dark:text-light">
         <PostFormFields
           title={title}
           setTitle={createFieldDispatcher('title')}
@@ -206,9 +212,11 @@ export default function NewPostForm({
           categoryId={categoryId}
           setCategoryId={createFieldDispatcher('categoryId')}
           categoriesLoading={categoriesLoading}
+          pinnedPost={pinnedPost}
         />
         <PostFormControls
           isSubmitting={isSubmitting}
+          hasUnsavedChanges={hasUnsavedChanges}
           showDiscard={true}
           onDiscard={() => setShowCancelModal(true)}
           onSubmitText="Create Post"
@@ -221,6 +229,7 @@ export default function NewPostForm({
         message=""
         onCancel={() => setShowGallery(false)}
         buttons="cancel"
+        size="large"
         leftButton={
           <Button
             type="button"
@@ -233,13 +242,6 @@ export default function NewPostForm({
           />
         }
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          multiple
-          className="hidden"
-        />
         <MediaGallery
           onSelect={insertImageAtCursor}
           fileInputRef={fileInputRef}

@@ -115,12 +115,10 @@ export default async function BlogPost({
   return (
     <Container>
       <article className="text-dark dark:text-light mt-12 md:mt-20">
-        <div className="mb-6 flex items-center justify-between">
-          <AdminPostControls
-            slug={post.slug}
-            published={post.published ?? false}
-          />
-        </div>
+        <AdminPostControls
+          slug={post.slug}
+          published={post.published ?? false}
+        />
 
         <div className="flex items-center justify-between">
           <div className="text-xxs flex flex-row uppercase">

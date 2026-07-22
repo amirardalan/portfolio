@@ -17,9 +17,9 @@ export default async function AdminLayout({
 
   return (
     <ToastProvider>
-      <div className="mb-6 flex w-full flex-col">
+      <div className="cms-shell flex w-full flex-col bg-[radial-gradient(circle_at_top_right,rgba(120,30,100,0.07),transparent_32%)] pb-20 dark:bg-[radial-gradient(circle_at_top_right,rgba(220,230,80,0.035),transparent_30%)]">
         <AdminMenu />
-        <div>{children}</div>
+        <div className="w-full">{children}</div>
       </div>
     </ToastProvider>
   );

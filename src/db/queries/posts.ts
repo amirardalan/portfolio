@@ -38,6 +38,25 @@ export const getPublishedPosts = async (options?: {
     .execute(options);
 };
 
+export async function getPinnedPost(): Promise<{
+  id: number;
+  title: string;
+  slug: string;
+} | null> {
+  const result = await db
+    .select({
+      id: posts.id,
+      title: posts.title,
+      slug: posts.slug,
+    })
+    .from(posts)
+    .where(and(eq(posts.featured, true), eq(posts.published, true)))
+    .orderBy(desc(posts.updated_at))
+    .limit(1);
+
+  return result[0] ?? null;
+}
+
 // Get draft posts (for admin drafts page)
 export async function getDraftPosts(options?: { next?: { tags: string[] } }) {
   return db
@@ -218,28 +237,41 @@ export async function getPostTitleSlugBySlug(slug: string) {
 // Database operation to create a new post
 export async function dbCreatePost(postData: Omit<BlogPost, 'id'>) {
   const isPublished = postData.published || false;
-  const result = await db
-    .insert(posts)
-    .values({
-      title: postData.title,
-      slug: postData.slug,
-      excerpt: postData.excerpt,
-      content: postData.content,
-      category_id: postData.category_id ?? null,
-      user_id: postData.user_id,
-      published: isPublished,
-      featured: postData.featured || false,
-      created_at: new Date(),
-      updated_at: new Date(),
-    })
-    .returning({ id: posts.id });
+  const shouldPin = isPublished && postData.featured === true;
+
+  const postId = await db.transaction(async (tx) => {
+    if (shouldPin) {
+      await tx
+        .update(posts)
+        .set({ featured: false })
+        .where(eq(posts.featured, true));
+    }
+
+    const result = await tx
+      .insert(posts)
+      .values({
+        title: postData.title,
+        slug: postData.slug,
+        excerpt: postData.excerpt,
+        content: postData.content,
+        category_id: postData.category_id ?? null,
+        user_id: postData.user_id,
+        published: isPublished,
+        featured: shouldPin,
+        created_at: new Date(),
+        updated_at: new Date(),
+      })
+      .returning({ id: posts.id });
+
+    return result[0]?.id;
+  });
 
   // Revalidate sitemap if a new post is published
   if (isPublished) {
     revalidateTag('sitemap', { expire: 0 });
   }
 
-  return result[0]?.id;
+  return postId;
 }
 
 // Database operation to update an existing post
@@ -257,13 +289,7 @@ export async function dbUpdatePost(id: number, postData: Partial<BlogPost>) {
   const slugChanged = postData.slug !== oldSlug;
   const publishStatusChanged = wasPublished !== isNowPublished;
 
-  // If this post is being featured, unfeatured all other posts first
-  if (postData.featured === true) {
-    await db
-      .update(posts)
-      .set({ featured: false })
-      .where(eq(posts.featured, true));
-  }
+  const shouldPin = postData.published === true && postData.featured === true;
 
   // Prepare the update object with proper handling of category_id
   const updateObject: any = {
@@ -274,14 +300,23 @@ export async function dbUpdatePost(id: number, postData: Partial<BlogPost>) {
     published: postData.published,
     show_updated: postData.show_updated ?? false,
     updated_at: new Date(),
-    featured: postData.featured,
+    featured: shouldPin,
   };
 
   if ('category_id' in postData) {
     updateObject.category_id = postData.category_id;
   }
 
-  await db.update(posts).set(updateObject).where(eq(posts.id, id));
+  await db.transaction(async (tx) => {
+    if (shouldPin) {
+      await tx
+        .update(posts)
+        .set({ featured: false })
+        .where(eq(posts.featured, true));
+    }
+
+    await tx.update(posts).set(updateObject).where(eq(posts.id, id));
+  });
 
   if (publishStatusChanged || (wasPublished && slugChanged)) {
     revalidateTag('sitemap', { expire: 0 });

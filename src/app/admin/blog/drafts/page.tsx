@@ -49,7 +49,7 @@ export default async function Drafts({
   const totalResults = filteredDrafts.length;
 
   return (
-    <Container>
+    <Container size="wide">
       <AdminPostList
         title="Drafts"
         posts={paginatedDrafts}

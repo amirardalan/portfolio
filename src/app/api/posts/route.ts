@@ -79,10 +79,12 @@ export async function PUT(req: NextRequest) {
     const result = await dbUpdatePost(id, postUpdatePayload);
 
     revalidatePath(`/blog/${result.newSlug || result.oldSlug}`);
+    revalidateTag('posts', { expire: 0 });
 
     if (result.wasPublished || updateData.published) {
       console.log('PUT /api/posts - Revalidating blog-list and sitemap tags.'); // Add log here
       revalidateTag('blog-list', { expire: 0 });
+      revalidateTag('published-posts', { expire: 0 });
 
       revalidateTag(`blog-post:${result.newSlug || result.oldSlug}`, {
         expire: 0,

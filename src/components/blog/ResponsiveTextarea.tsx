@@ -49,7 +49,7 @@ export default function ResponsiveTextarea({
   const textareaReference = textareaRef || internalRef;
 
   return (
-    <div className="bg-zinc-100 pt-1 dark:bg-zinc-900">
+    <div>
       <textarea
         id={id}
         value={value}

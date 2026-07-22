@@ -7,7 +7,6 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
-  isCategoryInUse,
 } from '@/services/category-service';
 import { generateSlug } from '@/utils/generate-slug';
 import { useToast } from '@/components/ui/ToastContext';
@@ -26,10 +25,6 @@ export default function AdminCategories() {
     null
   );
   const [isDeleting, setIsDeleting] = useState(false);
-  const [checkingCategory, setCheckingCategory] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
-  const [errorModalMessage, setErrorModalMessage] = useState('');
-  const [dataVersion, setDataVersion] = useState(1);
   const editFormRef = useRef<HTMLDivElement>(null);
   const [isNewCategory, setIsNewCategory] = useState(false);
 
@@ -64,7 +59,7 @@ export default function AdminCategories() {
     return () => {
       isMounted = false;
     };
-  }, [dataVersion, showToast]);
+  }, [showToast]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -86,35 +81,32 @@ export default function AdminCategories() {
     };
   }, [editingId]);
 
-  const handleAddCategory = useCallback(
-    async (id: number) => {
-      if (!editName) return;
+  const handleAddCategory = useCallback(async () => {
+    if (!editName) return;
 
-      setLoading(true);
-      try {
-        const slug = generateSlug(editName);
-        const newCategory = await createCategory({ name: editName, slug });
-        setCategories((prev) => [newCategory, ...prev]);
-        setEditingId(null);
-        setIsNewCategory(false);
-        showToast('Category added successfully', 'success');
-      } catch (err) {
-        const errorMessage = (err as Error).message || 'Failed to add category';
-        showToast(errorMessage, 'error');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [editName, setCategories, setLoading, showToast]
-  );
+    setLoading(true);
+    try {
+      const slug = generateSlug(editName);
+      const newCategory = await createCategory({ name: editName, slug });
+      setCategories((prev) => [newCategory, ...prev]);
+      setEditingId(null);
+      setIsNewCategory(false);
+      showToast('Category added successfully', 'success');
+    } catch (err) {
+      const errorMessage = (err as Error).message || 'Failed to add category';
+      showToast(errorMessage, 'error');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }, [editName, setCategories, setLoading, showToast]);
 
   const handleUpdateCategory = useCallback(
     async (id: number) => {
       if (!editName) return;
 
       if (isNewCategory) {
-        await handleAddCategory(id);
+        await handleAddCategory();
         return;
       }
 
@@ -166,13 +158,8 @@ export default function AdminCategories() {
         setCategories((prev) => prev.filter((cat) => cat.id !== id));
         showToast('Category deleted successfully', 'success');
       } catch (err) {
-        const error = err as Error;
-        let errorMessage = error.message || 'Failed to delete category';
-
-        if (errorMessage.includes('assigned to one or more posts')) {
-          errorMessage = `This category can't be deleted because it's currently being used by one or more posts. Please update those posts first.`;
-        }
-
+        const errorMessage =
+          (err as Error).message || 'Failed to delete category';
         showToast(errorMessage, 'error');
         console.error(err);
       } finally {
@@ -191,37 +178,11 @@ export default function AdminCategories() {
   );
 
   const startDeleteConfirmation = useCallback(
-    async (category: Category) => {
-      setCheckingCategory(true);
-
-      try {
-        const inUse = await isCategoryInUse(category.id);
-
-        if (inUse) {
-          const errorMessage = `The category "${category.name}" cannot be deleted because it is assigned to one or more posts. Please update those posts first.`;
-          setErrorModalMessage(errorMessage);
-          setShowErrorModal(true);
-        } else {
-          setCategoryToDelete(category);
-          setShowDeleteModal(true);
-        }
-      } catch (err) {
-        const errorMessage =
-          (err as Error).message || 'Failed to check category usage';
-        showToast(errorMessage, 'error');
-        console.error(err);
-      } finally {
-        setCheckingCategory(false);
-      }
+    (category: Category) => {
+      setCategoryToDelete(category);
+      setShowDeleteModal(true);
     },
-    [
-      setCheckingCategory,
-      setErrorModalMessage,
-      setShowErrorModal,
-      setCategoryToDelete,
-      setShowDeleteModal,
-      showToast,
-    ]
+    [setCategoryToDelete, setShowDeleteModal]
   );
 
   const startEditing = useCallback((category: Category) => {
@@ -237,11 +198,6 @@ export default function AdminCategories() {
     setIsNewCategory(true);
   }, []);
 
-  const closeErrorModal = useCallback(() => {
-    setShowErrorModal(false);
-    setErrorModalMessage('');
-  }, []);
-
   const cancelDelete = useCallback(() => {
     setShowDeleteModal(false);
     setCategoryToDelete(null);
@@ -249,127 +205,152 @@ export default function AdminCategories() {
 
   const categoriesList = useMemo(() => {
     if (loading && categories.length === 0) {
-      return <p className="text-zinc-500">Loading...</p>;
+      return (
+        <div className="space-y-px overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-800">
+          {[...Array(3)].map((_, index) => (
+            <div
+              key={index}
+              className="bg-light dark:bg-dark animate-pulse px-6 py-7"
+            >
+              <div className="h-4 w-36 rounded bg-zinc-200 dark:bg-zinc-800" />
+              <div className="mt-3 h-3 w-24 rounded bg-zinc-100 dark:bg-zinc-900" />
+            </div>
+          ))}
+        </div>
+      );
     }
 
-    let items = [...categories];
-
     const renderedItems = (
-      <ul className="text-dark dark:text-light">
+      <ul className="bg-light text-dark dark:bg-dark dark:text-light overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800">
         {isNewCategory && (
           <li
             key="new-category"
-            className="flex items-center gap-2 border-b border-zinc-200 py-2 dark:border-zinc-800 hover:dark:bg-zinc-900"
+            className="border-b border-zinc-200 bg-zinc-50 p-5 md:p-6 dark:border-zinc-800 dark:bg-zinc-900/70"
           >
             <div
               ref={editFormRef}
-              className="flex flex-grow items-center gap-2"
+              className="flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <input
                 type="text"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                className="m-0 box-border h-[24px] min-w-[180px] flex-grow rounded border-none bg-transparent px-0 py-0 leading-normal text-dark outline-none dark:text-light"
+                className="bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-12 min-w-[180px] flex-grow rounded-xl border border-zinc-300 px-4 text-sm transition-colors outline-none dark:border-zinc-700"
                 placeholder="New category name"
                 autoFocus
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') handleAddCategory(-1);
+                  if (e.key === 'Enter') handleAddCategory();
                   if (e.key === 'Escape') {
                     setEditingId(null);
                     setIsNewCategory(false);
                   }
                 }}
               />
-              <button
-                onClick={() => handleAddCategory(-1)}
-                className="rounded bg-primary px-2 text-xxs uppercase text-light dark:text-dark"
-              >
-                Add
-              </button>
-              <button
-                onClick={() => {
-                  setEditingId(null);
-                  setIsNewCategory(false);
-                }}
-                className="rounded bg-zinc-300 px-2 text-xxs uppercase dark:bg-zinc-600"
-              >
-                Cancel
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleAddCategory()}
+                  disabled={!editName.trim()}
+                  className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark min-h-10 rounded-full px-4 tracking-[0.1em] uppercase transition-colors disabled:opacity-40"
+                >
+                  Add category
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingId(null);
+                    setIsNewCategory(false);
+                  }}
+                  className="text-xxs min-h-10 rounded-full border border-zinc-300 px-4 tracking-[0.1em] uppercase dark:border-zinc-700"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </li>
         )}
         {categories.map((cat) => (
           <li
             key={cat.id}
-            className="hover:bg:zinc-200 flex items-center gap-2 border-b border-zinc-200 py-2 dark:border-zinc-800 hover:dark:bg-zinc-900"
+            className="border-b border-zinc-200 last:border-b-0 dark:border-zinc-800"
           >
             {editingId === cat.id ? (
               <div
                 ref={editFormRef}
-                className="flex flex-grow items-center gap-2"
+                className="flex w-full flex-col gap-3 bg-zinc-50 p-5 sm:flex-row sm:items-center md:p-6 dark:bg-zinc-900/70"
               >
                 <input
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="m-0 box-border h-[24px] min-w-[180px] flex-grow rounded border-none bg-transparent px-0 py-0 leading-normal text-zinc-500 outline-none dark:text-zinc-400"
+                  className="bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-12 min-w-[180px] flex-grow rounded-xl border border-zinc-300 px-4 text-sm transition-colors outline-none dark:border-zinc-700"
                   autoFocus
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleUpdateCategory(cat.id);
                     if (e.key === 'Escape') setEditingId(null);
                   }}
                 />
-                <button
-                  onClick={() => handleUpdateCategory(cat.id)}
-                  className="rounded bg-primary px-2 text-xxs uppercase text-light dark:text-dark"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => setEditingId(null)}
-                  className="rounded bg-zinc-300 px-2 text-xxs uppercase dark:bg-zinc-600"
-                >
-                  Cancel
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleUpdateCategory(cat.id)}
+                    disabled={!editName.trim()}
+                    className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark min-h-10 rounded-full px-4 tracking-[0.1em] uppercase transition-colors disabled:opacity-40"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => setEditingId(null)}
+                    className="text-xxs min-h-10 rounded-full border border-zinc-300 px-4 tracking-[0.1em] uppercase dark:border-zinc-700"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             ) : (
-              <>
-                <div
-                  className="flex cursor-pointer items-center gap-2"
+              <div className="flex items-center gap-4 p-5 transition-colors hover:bg-zinc-50 md:p-6 dark:hover:bg-zinc-900/70">
+                <button
+                  type="button"
+                  className="min-w-0 flex-grow text-left"
                   onClick={() => startEditing(cat)}
                 >
-                  <span>{cat.name}</span>
-                  <span className="text-xs text-zinc-500">({cat.slug})</span>
-                </div>
-                <div className="ml-auto flex gap-2">
+                  <span className="block text-lg font-medium">{cat.name}</span>
+                  <span className="mt-1 block font-mono text-xs font-normal text-zinc-500 dark:text-zinc-400">
+                    /{cat.slug}
+                  </span>
+                </button>
+                <div className="ml-auto flex gap-1">
                   <button
                     onClick={() => startEditing(cat)}
-                    className="h-6 w-6"
+                    className="group flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     title="Edit category"
+                    aria-label={`Edit ${cat.name}`}
                   >
-                    <IconEdit className="fill-zinc-400 duration-200 hover:fill-primary dark:fill-zinc-600" />
+                    <IconEdit className="group-hover:text-primary h-5 w-5 text-zinc-400 transition-colors duration-200 dark:text-zinc-600" />
                   </button>
                   <button
                     onClick={() => startDeleteConfirmation(cat)}
-                    className="h-6 w-6"
+                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-red-50 dark:hover:bg-red-950/40"
                     title="Delete category"
-                    disabled={checkingCategory}
+                    aria-label={`Delete ${cat.name}`}
                   >
-                    <IconDelete className="fill-zinc-400 duration-200 hover:fill-red-500 dark:fill-zinc-600" />
+                    <IconDelete className="h-5 w-5 fill-zinc-400 duration-200 hover:fill-red-500 dark:fill-zinc-600" />
                   </button>
                 </div>
-              </>
+              </div>
             )}
           </li>
         ))}
       </ul>
     );
 
-    if (items.length === 0 && !isNewCategory) {
+    if (categories.length === 0 && !isNewCategory) {
       return (
-        <p className="text-zinc-500">
-          No categories have been created yet. Try adding one.
-        </p>
+        <div className="rounded-3xl border border-dashed border-zinc-300 px-6 py-16 text-center dark:border-zinc-700">
+          <p className="text-dark dark:text-light font-serif text-2xl italic">
+            No categories yet.
+          </p>
+          <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+            Create one to start organizing your writing.
+          </p>
+        </div>
       );
     }
 
@@ -382,44 +363,42 @@ export default function AdminCategories() {
     handleUpdateCategory,
     startEditing,
     startDeleteConfirmation,
-    checkingCategory,
     isNewCategory,
     handleAddCategory,
   ]);
 
   return (
-    <section className="mt-8">
-      <div className="mb-4">
+    <section className="pb-10">
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-xxs tracking-[0.2em] text-zinc-500 uppercase dark:text-zinc-400">
+            Category library
+          </h2>
+          <p className="mt-2 text-sm font-normal text-zinc-500 dark:text-zinc-400">
+            {categories.length}{' '}
+            {categories.length === 1 ? 'category' : 'categories'}
+          </p>
+        </div>
         <button
           onClick={startNewCategory}
-          className="cursor-pointer border-b border-primary text-xs font-medium uppercase text-primary"
+          className="bg-dark text-light hover:bg-primary dark:bg-light dark:text-dark dark:hover:bg-primary inline-flex min-h-11 items-center justify-center gap-3 self-start rounded-full px-5 text-xs tracking-[0.12em] uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40 sm:self-auto"
           disabled={isNewCategory}
         >
-          Create New Category +
+          New category <span aria-hidden="true">+</span>
         </button>
       </div>
-      <div className="min-fit-content">{categoriesList}</div>
+      <div>{categoriesList}</div>
 
       <Modal
         isOpen={showDeleteModal}
-        title="Confirm Deletion"
-        message={`Are you sure you want to delete the category "${categoryToDelete?.name}"? This action cannot be undone.`}
+        title="Delete category?"
+        message={`Deleting "${categoryToDelete?.name}" will leave any posts using it uncategorized. The posts themselves will not be deleted.`}
         onCancel={cancelDelete}
         onConfirm={() =>
           categoryToDelete && handleDeleteCategory(categoryToDelete.id)
         }
         confirmText={isDeleting ? 'Deleting...' : 'Delete Category'}
         confirmDisabled={isDeleting}
-      />
-
-      <Modal
-        isOpen={showErrorModal}
-        title="Cannot Delete Category"
-        message={errorModalMessage}
-        onCancel={closeErrorModal}
-        confirmText="Close"
-        buttons={'confirm'}
-        onConfirm={closeErrorModal}
       />
     </section>
   );

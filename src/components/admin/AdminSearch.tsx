@@ -30,20 +30,22 @@ export default function AdminSearch({
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    if (!searchTerm) {
+    const hasSearchTerm = Boolean(searchTerm.trim());
+
+    if (!hasSearchTerm && !defaultValue) {
       e.preventDefault();
       setSearchExecuted(false);
-    } else {
-      setIsLoading(true);
-      setSearchExecuted(true);
-      formRef.current?.submit();
+      return;
     }
+
+    setIsLoading(true);
+    setSearchExecuted(hasSearchTerm);
   };
 
   return (
     <form
       method="get"
-      className="mb-10"
+      className="mb-6"
       onSubmit={(e) => {
         setSearchTerm(searchTerm);
         handleSubmit(e);
@@ -51,17 +53,29 @@ export default function AdminSearch({
       }}
       ref={formRef}
     >
-      <input
-        type="text"
-        name={name}
-        placeholder={placeholder}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-dark outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-light"
-      />
+      <div className="relative">
+        <span
+          className="pointer-events-none absolute top-1/2 left-5 -translate-y-1/2 text-zinc-400"
+          aria-hidden="true"
+        >
+          ⌕
+        </span>
+        <input
+          type="search"
+          name={name}
+          aria-label={placeholder}
+          placeholder={placeholder}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="text-dark focus:border-primary focus:bg-light dark:text-light dark:focus:bg-dark h-14 w-full rounded-2xl border border-zinc-200 bg-zinc-100/70 pr-5 pl-12 text-sm transition-colors outline-none placeholder:text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900/70 dark:placeholder:text-zinc-600"
+        />
+      </div>
       {searchExecuted && (
-        <div className="mt-2 flex items-center justify-between">
-          <p className="text-sm text-dark dark:text-light">
+        <div className="mt-3 flex items-center justify-between px-1">
+          <p
+            className="text-xs text-zinc-500 dark:text-zinc-400"
+            aria-live="polite"
+          >
             {isLoading
               ? 'Loading...'
               : `${totalResults} result${totalResults !== 1 ? 's' : ''}`}
@@ -70,10 +84,10 @@ export default function AdminSearch({
             type="button"
             onClick={handleClearFilters}
             title="Clear Search"
-            className="flex items-center"
+            className="hover:text-primary flex items-center text-zinc-500 transition-colors dark:text-zinc-400"
           >
             <IconClose size={2} />
-            <span className="pl-1 text-sm text-dark dark:text-light">
+            <span className="pl-1 text-xs tracking-[0.1em] uppercase">
               Clear Search
             </span>
           </button>

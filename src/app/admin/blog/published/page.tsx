@@ -49,7 +49,7 @@ export default async function Published({
   const totalResults = filteredPosts.length;
 
   return (
-    <Container>
+    <Container size="wide">
       <AdminPostList
         title="Published Posts"
         posts={paginatedPosts}

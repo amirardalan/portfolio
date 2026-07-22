@@ -2,52 +2,43 @@
 
 import { useActiveLink } from '@/hooks/useActiveLink';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import Container from '@/components/content/Container';
 
+const links = [
+  { href: '/admin', label: 'Overview' },
+  { href: '/admin/blog/new', label: 'New post' },
+  { href: '/admin/blog/drafts', label: 'Drafts' },
+  { href: '/admin/blog/published', label: 'Published' },
+  { href: '/admin/blog/categories', label: 'Categories' },
+];
+
 export default function AdminMenu() {
   const { isActive } = useActiveLink();
+  const pathname = usePathname();
 
   const getLinkClass = (href: string) => {
+    const active = href === '/admin' ? pathname === href : isActive(href);
     return clsx(
-      !isActive(href) && 'text-zinc-400 dark:text-zinc-500',
-      isActive(href) && 'text-zinc-800 dark:text-zinc-300'
+      'relative whitespace-nowrap rounded-full px-4 py-2 text-xxs uppercase tracking-[0.14em] transition-colors',
+      !active &&
+        'text-zinc-500 hover:bg-zinc-200/70 hover:text-dark dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-light',
+      active && 'bg-dark text-light shadow-sm dark:bg-light dark:text-dark'
     );
   };
 
   return (
-    <Container>
-      <nav className="mt-24 flex justify-between">
-        <div className="flex flex-wrap space-x-4">
-          <Link href="/admin" className={getLinkClass('/admin')}>
-            Dashboard
-          </Link>
+    <Container size="wide" className="pt-24 md:pt-28">
+      <div className="border-b border-zinc-200 pb-5 dark:border-zinc-800">
+        <div className="mb-4 flex items-center justify-between">
           <Link
-            href="/admin/blog/new"
-            className={getLinkClass('/admin/blog/new')}
+            href="/admin"
+            className="text-dark dark:text-light flex items-center gap-2.5 text-sm font-medium"
           >
-            New Post
+            <span className="bg-primary h-2 w-2 rotate-45" aria-hidden="true" />
+            Content studio
           </Link>
-          <Link
-            href="/admin/blog/drafts"
-            className={getLinkClass('/admin/blog/drafts')}
-          >
-            Drafts
-          </Link>
-          <Link
-            href="/admin/blog/published"
-            className={getLinkClass('/admin/blog/published')}
-          >
-            Published
-          </Link>
-          <Link
-            href="/admin/blog/categories"
-            className={getLinkClass('/admin/blog/categories')}
-          >
-            Categories
-          </Link>
-        </div>
-        <div className="flex flex-wrap space-x-4">
           <Link
             href="/admin/account"
             className={getLinkClass('/admin/account')}
@@ -55,7 +46,23 @@ export default function AdminMenu() {
             Account
           </Link>
         </div>
-      </nav>
+        <nav
+          aria-label="Content management"
+          className="-mx-2 overflow-x-auto px-2"
+        >
+          <div className="flex min-w-max items-center gap-1">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={getLinkClass(link.href)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      </div>
     </Container>
   );
 }

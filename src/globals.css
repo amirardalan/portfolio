@@ -17,7 +17,8 @@
   --color-skeleton-dark: oklch(0.3 0.01 240);
 
   /* Mobile navigation overlay */
-  --color-gradient: radial-gradient(
+  --color-gradient:
+    radial-gradient(
       circle at 12% 76%,
       oklch(0.76 0.15 195) 0%,
       oklch(0.38 0.11 215) 30%,
@@ -54,6 +55,12 @@
     outline: 2px solid var(--color-primary) !important;
     outline-offset: 4px !important;
   }
+  :where(input, textarea, select).cms-editor-field:focus,
+  :where(input, textarea, select).cms-editor-field:focus-visible {
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+  }
   body {
     background-color: var(--color-light);
     .dark & {
@@ -62,7 +69,8 @@
       --color-dynamic-inverse: var(--color-dark);
       --color-primary: var(--color-primary-dark);
       --color-selection-text: oklch(0.141 0.005 285.823);
-      --color-gradient: radial-gradient(
+      --color-gradient:
+        radial-gradient(
           circle at 12% 76%,
           oklch(0.56 0.13 195) 0%,
           oklch(0.27 0.09 215) 30%,
@@ -88,9 +96,18 @@
   }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .cms-shell :where(a[href], button:not(:disabled), select:not(:disabled)),
+  .cms-shell :where(input[type='checkbox']:not(:disabled)),
+  .cms-shell :where(label:has(input[type='checkbox']:not(:disabled))) {
+    cursor: pointer;
+  }
+}
+
 @layer components {
   .work-card-gradient {
-    background: radial-gradient(
+    background:
+      radial-gradient(
         circle at 8% 8%,
         oklch(0.42 0.09 230 / 0.24),
         transparent 38%
@@ -104,7 +121,8 @@
   }
 
   .dark .work-card-gradient {
-    background: radial-gradient(
+    background:
+      radial-gradient(
         circle at 8% 8%,
         oklch(0.44 0.1 230 / 0.18),
         transparent 40%
@@ -167,7 +185,6 @@
   pre > code > div {
     display: block;
   }
-
 }
 
 @layer utilities {

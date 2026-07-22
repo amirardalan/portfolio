@@ -15,7 +15,7 @@ import Modal from '@/components/ui/Modal';
 import MediaGallery from '@/components/blog/MediaGallery';
 import PostFormControls from '@/components/blog/PostFormControls';
 
-import { BlogPost, Category } from '@/types/blog';
+import { BlogPost, Category, PinnedPostSummary } from '@/types/blog';
 
 interface FormState {
   title: string;
@@ -39,8 +39,7 @@ type FormUpdateActions = {
 }[keyof FormState];
 
 type FormAction =
-  | FormUpdateActions
-  | { type: 'SET_INITIAL_STATE'; payload: FormState };
+  FormUpdateActions | { type: 'SET_INITIAL_STATE'; payload: FormState };
 
 function formReducer(state: FormState, action: FormAction): FormState {
   switch (action.type) {
@@ -56,11 +55,13 @@ function formReducer(state: FormState, action: FormAction): FormState {
 interface EditPostFormProps {
   post: BlogPost;
   categories?: Category[];
+  pinnedPost?: PinnedPostSummary | null;
 }
 
 export default function EditPostForm({
   post,
   categories: propCategories,
+  pinnedPost = null,
 }: EditPostFormProps) {
   const router = useRouter();
   const { showToast } = useToast();
@@ -74,7 +75,7 @@ export default function EditPostForm({
       content: initialPost.content || '',
       categoryId: initialPost.category_id ?? null,
       published: initialPost.published || false,
-      featured: initialPost.featured || false,
+      featured: Boolean(initialPost.featured && initialPost.published),
       showUpdated: initialPost.show_updated || false,
     }),
     []
@@ -148,7 +149,17 @@ export default function EditPostForm({
         user_id: post.user_id,
       });
 
-      showToast('Post updated successfully!', 'success');
+      const replacedPinnedPost =
+        state.published &&
+        state.featured &&
+        pinnedPost &&
+        pinnedPost.id !== post.id;
+      showToast(
+        replacedPinnedPost
+          ? `Post saved and pinned. “${pinnedPost.title}” was unpinned.`
+          : 'Post updated successfully!',
+        'success'
+      );
       setHasUnsavedChanges(false);
       router.push(`/blog/${state.slug}`);
     } catch (err) {
@@ -226,10 +237,7 @@ export default function EditPostForm({
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="font-mono text-dark dark:text-light"
-      >
+      <form onSubmit={handleSubmit} className="text-dark dark:text-light">
         <PostFormFields
           title={title}
           setTitle={createFieldDispatcher('title')}
@@ -253,9 +261,12 @@ export default function EditPostForm({
           categoryId={categoryId}
           setCategoryId={createFieldDispatcher('categoryId')}
           categoriesLoading={categoriesLoading}
+          pinnedPost={pinnedPost}
+          currentPostId={post.id}
         />
         <PostFormControls
           isSubmitting={isSubmitting}
+          hasUnsavedChanges={hasUnsavedChanges}
           isDeleting={isDeleting}
           showDelete={true}
           onDelete={handleDeleteClick}
@@ -280,6 +291,7 @@ export default function EditPostForm({
         message=""
         onCancel={() => setShowGallery(false)}
         buttons="cancel"
+        size="large"
         leftButton={
           <Button
             type="button"
@@ -292,13 +304,6 @@ export default function EditPostForm({
           />
         }
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          multiple
-          className="hidden"
-        />
         <MediaGallery
           onSelect={insertImageAtCursor}
           fileInputRef={fileInputRef}

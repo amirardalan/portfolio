@@ -24,3 +24,5 @@ export type BlogPost = {
   isDraft?: boolean;
   user_name?: string | null;
 };
+
+export type PinnedPostSummary = Pick<BlogPost, 'id' | 'title' | 'slug'>;

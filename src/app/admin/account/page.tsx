@@ -23,33 +23,51 @@ export default async function Account() {
   }
 
   return (
-    <Container>
-      <div>
-        <AdminPageHeading title={'Account'} />
-        <div className="flex flex-col">
-          <div className="flex items-center">
-            <div className="h-6 w-6">
-              <Avatar />
+    <Container size="wide">
+      <div className="pb-10">
+        <AdminPageHeading
+          title="Account"
+          eyebrow="Studio profile"
+          description="Your authenticated author identity and account details."
+        />
+        <section className="bg-light dark:bg-dark overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800">
+          <div className="flex flex-col gap-6 border-b border-zinc-200 p-6 sm:flex-row sm:items-center sm:justify-between md:p-8 dark:border-zinc-800">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 overflow-hidden rounded-full ring-1 ring-zinc-200 dark:ring-zinc-700">
+                <Avatar />
+              </div>
+              <div>
+                <p className="text-dark dark:text-light text-lg font-medium">
+                  {session.user?.name}
+                </p>
+                <p className="text-xxs text-primary mt-1 tracking-[0.14em] uppercase">
+                  Owner · Author
+                </p>
+              </div>
             </div>
-            <p className="text-s text-dark dark:text-light ml-2">
-              {session.user?.name}
-            </p>
             <Link
               href="/api/auth/signout?callbackUrl=/&redirect=false"
-              className="text-xxs text-primary ml-2 uppercase"
+              className="text-xxs text-dark hover:border-primary hover:text-primary dark:text-light inline-flex min-h-10 items-center justify-center self-start rounded-full border border-zinc-300 px-4 tracking-[0.1em] uppercase transition-colors sm:self-auto dark:border-zinc-700"
             >
-              Sign Out
+              Sign out
             </Link>
           </div>
-          <div className="text-dark dark:text-light mt-4 flex flex-row items-center rounded-lg border border-1 border-zinc-300 p-4 dark:border-zinc-700">
-            <span>Email:</span>
-            <span>
+          <div className="grid gap-3 p-6 sm:grid-cols-[180px_1fr] sm:items-center md:p-8">
+            <div>
+              <p className="text-xxs tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
+                Email address
+              </p>
+              <p className="mt-1 text-xs font-normal text-zinc-400 dark:text-zinc-600">
+                Click to reveal
+              </p>
+            </div>
+            <div className="text-dark dark:text-light text-sm sm:justify-self-end">
               {session.user?.email && (
                 <ObfuscatedEmail email={session.user.email} />
               )}
-            </span>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </Container>
   );

@@ -11,10 +11,14 @@ export default async function AdminPage() {
   }
 
   return (
-    <Container>
-      <AdminPageHeading title={'Dashboard'} />
-      <AdminDashboard />
+    <Container size="wide">
+      <AdminPageHeading
+        title="Welcome back"
+        eyebrow="Content overview"
+        description="Write, organize, and keep an eye on your published work from one place."
+      />
       <AdminStats />
+      <AdminDashboard />
     </Container>
   );
 }

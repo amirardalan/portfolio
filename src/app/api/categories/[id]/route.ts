@@ -2,11 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/connector';
 import { categories } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import {
-  getCategoryById,
-  isCategoryUsedByPosts,
-} from '@/db/queries/categories';
+import { getCategoryById } from '@/db/queries/categories';
+import { getPostsByCategoryId } from '@/db/queries/posts';
 import { isAuthorized } from '@/lib/auth';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 // Get category by ID
 export async function GET(
@@ -74,6 +73,8 @@ export async function PUT(
       );
     }
 
+    const affectedPosts = await getPostsByCategoryId(categoryId);
+
     // Update the category
     const [result] = await db
       .update(categories)
@@ -91,6 +92,8 @@ export async function PUT(
         { status: 404 }
       );
     }
+
+    revalidateCategoryContent(affectedPosts);
 
     return NextResponse.json(result);
   } catch (error: any) {
@@ -140,28 +143,37 @@ export async function DELETE(
       );
     }
 
-    // Check if the category is used by any posts
-    const isUsed = await isCategoryUsedByPosts(categoryId);
-    if (isUsed) {
-      return NextResponse.json(
-        {
-          error:
-            'Cannot delete this category because it is assigned to one or more posts',
-          code: 'CATEGORY_IN_USE',
-        },
-        { status: 409 } // Conflict status code
-      );
-    }
+    const affectedPosts = await getPostsByCategoryId(categoryId);
 
-    // Delete the category
+    // The foreign key sets affected posts to Uncategorized (null).
     await db.delete(categories).where(eq(categories.id, categoryId));
 
-    return NextResponse.json({ success: true });
+    revalidateCategoryContent(affectedPosts);
+
+    return NextResponse.json({
+      success: true,
+      uncategorizedPosts: affectedPosts.length,
+    });
   } catch (error: any) {
     console.error('Error deleting category:', error);
     return NextResponse.json(
       { error: error.message || 'Failed to delete category' },
       { status: 500 }
     );
+  }
+}
+
+function revalidateCategoryContent(
+  affectedPosts: Array<{ slug: string; published: boolean | null }>
+) {
+  revalidateTag('posts', { expire: 0 });
+  revalidateTag('published-posts', { expire: 0 });
+  revalidateTag('blog-list', { expire: 0 });
+
+  for (const post of affectedPosts) {
+    if (post.published) {
+      revalidateTag(`blog-post:${post.slug}`, { expire: 0 });
+      revalidatePath(`/blog/${post.slug}`);
+    }
   }
 }

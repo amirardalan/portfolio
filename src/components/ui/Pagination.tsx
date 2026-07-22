@@ -27,21 +27,25 @@ export default function Pagination({
   }
 
   return (
-    <div className={`flex justify-center space-x-2 ${className}`}>
+    <nav
+      aria-label="Pagination"
+      className={`flex justify-center space-x-2 ${className}`}
+    >
       {Array.from({ length: totalPages }, (_, index) => (
         <Link
           key={index}
           href={createPageURL(index + 1)}
           className={clsx(
-            'rounded border border-zinc-300 px-3 py-0.5 font-mono text-xs hover:bg-zinc-200 dark:border-zinc-500 dark:hover:bg-zinc-800',
+            'flex h-10 min-w-10 items-center justify-center rounded-full border px-3 font-mono text-xs transition-colors',
             currentPage === index + 1
-              ? 'bg-zinc-200 text-dark dark:bg-zinc-800 dark:text-light'
-              : 'text-zinc-400 dark:text-zinc-500'
+              ? 'border-dark bg-dark text-light dark:border-light dark:bg-light dark:text-dark'
+              : 'hover:border-primary hover:text-primary border-zinc-300 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400'
           )}
+          aria-current={currentPage === index + 1 ? 'page' : undefined}
         >
           {index + 1}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 }

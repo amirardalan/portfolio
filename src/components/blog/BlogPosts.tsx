@@ -33,8 +33,8 @@ function ClientPagination({
           className={clsx(
             'rounded px-3 py-1 font-mono text-xs',
             currentPage === index + 1
-              ? 'bg-zinc-400 text-light dark:text-dark'
-              : 'bg-zinc-200 text-dark dark:bg-zinc-700 dark:text-light'
+              ? 'text-light dark:text-dark bg-zinc-400'
+              : 'text-dark dark:text-light bg-zinc-200 dark:bg-zinc-700'
           )}
         >
           {index + 1}
@@ -51,10 +51,13 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
   const categoryFilter = searchParams?.get('category');
   const postsPerPage = 8;
 
-  const featuredPost = posts.find((post) => post.featured);
-  const regularPosts = posts.filter((post) => !post.featured);
+  const pinnedPost = posts.find((post) => post.featured);
+  const hasActiveFilters = Boolean(searchTerm || categoryFilter);
+  const candidatePosts = hasActiveFilters
+    ? posts
+    : posts.filter((post) => post.id !== pinnedPost?.id);
 
-  const filteredPosts = regularPosts.filter((post) => {
+  const filteredPosts = candidatePosts.filter((post) => {
     const matchesSearch = post.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -65,13 +68,9 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
     return matchesSearch && matchesCategory;
   });
 
-  const showFeaturedPost =
-    featuredPost &&
-    (!searchTerm ||
-      featuredPost.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
-    (!categoryFilter ||
-      (featuredPost.category?.name ?? 'Uncategorized').toLowerCase() ===
-        categoryFilter.toLowerCase());
+  const showPinnedPost = Boolean(
+    pinnedPost && !hasActiveFilters && currentPage === 1
+  );
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const paginatedPosts = filteredPosts.slice(
@@ -95,7 +94,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
 
   return (
     <div>
-      <div className="scrollbar-hide mb-4 flex space-x-4 overflow-x-auto text-xxs uppercase text-dark dark:text-light">
+      <div className="scrollbar-hide text-xxs text-dark dark:text-light mb-4 flex space-x-4 overflow-x-auto uppercase">
         {allCategories.map((category) => (
           <Link
             key={category}
@@ -108,7 +107,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
             className={clsx(
               categoryFilter === category ||
                 (!categoryFilter && category === 'all')
-                ? 'pb-0.5 text-primary'
+                ? 'text-primary pb-0.5'
                 : ''
             )}
           >
@@ -121,7 +120,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
           aria-hidden="true"
           viewBox="0 0 20 20"
           fill="none"
-          className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400"
+          className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-zinc-400"
         >
           <circle
             cx="8.5"
@@ -146,17 +145,15 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
             setSearchTerm(e.target.value);
             setCurrentPage(1);
           }}
-          className="w-full rounded-xl border border-zinc-200 bg-zinc-50/70 py-3 pl-10 pr-4 text-sm text-dark outline-none transition-colors placeholder:text-zinc-400 focus:border-primary focus:ring-1 focus:ring-primary dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-light dark:placeholder:text-zinc-500"
+          className="text-dark focus:border-primary focus:ring-primary dark:text-light w-full rounded-xl border border-zinc-200 bg-zinc-50/70 py-3 pr-4 pl-10 text-sm transition-colors outline-none placeholder:text-zinc-400 focus:ring-1 dark:border-zinc-800 dark:bg-zinc-900/70 dark:placeholder:text-zinc-500"
         />
       </div>
       {searchTerm && (
         <div className="mt-3 flex items-center justify-between">
           <div>
-            <p className="text-sm text-dark dark:text-light">
-              {filteredPosts.length + (showFeaturedPost ? 1 : 0)} result
-              {filteredPosts.length + (showFeaturedPost ? 1 : 0) !== 1
-                ? 's'
-                : ''}
+            <p className="text-dark dark:text-light text-sm">
+              {filteredPosts.length} result
+              {filteredPosts.length !== 1 ? 's' : ''}
             </p>
           </div>
           <div className="flex space-x-2">
@@ -166,24 +163,24 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
               className="flex items-center"
             >
               <IconClose size={20} color="var(--color-primary)" />
-              <span className="pl-1 text-sm text-dark dark:text-light">
+              <span className="text-dark dark:text-light pl-1 text-sm">
                 Clear
               </span>
             </button>
           </div>
         </div>
       )}
-      {paginatedPosts.length > 0 || showFeaturedPost ? (
-        <ul className="mb-8 mt-6 border-b border-zinc-200 dark:border-zinc-800">
-          {showFeaturedPost && (
-            <BlogPostCard post={featuredPost} featured={true} />
+      {paginatedPosts.length > 0 || showPinnedPost ? (
+        <ul className="mt-6 mb-8 border-b border-zinc-200 dark:border-zinc-800">
+          {showPinnedPost && pinnedPost && (
+            <BlogPostCard post={pinnedPost} pinned={true} />
           )}
           {paginatedPosts.map((post) => (
             <BlogPostCard key={post.id} post={post} />
           ))}
         </ul>
       ) : (
-        <p className="pt-6 text-dark dark:text-light">
+        <p className="text-dark dark:text-light pt-6">
           No posts match that search.
         </p>
       )}
