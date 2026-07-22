@@ -111,6 +111,7 @@ function WaterSurface({
   const fillGeometry = useRef<PlaneGeometryRef>(null);
   const wireGeometry = useRef<PlaneGeometryRef>(null);
   const surface = useRef<Group>(null);
+  const localPointerPosition = useRef(new Vector3());
   const waterUniforms = useRef({
     uTime: { value: 0 },
     uWaveAmplitude: { value: amplitude },
@@ -184,24 +185,29 @@ function WaterSurface({
 
           #if WATER_CLICK_RIPPLES == 1
           for (int clickIndex = 0; clickIndex < MAX_CLICK_RIPPLES; clickIndex++) {
-            float clickDistance = length(waterPosition - uClickRippleCenters[clickIndex]);
-            float clickRadius = uClickRippleAges[clickIndex] * 0.65;
-            float clickOffset = clickDistance - clickRadius;
-            float clickEnvelope = exp(-clickOffset * clickOffset * 18.0);
-            float clickWave = sin(clickOffset * 20.0) * 0.07 * clickEnvelope;
-            transformed.y += clickWave * uClickRippleStrengths[clickIndex];
+            float clickStrength = uClickRippleStrengths[clickIndex];
+            if (clickStrength > 0.001) {
+              float clickDistance = length(waterPosition - uClickRippleCenters[clickIndex]);
+              float clickRadius = uClickRippleAges[clickIndex] * 0.65;
+              float clickOffset = clickDistance - clickRadius;
+              float clickEnvelope = exp(-clickOffset * clickOffset * 18.0);
+              float clickWave = sin(clickOffset * 20.0) * 0.07 * clickEnvelope;
+              transformed.y += clickWave * clickStrength;
+            }
           }
           #endif
 
           #if WATER_POINTER_DISPLACEMENT == 1
-          vec2 pointerOffset = waterPosition - uPointerCenter;
-          float pointerDistanceSquared = dot(pointerOffset, pointerOffset);
-          float pointerDistance = sqrt(pointerDistanceSquared);
-          float pointerDepression = exp(-pointerDistanceSquared * 24.0) * 0.045;
-          float pointerRim = exp(-pow(pointerDistance - 0.24, 2.0) * 120.0) * 0.012;
-          float pointerPush = exp(-pointerDistanceSquared * 20.0) * 0.08;
-          transformed.y += (pointerRim - pointerDepression) * uPointerStrength;
-          transformed.xz += pointerOffset * pointerPush * uPointerStrength;
+          if (uPointerStrength > 0.001) {
+            vec2 pointerOffset = waterPosition - uPointerCenter;
+            float pointerDistanceSquared = dot(pointerOffset, pointerOffset);
+            float pointerDistance = sqrt(pointerDistanceSquared);
+            float pointerDepression = exp(-pointerDistanceSquared * 24.0) * 0.045;
+            float pointerRim = exp(-pow(pointerDistance - 0.24, 2.0) * 120.0) * 0.012;
+            float pointerPush = exp(-pointerDistanceSquared * 20.0) * 0.08;
+            transformed.y += (pointerRim - pointerDepression) * uPointerStrength;
+            transformed.xz += pointerOffset * pointerPush * uPointerStrength;
+          }
           #endif`
         );
     },
@@ -239,7 +245,9 @@ function WaterSurface({
       if (reduceMotion || !surface.current) return;
 
       event.stopPropagation();
-      const localPoint = surface.current.worldToLocal(event.point.clone());
+      const localPoint = surface.current.worldToLocal(
+        localPointerPosition.current.copy(event.point)
+      );
       pointerPosition.current.x = localPoint.x;
       pointerPosition.current.z = localPoint.z;
       if (canPartWater) {
@@ -261,7 +269,9 @@ function WaterSurface({
       if (reduceMotion || !surface.current) return;
 
       event.stopPropagation();
-      const localPoint = surface.current.worldToLocal(event.point.clone());
+      const localPoint = surface.current.worldToLocal(
+        localPointerPosition.current.copy(event.point)
+      );
       pointerPosition.current.x = localPoint.x;
       pointerPosition.current.z = localPoint.z;
     },
@@ -325,9 +335,6 @@ function WaterSurface({
 
     const uniforms = waterUniforms.current;
     uniforms.uTime.value = reduceMotion ? 0 : clock.elapsedTime;
-    uniforms.uWaveAmplitude.value = amplitude;
-    uniforms.uWaveFrequency.value = frequency;
-    uniforms.uWavePhases.value.set(...phases);
     for (let index = 0; index < MAX_CLICK_RIPPLES; index++) {
       const clickRipple = clickRipples.current[index];
       uniforms.uClickRippleCenters.value[index].set(
@@ -424,7 +431,6 @@ const getRandomArbitrary = (min: number, max: number) => {
 
 // Canvas
 export default function TerrainCanvas() {
-  const [pixelRatio, setPixelRatio] = useState(1);
   const [detail] = useState(getRandomInt(MIN_DETAIL, MAX_DETAIL));
   const [amplitude] = useState(
     getRandomArbitrary(MIN_AMPLITUDE, MAX_AMPLITUDE)
@@ -440,10 +446,6 @@ export default function TerrainCanvas() {
   const scale = 8;
   const rotation = 0.5;
   const offset = useMemo(() => ({ x: 0, z: 0 }), []);
-
-  useEffect(() => {
-    setPixelRatio(window.devicePixelRatio);
-  }, []);
 
   const handleButtonClick = useCallback(() => {
     setRippleTrigger((trigger) => trigger + 1);
@@ -481,7 +483,7 @@ export default function TerrainCanvas() {
     >
       <Canvas
         gl={{ antialias: true }}
-        dpr={pixelRatio}
+        dpr={[1, 2]}
         onCreated={({ camera }) => camera.lookAt(0.2, 0.2, 0.1)}
         camera={{ position: [0.15, 0.4, 0.4] }}
       >
