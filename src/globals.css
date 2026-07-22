@@ -118,6 +118,13 @@
       );
   }
 
+  .etched-heading {
+    color: rgb(255 255 255 / 0.62);
+    text-shadow:
+      0 -1px 0 rgb(0 0 0 / 0.72),
+      0 1px 0 rgb(255 255 255 / 0.1);
+  }
+
   .dark {
     .mdx-content {
       --sh-property: oklch(0.77 0.11 202.26);

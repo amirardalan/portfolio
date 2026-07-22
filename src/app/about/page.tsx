@@ -64,7 +64,7 @@ export default function About() {
             <SectionGlyph /> About
           </p>
           <h1 className="mt-6 text-balance font-serif text-4xl font-normal italic leading-tight sm:text-5xl lg:text-6xl">
-            I’m Amir. I design products and build them.
+            I’m Amir. I turn ideas into working products.
           </h1>
           <div className="mt-7 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
             <p>
@@ -87,7 +87,7 @@ export default function About() {
             </p>
             <h2
               id="process-heading"
-              className="mt-4 max-w-2xl text-3xl font-medium leading-snug sm:mx-2 sm:text-4xl"
+              className="mt-4 max-w-2xl text-balance font-serif text-3xl font-normal italic leading-snug sm:mx-2 sm:text-4xl"
             >
               I keep possibilities open and the work grounded.
             </h2>
@@ -102,10 +102,10 @@ export default function About() {
                     {step.number}
                   </span>
                   <div>
-                    <h3 className="text-lg font-medium sm:text-xl">
+                    <h3 className="etched-heading text-lg font-medium uppercase sm:text-xl">
                       {step.title}
                     </h3>
-                    <p className="mt-2 leading-relaxed text-zinc-300">
+                    <p className="mt-2 font-normal leading-relaxed text-zinc-300">
                       {step.body}
                     </p>
                   </div>
