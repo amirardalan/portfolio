@@ -1,6 +1,7 @@
-import type { Config } from 'tailwindcss';
+import scrollbar from 'tailwind-scrollbar';
 
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   content: [
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -32,7 +33,7 @@ const config: Config = {
     },
   },
   darkMode: 'selector',
-  plugins: [require('tailwind-scrollbar')],
+  plugins: [scrollbar],
 };
 
 export default config;

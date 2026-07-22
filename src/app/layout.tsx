@@ -97,6 +97,7 @@ export default async function RootLayout({
     <AuthProvider session={session}>
       <html
         lang="en"
+        data-scroll-behavior="smooth"
         className={clsx(
           sans.className,
           serif.className,

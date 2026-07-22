@@ -27,7 +27,7 @@ export default function AdjacentPostNavigation({
   };
 
   return (
-    <nav className="mt-8 border-t border-zinc-300 pt-5 dark:border-zinc-700">
+    <nav className="mt-8 border-t border-zinc-300 pt-5 text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
       <div className="mb-4 grid grid-cols-2 gap-6">
         <div className="col-span-1 text-xxs lg:text-sm">
           {previous && (

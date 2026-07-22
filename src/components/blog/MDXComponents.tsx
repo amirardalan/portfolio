@@ -72,7 +72,7 @@ export const components = {
   h4: (props: HeadingProps) => <h4 className="" {...props} />,
   p: (props: ParagraphProps) => (
     <p
-      className="my-5 font-serif text-lg font-medium leading-normal"
+      className="my-5 font-serif text-lg font-normal leading-relaxed"
       {...props}
     />
   ),
@@ -97,7 +97,7 @@ export const components = {
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      'text-primary hover:underline dark:text-zinc-400 hover:dark:text-zinc-300 dark:underline dark:underline-offset-2';
+      'text-zinc-600 underline decoration-zinc-400/60 underline-offset-2 transition-colors hover:text-primary hover:decoration-primary focus-visible:text-primary focus-visible:decoration-primary dark:text-zinc-400 dark:decoration-zinc-600 dark:hover:text-primary dark:hover:decoration-primary dark:focus-visible:text-primary dark:focus-visible:decoration-primary';
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -129,7 +129,7 @@ export const components = {
     if (!isInsidePre) {
       return (
         <code
-          className="rounded bg-zinc-200 px-1.5 py-0.5 font-mono text-sm text-dark dark:bg-zinc-800 dark:text-light"
+          className="rounded-md bg-primary/10 px-1.5 py-0.5 font-mono text-[0.9em] font-normal text-primary ring-1 ring-inset ring-primary/20"
           {...props}
         >
           {children}
@@ -253,9 +253,14 @@ export const components = {
   img: (props: ComponentPropsWithoutRef<'img'> & { title?: string }) => {
     const { src, alt, title } = props;
     const isPriority = title?.trim().toLowerCase() === 'priority';
+
+    if (typeof src !== 'string') {
+      return null;
+    }
+
     return (
       <Image
-        src={src!}
+        src={src}
         alt={alt ?? ''}
         width={736}
         height={552}

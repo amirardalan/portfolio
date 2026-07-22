@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   const response = NextResponse.next();
@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
-// Specify the paths where the middleware should run
+// Specify the paths where the proxy should run
 export const config = {
   matcher: [
     /*

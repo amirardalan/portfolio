@@ -180,11 +180,11 @@ async function revalidateAffectedContent(
   if (posts) {
     for (const post of posts) {
       if (post.published) {
-        await revalidateTag(`blog-post:${post.slug}`);
+        revalidateTag(`blog-post:${post.slug}`, { expire: 0 });
       }
     }
   }
 
   // Also revalidate the blog list since category details might be shown there
-  await revalidateTag('blog-list');
+  revalidateTag('blog-list', { expire: 0 });
 }

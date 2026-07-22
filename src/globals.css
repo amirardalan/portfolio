@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config '../tailwind.config.mjs';
 
 :root {
   /* Typopgrahy */
@@ -169,11 +168,6 @@
     display: block;
   }
 
-  /* MDX Styles */
-  .note p {
-    font-size: 0.875rem; /* text-sm */
-    font-family: 'Jura', sans-serif;
-  }
 }
 
 @layer utilities {
@@ -268,4 +262,21 @@
   .animate-fade-in-bottom {
     animation: fade-in-bottom 0.5s ease-out;
   }
+}
+
+/* Keep MDX admonition typography above Tailwind's generated utility layer. */
+.note p {
+  color: var(--color-zinc-600);
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.note p + p {
+  margin-top: 0.75rem;
+}
+
+.dark .note p {
+  color: var(--color-zinc-400);
 }

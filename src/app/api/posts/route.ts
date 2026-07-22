@@ -39,12 +39,12 @@ export async function POST(req: NextRequest) {
 
     const postId = await dbCreatePost(postData);
 
-    revalidateTag('posts');
+    revalidateTag('posts', { expire: 0 });
     if (postData.published) {
-      revalidateTag('published-posts');
-      revalidateTag('blog-list');
-      revalidateTag(`blog-post:${postData.slug}`);
-      revalidateTag('sitemap');
+      revalidateTag('published-posts', { expire: 0 });
+      revalidateTag('blog-list', { expire: 0 });
+      revalidateTag(`blog-post:${postData.slug}`, { expire: 0 });
+      revalidateTag('sitemap', { expire: 0 });
     }
 
     return NextResponse.json({ id: postId }, { status: 201 });
@@ -82,11 +82,13 @@ export async function PUT(req: NextRequest) {
 
     if (result.wasPublished || updateData.published) {
       console.log('PUT /api/posts - Revalidating blog-list and sitemap tags.'); // Add log here
-      revalidateTag('blog-list');
+      revalidateTag('blog-list', { expire: 0 });
 
-      revalidateTag(`blog-post:${result.newSlug || result.oldSlug}`);
+      revalidateTag(`blog-post:${result.newSlug || result.oldSlug}`, {
+        expire: 0,
+      });
 
-      revalidateTag('sitemap');
+      revalidateTag('sitemap', { expire: 0 });
     } else {
       console.log(
         'PUT /api/posts - Post was not published and is not being published. Skipping blog-list/sitemap revalidation.'

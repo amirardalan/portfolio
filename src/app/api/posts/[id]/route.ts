@@ -22,11 +22,11 @@ export async function DELETE(
 
     const result = await dbDeletePost(postId);
 
-    revalidateTag('posts');
+    revalidateTag('posts', { expire: 0 });
     if (result.wasPublished) {
-      revalidateTag('published-posts');
-      revalidateTag('blog-list');
-      revalidateTag('sitemap');
+      revalidateTag('published-posts', { expire: 0 });
+      revalidateTag('blog-list', { expire: 0 });
+      revalidateTag('sitemap', { expire: 0 });
       revalidatePath(`/blog/${result.slug}`);
     }
 

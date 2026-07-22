@@ -236,7 +236,7 @@ export async function dbCreatePost(postData: Omit<BlogPost, 'id'>) {
 
   // Revalidate sitemap if a new post is published
   if (isPublished) {
-    revalidateTag('sitemap');
+    revalidateTag('sitemap', { expire: 0 });
   }
 
   return result[0]?.id;
@@ -284,7 +284,7 @@ export async function dbUpdatePost(id: number, postData: Partial<BlogPost>) {
   await db.update(posts).set(updateObject).where(eq(posts.id, id));
 
   if (publishStatusChanged || (wasPublished && slugChanged)) {
-    revalidateTag('sitemap');
+    revalidateTag('sitemap', { expire: 0 });
   }
 
   return {
@@ -315,7 +315,7 @@ export async function dbDeletePost(id: number) {
 
   // Revalidate sitemap if the deleted post was published
   if (wasPublished) {
-    revalidateTag('sitemap');
+    revalidateTag('sitemap', { expire: 0 });
   }
 
   return {

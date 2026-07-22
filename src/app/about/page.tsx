@@ -80,9 +80,9 @@ export default function About() {
         </header>
 
         <section className="mt-12 lg:mt-16" aria-labelledby="process-heading">
-          <div className="rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-6 text-light sm:p-8 dark:to-fuchsia-950/25">
+          <div className="rounded-3xl bg-linear-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-6 text-light sm:p-8 dark:to-fuchsia-950/25">
             <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-400">
-              <SectionGlyph className="text-[var(--color-primary-dark)]" /> How
+              <SectionGlyph className="text-(--color-primary-dark)" /> How
               I work
             </p>
             <h2
@@ -98,7 +98,7 @@ export default function About() {
                   key={step.number}
                   className="grid gap-3 border-t border-white/10 py-6 first:border-t-0 sm:grid-cols-[3rem_1fr] sm:items-baseline sm:gap-5"
                 >
-                  <span className="font-mono text-xs text-[var(--color-primary-dark)] sm:relative sm:-top-0.5">
+                  <span className="font-mono text-xs text-(--color-primary-dark) sm:relative sm:-top-0.5">
                     {step.number}
                   </span>
                   <div>
