@@ -70,6 +70,7 @@ export const NavLinks = ({
           key={link.href}
           href={link.href}
           onClick={onClick}
+          prefetch={link.external ? false : undefined}
           target={link.external ? '_blank' : undefined}
           rel={link.external ? 'noopener noreferrer' : undefined}
         >
@@ -81,6 +82,11 @@ export const NavLinks = ({
             )}
           >
             {link.label}
+            {link.external && (
+              <span className="ml-1.5" aria-hidden="true">
+                ↗
+              </span>
+            )}
           </span>
         </Link>
       ))}

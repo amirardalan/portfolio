@@ -36,7 +36,7 @@ export default function Header() {
     isHomePage && !isScrolled ? transparentHomeClasses : glassHeaderClasses;
 
   return (
-    <header className={`${headerBaseClasses} ${headerBgClasses}`} role="banner">
+    <header className={`${headerBaseClasses} ${headerBgClasses}`}>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-primary focus:px-4 focus:py-2 focus:text-light"
@@ -46,7 +46,7 @@ export default function Header() {
 
       <div className="flex w-full flex-row items-center justify-between">
         <Link href="/" aria-label="Home">
-          <Logo size={isTablet ? 25 : 35} title="amir.sh" />
+          <Logo size={isTablet ? 25 : 35} />
         </Link>
         <div className="flex w-full max-w-screen-xl items-center justify-end space-x-4">
           <nav

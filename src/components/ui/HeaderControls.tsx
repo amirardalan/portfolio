@@ -3,24 +3,22 @@ import Tooltip from '@/components/ui/Tooltip';
 import ThemeMenu from '@/components/ui/ThemeMenu';
 
 export default function HeaderExternalLinks() {
-  const handleClick = () => {
-    window.open(
-      'https://github.com/amirardalan/amirardalan.com',
-      '_blank',
-      'noopener,noreferrer'
-    );
-  };
-
   return (
     <div
-      className="mt-2 flex items-center space-x-6 pr-20 md:pr-0"
+      className="flex shrink-0 items-center gap-1 pr-20 md:pr-0"
       role="group"
       aria-label="External links and site controls"
     >
-      <Tooltip text="Star on GitHub" pos="b">
-        <button onClick={handleClick} aria-label="Visit GitHub repository">
+      <Tooltip text="View source" pos="b">
+        <a
+          className="inline-flex size-10 items-center justify-center rounded-full text-dark transition-colors hover:bg-zinc-200/70 dark:text-light dark:hover:bg-zinc-800/80"
+          href="https://github.com/amirardalan/portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View portfolio source on GitHub"
+        >
           <IconGithub />
-        </button>
+        </a>
       </Tooltip>
       <ThemeMenu />
     </div>

@@ -42,12 +42,5 @@
       "url": "/"
     }
   ],
-  "description": "The portfolio and writing of Amir Ardalan, a design engineer working across product design, interaction design, and frontend engineering.",
-  "screenshots": [
-    {
-      "src": "/thumbnail.png",
-      "type": "image/png",
-      "sizes": "1200x627"
-    }
-  ]
+  "description": "The portfolio and writing of Amir Ardalan, a design engineer working across product design, interaction design, and frontend engineering."
 }

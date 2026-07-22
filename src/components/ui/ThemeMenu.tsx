@@ -15,6 +15,7 @@ export default function ThemeMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
+  const shouldManageFocusRef = useRef(false);
 
   // Initialize theme
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function ThemeMenu() {
 
   // Focus management for keyboard navigation
   useEffect(() => {
-    if (menuOpen && firstItemRef.current) {
+    if (menuOpen && shouldManageFocusRef.current && firstItemRef.current) {
       firstItemRef.current.focus();
     }
   }, [menuOpen]);
@@ -57,13 +58,42 @@ export default function ThemeMenu() {
     if (e.key === 'Escape') {
       setMenuOpen(false);
       buttonRef.current?.focus();
+      return;
+    }
+
+    if (!menuOpen || !menuRef.current) return;
+
+    const items = Array.from(
+      menuRef.current.querySelectorAll<HTMLButtonElement>(
+        '[role="menuitemradio"]'
+      )
+    );
+    const currentIndex = items.indexOf(
+      document.activeElement as HTMLButtonElement
+    );
+
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const direction = e.key === 'ArrowDown' ? 1 : -1;
+      const nextIndex =
+        currentIndex < 0
+          ? 0
+          : (currentIndex + direction + items.length) % items.length;
+      items[nextIndex]?.focus();
+    } else if (e.key === 'Home' || e.key === 'End') {
+      e.preventDefault();
+      items[e.key === 'Home' ? 0 : items.length - 1]?.focus();
     }
   };
 
-  const handleThemeChange = (newTheme: Theme) => {
+  const handleThemeChange = (newTheme: Theme, returnFocus: boolean) => {
     setTheme(newTheme);
     setMenuOpen(false);
-    buttonRef.current?.blur();
+    if (returnFocus) {
+      buttonRef.current?.focus();
+    } else {
+      buttonRef.current?.blur();
+    }
     router.refresh();
   };
 
@@ -71,25 +101,23 @@ export default function ThemeMenu() {
     buttonRef.current?.blur();
   };
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    shouldManageFocusRef.current = event.detail === 0;
+    setMenuOpen((isOpen) => !isOpen);
     buttonRef.current?.blur();
   };
 
   const themeLabel = effectiveTheme === 'dark' ? 'Dark mode' : 'Light mode';
 
   return (
-    <div
-      className="relative flex align-middle"
-      ref={menuRef}
-      onKeyDown={handleKeyDown}
-    >
+    <div className="relative" ref={menuRef} onKeyDown={handleKeyDown}>
       <Tooltip pos="b" text="Change theme" onClose={closeTooltip}>
         <button
-          className="m-0 p-0"
+          id="theme-menu-button"
+          className="inline-flex size-10 items-center justify-center rounded-full text-dark transition-colors hover:bg-zinc-200/70 dark:text-light dark:hover:bg-zinc-800/80"
           onClick={toggleMenu}
           ref={buttonRef}
-          aria-haspopup="true"
+          aria-haspopup="menu"
           aria-expanded={menuOpen}
           aria-label={`Theme toggle, current theme: ${themeLabel}`}
         >
@@ -98,23 +126,22 @@ export default function ThemeMenu() {
       </Tooltip>
       {menuOpen && (
         <div
-          className="absolute right-0 z-40 mt-8 w-24 rounded-md bg-light shadow-lg dark:bg-zinc-800 dark:text-light"
+          className="bg-light/95 absolute right-0 top-full z-40 mt-2 w-36 overflow-hidden rounded-xl border border-zinc-200/80 p-1 shadow-xl backdrop-blur-xl dark:border-zinc-700/80 dark:bg-zinc-900/95 dark:text-light"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="theme-menu-button"
         >
-          {(['system', 'light', 'dark'] as Theme[]).map((t, index, array) => (
+          {(['system', 'light', 'dark'] as Theme[]).map((t, index) => (
             <button
               key={t}
               ref={index === 0 ? firstItemRef : null}
-              className={`flex w-full items-center justify-between px-4 py-2 text-left text-xs hover:bg-zinc-100 dark:text-light dark:hover:bg-zinc-700 ${index === 0 ? 'rounded-t-md' : ''} ${index === array.length - 1 ? 'rounded-b-md' : 'border-b border-zinc-200 dark:border-zinc-700'} `}
-              onClick={() => handleThemeChange(t)}
-              role="menuitem"
-              aria-current={theme === t ? 'true' : 'false'}
+              className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs capitalize transition-colors hover:bg-zinc-100 dark:text-light dark:hover:bg-zinc-800 ${theme === t ? 'bg-zinc-100 text-primary dark:bg-zinc-800 dark:text-primary' : ''}`}
+              onClick={(event) => handleThemeChange(t, event.detail === 0)}
+              role="menuitemradio"
+              aria-checked={theme === t}
             >
-              <span>{t.charAt(0).toUpperCase() + t.slice(1)}</span>
+              <span>{t}</span>
               {theme === t && <span aria-hidden="true">✓</span>}
-              {theme === t && <span className="sr-only">(selected)</span>}
             </button>
           ))}
         </div>

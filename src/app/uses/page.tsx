@@ -2,6 +2,15 @@ import Container from '@/components/content/Container';
 import PageHeading from '@/components/ui/PageHeading';
 import UsesItemGrid from '@/components/content/UsesItemGrid';
 import UsesItemCard from '@/components/content/UsesItemCard';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Uses — Amir Ardalan',
+  description: 'Hardware, software, and tools I use.',
+  alternates: {
+    canonical: '/uses',
+  },
+};
 
 export default function Uses() {
   const computers = [

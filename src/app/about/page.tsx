@@ -1,5 +1,15 @@
 import Container from '@/components/content/Container';
 import SectionGlyph from '@/components/ui/SectionGlyph';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About — Amir Ardalan',
+  description:
+    'About Amir Ardalan, a design engineer working across interaction design and frontend engineering.',
+  alternates: {
+    canonical: '/about',
+  },
+};
 
 const process = [
   {
@@ -39,7 +49,7 @@ const principles = [
 ];
 
 const links = [
-  { label: 'Email', href: 'mailto:hello@amir.sh' },
+  { label: 'Email', href: 'mailto:hi@amir.sh' },
   { label: 'GitHub', href: 'https://github.com/amirardalan' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/amirardalan' },
   { label: 'X', href: 'https://x.com/amirardalan' },
@@ -58,10 +68,13 @@ export default function About() {
           </h1>
           <div className="mt-7 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
             <p>
-              I like being involved early, while a product is still taking shape. I work across interaction design and frontend engineering, using each to inform the other.
+              I like being involved early, while a product is still taking
+              shape. I work across interaction design and frontend engineering,
+              using each to inform the other.
             </p>
             <p>
-              I care about clarity, intrigue, thoughtful details, and software that respects the people using it.
+              I care about clarity, intrigue, thoughtful details, and software
+              that respects the people using it.
             </p>
           </div>
         </header>
@@ -106,12 +119,12 @@ export default function About() {
           className="mt-12 lg:mt-16"
           aria-labelledby="principles-heading"
         >
-          <p
+          <h2
             id="principles-heading"
             className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
           >
             <SectionGlyph /> Principles
-          </p>
+          </h2>
           <div className="mt-6 grid gap-x-10 gap-y-7 sm:grid-cols-2 sm:gap-y-8">
             {principles.map((principle) => (
               <div key={principle.title}>
@@ -140,7 +153,9 @@ export default function About() {
             Independent products and global brands.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
-            I’ve collaborated with teams at Nike’s LeBron James Innovation Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN Footwear.
+            I’ve collaborated with teams at Nike’s LeBron James Innovation
+            Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN
+            Footwear.
           </p>
           <a
             href="/resume"
@@ -148,7 +163,7 @@ export default function About() {
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-3 text-sm uppercase tracking-wide text-primary"
           >
-            View my resume <span aria-hidden="true">↗</span>
+            View resume <span aria-hidden="true">↗</span>
           </a>
         </section>
 
@@ -156,12 +171,12 @@ export default function About() {
           className="mt-10 border-t border-zinc-200 pt-5 lg:mt-14 lg:pt-6 dark:border-zinc-800"
           aria-labelledby="contact-heading"
         >
-          <p
+          <h2
             id="contact-heading"
             className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400"
           >
             <SectionGlyph /> Get in touch
-          </p>
+          </h2>
           <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3 text-xs uppercase tracking-wide">
             {links.map((link) => (
               <a
@@ -175,7 +190,10 @@ export default function About() {
                 }
                 className="text-primary"
               >
-                {link.label} <span aria-hidden="true">↗</span>
+                {link.label}{' '}
+                <span aria-hidden="true">
+                  {link.href.startsWith('http') ? '↗' : '→'}
+                </span>
               </a>
             ))}
           </div>

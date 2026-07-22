@@ -15,7 +15,7 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="mb-0 pt-10 text-dark dark:text-light" {...props} />
+    <h2 className="mb-0 pt-10 text-dark dark:text-light" {...props} />
   ),
   h2: (props: HeadingProps) => (
     <h2 className="mb-3 mt-7 text-dark dark:text-light" {...props} />
@@ -39,30 +39,34 @@ export const components = {
         : children
     );
     return (
-      <a
-        href={`#${slug}`}
-        className="group relative mb-3 mt-7 block scroll-mt-24 text-2xl leading-tight text-dark outline-none lg:leading-normal dark:text-light"
+      <h3
         id={slug}
-        aria-label={`Link to ${children}`}
+        className="mb-3 mt-7 scroll-mt-24 text-2xl font-medium leading-tight text-dark lg:leading-normal dark:text-light"
+        {...props}
       >
-        <span className="absolute -left-5 text-primary opacity-0 transition-opacity group-hover:opacity-100">
-          #
-        </span>
-        {Array.isArray(children)
-          ? children.map((child, index) =>
-              typeof child === 'string' ? (
-                child
-              ) : (
-                <code
-                  key={index}
-                  className="font-sans before:content-['`'] after:content-['`']"
-                >
-                  {child.props.children}
-                </code>
+        <a href={`#${slug}`} className="group relative">
+          <span
+            className="absolute -left-5 text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+            aria-hidden="true"
+          >
+            #
+          </span>
+          {Array.isArray(children)
+            ? children.map((child, index) =>
+                typeof child === 'string' ? (
+                  child
+                ) : (
+                  <code
+                    key={index}
+                    className="font-sans before:content-['`'] after:content-['`']"
+                  >
+                    {child.props.children}
+                  </code>
+                )
               )
-            )
-          : children}
-      </a>
+            : children}
+        </a>
+      </h3>
     );
   },
   h4: (props: HeadingProps) => <h4 className="" {...props} />,
@@ -252,7 +256,7 @@ export const components = {
     return (
       <Image
         src={src!}
-        alt={alt || 'Image'}
+        alt={alt ?? ''}
         width={736}
         height={552}
         priority={isPriority}
@@ -274,7 +278,7 @@ export const components = {
     <figure className="my-6">
       <Image
         src={src}
-        alt={alt || 'Image'}
+        alt={alt ?? ''}
         width={736}
         height={552}
         priority={priority}

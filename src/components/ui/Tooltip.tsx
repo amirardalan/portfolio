@@ -31,11 +31,15 @@ export default function Tooltip({
   return (
     <div
       ref={ref}
-      className="relative inline-block"
+      className="relative inline-flex"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      tabIndex={0}
-      aria-describedby={tooltipId}
+      onFocusCapture={() => setIsHovered(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          handleMouseLeave();
+        }
+      }}
     >
       {children}
       <div

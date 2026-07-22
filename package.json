@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "preview": "prettier --write . && next lint && next build && next start"
+    "build": "next build",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "preview": "prettier --write . && npm run lint && npm run build && next start"
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.0",

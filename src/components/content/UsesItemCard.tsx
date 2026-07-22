@@ -19,7 +19,7 @@ const UsesItemCard = ({
   'aria-label': ariaLabel,
 }: UsesItemCardProps) => {
   return (
-    <div className={`mb-4 ${className}`} aria-label={ariaLabel} role="region">
+    <div className={`mb-4 ${className}`} aria-label={ariaLabel} role="group">
       {title && <h3 className="mb-2 text-dark dark:text-light">{title}</h3>}
       {subtitle && <p className="text-dark dark:text-light">{subtitle}</p>}
       {items && items.length > 0 && (

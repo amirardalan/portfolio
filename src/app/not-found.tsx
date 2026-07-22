@@ -2,10 +2,7 @@ import Link from 'next/link';
 
 export default function NotFoundPage() {
   return (
-    <main
-      id="main-content"
-      className="flex w-full flex-col items-center justify-center px-6 text-center text-dark dark:text-light"
-    >
+    <div className="flex w-full flex-col items-center justify-center px-6 text-center text-dark dark:text-light">
       <p className="font-mono text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         404
       </p>
@@ -16,6 +13,6 @@ export default function NotFoundPage() {
       >
         Back to work
       </Link>
-    </main>
+    </div>
   );
 }

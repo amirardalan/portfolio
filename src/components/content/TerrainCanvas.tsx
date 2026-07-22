@@ -155,8 +155,8 @@ function Terrain({
       <ambientLight intensity={3} />
       <directionalLight position={[10, 20, 5]} intensity={3} />
       <MeshDistortMaterial
-        distort={0.8}
-        speed={0.05}
+        distort={reduceMotion ? 0 : 0.8}
+        speed={reduceMotion ? 0 : 0.05}
         wireframe
         color={canvasColor}
       />

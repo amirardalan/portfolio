@@ -3,6 +3,7 @@ import createMDX from '@next/mdx';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  outputFileTracingRoot: process.cwd(),
   pageExtensions: ['mdx', 'ts', 'tsx'],
   async redirects() {
     return [

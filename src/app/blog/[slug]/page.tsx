@@ -125,28 +125,31 @@ export default async function BlogPost({
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="flex flex-row text-xxs uppercase">
-            <p className="pr-2 text-xxs uppercase text-primary">
+          <div className="flex flex-row text-xxs uppercase">
+            <span className="pr-2 text-xxs uppercase text-primary">
               <Link
                 href={`/blog?category=${encodeURIComponent(post.category?.name ?? 'uncategorized')}`}
               >
                 #{post.category?.name ?? 'uncategorized'}
               </Link>
-            </p>
+            </span>
             <span className="mr-2 text-zinc-500 dark:text-zinc-400">•</span>
-            <p className="whitespace-nowrap text-zinc-500 dark:text-zinc-400">
+            <span className="whitespace-nowrap text-zinc-500 dark:text-zinc-400">
               {calculateReadTime(post.content)}
-            </p>
-          </span>
-          <span className="mx-4 w-full border-t-[1px] border-zinc-300 dark:border-zinc-700"></span>
-          <span className="flex items-center whitespace-nowrap text-xxs uppercase">
+            </span>
+          </div>
+          <span
+            className="mx-4 w-full border-t-[1px] border-zinc-300 dark:border-zinc-700"
+            aria-hidden="true"
+          />
+          <div className="flex items-center whitespace-nowrap text-xxs uppercase">
             <ClientViewCount
               route={`/blog/${post.slug}`}
               textColor="text-zinc-500 dark:text-zinc-400"
             />
             <span className="mx-2 text-zinc-500 dark:text-zinc-400">•</span>
             <ClientLikeCount postId={post.id} />
-          </span>
+          </div>
         </div>
         <h1 className="mt-6 text-3xl lg:text-4xl" id="post-title">
           {post.title}

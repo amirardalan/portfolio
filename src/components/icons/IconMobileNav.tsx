@@ -1,22 +1,29 @@
 import IconClose from '@/components/icons/IconClose';
+import type { MouseEventHandler, Ref } from 'react';
 
 type IconMobileNavProps = {
   isOpen?: boolean;
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   className?: string;
+  buttonRef?: Ref<HTMLButtonElement>;
+  controls?: string;
 };
 
 export default function IconMobileNav({
   isOpen = false,
   onClick,
   className = '',
+  buttonRef,
+  controls,
 }: IconMobileNavProps) {
   return (
     <button
+      ref={buttonRef}
       onClick={onClick}
       className={`fixed right-6 top-3 z-50 flex items-center py-2 text-dark md:top-1.5 md:hidden dark:text-light ${className}`}
       aria-label={isOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isOpen}
+      aria-controls={controls}
     >
       {!isOpen ? (
         <svg

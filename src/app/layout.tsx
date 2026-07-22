@@ -35,7 +35,7 @@ const mono = JetBrains_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pathname = (await headers()).get('x-next-pathname') as string;
+  const pathname = (await headers()).get('x-next-pathname') || '/';
 
   const getPageTitle = (path: string): string => {
     if (path === '/') {
@@ -53,11 +53,17 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title = getPageTitle(pathname);
 
+  const description =
+    'The portfolio and writing of Amir Ardalan, a design engineer working across product design, interaction design, and frontend engineering.';
+
   return {
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
     title,
-    description:
-      'The portfolio and writing of Amir Ardalan, a design engineer working across product design, interaction design, and frontend engineering.',
+    description,
+    alternates: {
+      canonical: pathname,
+    },
+    manifest: '/manifest.json',
     icons: [
       {
         rel: 'icon',
@@ -70,6 +76,12 @@ export async function generateMetadata(): Promise<Metadata> {
         media: '(prefers-color-scheme: dark)',
         type: 'image/png',
         url: DarkIcon.src,
+      },
+      {
+        rel: 'apple-touch-icon',
+        type: 'image/png',
+        sizes: '192x192',
+        url: '/icons/touch-192.png',
       },
     ],
   };
@@ -101,7 +113,9 @@ export default async function RootLayout({
           <PostHogProvider>
             <div className="flex min-h-screen flex-col">
               <Header />
-              <main className="flex flex-1 flex-grow">{children}</main>
+              <main id="main-content" className="flex flex-1 flex-grow">
+                {children}
+              </main>
               <Footer />
             </div>
           </PostHogProvider>

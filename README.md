@@ -30,7 +30,7 @@ A Markdown Blog and CMS written in TypeScript with React Server Components. Crea
 - Custom [Cloudinary](https://cloudinary.com/) CMS Media Gallery
 - [PostHog](https://posthog.com/) analytics and blog post view count
 - Blog likes with [Upstash](https://upstash.com/) Redis
-- Accessibility, perfomance, and SEO best-practices
+- Accessibility, performance, and SEO best practices
 - 100% Lighthouse score
 
 ## Getting Started
@@ -41,7 +41,7 @@ A Markdown Blog and CMS written in TypeScript with React Server Components. Crea
 npm install
 ```
 
-Then, set up your [GitHub oAuth App](https://authjs.dev/getting-started/providers/github?framework=next-js) and add your GitHub Client ID and Secret in a `.env.local` file:
+Then, set up your [GitHub OAuth app](https://authjs.dev/getting-started/providers/github?framework=next-js) and add your GitHub Client ID and Secret in a `.env.local` file:
 
 ```
 // .env.local
@@ -92,7 +92,7 @@ KV_REST_API_TOKEN=<your-kv-rest-api-token>
 KV_REST_API_URL=<your-kv-rest-api-url>
 ```
 
-And finally, generate a Next Auth secret which will automatically overwrite the placeholder in the `.env.local` file:
+Finally, generate an Auth.js secret, which will automatically overwrite the placeholder in the `.env.local` file:
 
 ```bash
 npx auth secret
@@ -115,7 +115,7 @@ npm run dev
 
 ### Preview
 
-To test On-demand Revalidation of blog posts and to ensure the app is in good shape to run on production it is recommended to compile a preview build.
+To test on-demand revalidation of blog posts and ensure the app is in good shape for production, compile a preview build.
 
 ```bash
 npm run preview

@@ -3,10 +3,10 @@ interface ContainerProps {
 }
 
 export default function Container({ children }: ContainerProps) {
-  // Wrapper for all pages other than: home, admin, not-found
+  // The root layout owns the page's main landmark.
   return (
-    <main className="container mx-auto max-h-fit max-w-[736px] flex-grow p-6 lg:p-8">
+    <div className="container mx-auto max-h-fit max-w-[736px] flex-grow p-6 lg:p-8">
       {children}
-    </main>
+    </div>
   );
 }

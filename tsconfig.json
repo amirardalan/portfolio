@@ -27,6 +27,7 @@
       "@/db/*": ["./src/db/*"],
       "@/data/*": ["./src/data/*"],
       "@/components/*": ["./src/components/*"],
+      "@/content/*": ["./src/content/*"],
       "@/context/*": ["./src/context/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/lib/*": ["./src/lib/*"],

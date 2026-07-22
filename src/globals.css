@@ -17,13 +17,14 @@
   --color-skeleton-light: oklch(0.95 0.01 240);
   --color-skeleton-dark: oklch(0.3 0.01 240);
 
-  /* Gradients */
-  --color-gradient: linear-gradient(
-    to bottom,
-    oklch(0.5 0.15 200) 0%,
-    oklch(0.3 0.12 260) 52%,
-    oklch(0.22 0.08 290) 100%
-  );
+  /* Mobile navigation overlay */
+  --color-gradient: radial-gradient(
+      circle at 12% 76%,
+      oklch(0.76 0.15 195) 0%,
+      oklch(0.38 0.11 215) 30%,
+      transparent 64%
+    ),
+    linear-gradient(145deg, oklch(0.12 0.04 250), oklch(0.2 0.08 230));
 
   /* Dynamic Colors */
   --color-dynamic: var(--color-dark);
@@ -50,6 +51,10 @@
     font-family: var(--font-sans);
     scroll-behavior: smooth;
   }
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 2px solid var(--color-primary) !important;
+    outline-offset: 4px !important;
+  }
   body {
     background-color: var(--color-light);
     .dark & {
@@ -58,13 +63,29 @@
       --color-dynamic-inverse: var(--color-dark);
       --color-primary: var(--color-primary-dark);
       --color-selection-text: oklch(0.141 0.005 285.823);
-      --color-gradient: linear-gradient(
-        to bottom,
-        oklch(0.68 0.15 195) 0%,
-        oklch(0.42 0.16 260) 52%,
-        oklch(0.25 0.1 295) 100%
-      );
+      --color-gradient: radial-gradient(
+          circle at 12% 76%,
+          oklch(0.56 0.13 195) 0%,
+          oklch(0.27 0.09 215) 30%,
+          transparent 64%
+        ),
+        linear-gradient(145deg, oklch(0.07 0.025 250), oklch(0.14 0.06 230));
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
