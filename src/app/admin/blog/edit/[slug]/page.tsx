@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getAuthorizedSession } from '@/lib/auth';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -83,7 +84,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const title = `Edit Post: ${slug
     .replace(/-/g, ' ')

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import {
@@ -33,7 +34,7 @@ export async function generateMetadata({
   params: paramsPromise,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await paramsPromise;
   const post = await getPostBySlug(slug);
 
@@ -135,7 +136,7 @@ export default async function BlogPost({
             </span>
           </div>
           <span
-            className="mx-4 w-full border-t-[1px] border-zinc-300 dark:border-zinc-700"
+            className="mx-4 w-full border-t border-zinc-300 dark:border-zinc-700"
             aria-hidden="true"
           />
           <div className="text-xxs flex items-center whitespace-nowrap uppercase">
