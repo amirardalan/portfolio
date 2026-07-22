@@ -15,8 +15,8 @@ export default function HomeContent() {
       <section className="relative isolate overflow-hidden md:flex md:min-h-[720px] md:items-center">
         <StarField />
         <TerrainCanvas />
-        <div className="from-light/55 via-light/40 to-light/20 dark:from-dark/60 dark:via-dark/45 dark:to-dark/20 pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r md:hidden" />
-        <div className="from-light/55 via-light/35 dark:from-dark/55 dark:via-dark/35 pointer-events-none absolute inset-0 z-[1] hidden bg-gradient-to-r to-transparent md:block" />
+        <div className="from-light/90 via-light/75 to-light/45 dark:from-dark/60 dark:via-dark/45 dark:to-dark/20 pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r md:hidden" />
+        <div className="from-light/90 via-light/70 dark:from-dark/55 dark:via-dark/35 pointer-events-none absolute inset-0 z-[1] hidden bg-gradient-to-r to-transparent md:block" />
 
         <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-10 pt-[97px] md:px-10 md:py-32 lg:px-16">
           <div className="max-w-3xl">

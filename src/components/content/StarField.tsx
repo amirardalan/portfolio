@@ -11,7 +11,7 @@ export default function StarField() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden dark:block"
       style={{
         maskImage:
           'linear-gradient(to bottom, black 0%, black 18%, transparent 29%)',

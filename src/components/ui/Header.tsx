@@ -29,7 +29,7 @@ export default function Header() {
   const headerBaseClasses =
     'animate-fade-in-top fixed top-0 z-30 w-full px-6 py-4 transition-[background-color,box-shadow,backdrop-filter] duration-300 lg:px-10 lg:py-6';
   const transparentHomeClasses =
-    'bg-zinc-50/50 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none dark:bg-zinc-950/50 md:dark:bg-transparent';
+    'bg-transparent backdrop-blur-none';
   const glassHeaderClasses =
     'bg-zinc-50/80 shadow-sm backdrop-blur-xl dark:bg-zinc-950/80 dark:shadow-zinc-950/30';
   const headerBgClasses =
