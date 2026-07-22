@@ -33,7 +33,7 @@ export default function HomeContent() {
             <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-10">
               <a
                 href="#selected-work"
-                className="group pointer-events-auto inline-flex items-center gap-3 text-primary"
+                className="group text-primary pointer-events-auto -mx-2 inline-flex min-h-11 items-center gap-3 px-2"
               >
                 View selected work
                 <span
@@ -45,7 +45,7 @@ export default function HomeContent() {
               </a>
               <Link
                 href="/about"
-                className="group pointer-events-auto inline-flex items-center gap-3"
+                className="group pointer-events-auto -mx-2 inline-flex min-h-11 items-center gap-3 px-2"
               >
                 About me <Arrow />
               </Link>
