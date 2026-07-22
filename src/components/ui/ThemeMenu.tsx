@@ -8,7 +8,7 @@ import { Theme } from '@/types/theme';
 
 export default function ThemeMenu() {
   const router = useRouter();
-  const { theme, setTheme, initializeTheme } = useTheme();
+  const { theme, effectiveTheme, setTheme, initializeTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState({
     top: 0,
@@ -18,7 +18,6 @@ export default function ThemeMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const systemButtonRef = useRef<HTMLSpanElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
   const shouldManageFocusRef = useRef(false);
 
@@ -28,19 +27,16 @@ export default function ThemeMenu() {
 
     const viewportPadding = 8;
     const buttonRect = button.getBoundingClientRect();
-    const systemButtonWidth =
-      systemButtonRef.current?.getBoundingClientRect().width ??
-      buttonRect.width;
-    const menuWidth =
-      window.innerWidth < 768
-        ? Math.max(buttonRect.width, systemButtonWidth)
-        : buttonRect.width;
+    const menuWidth = window.innerWidth < 768 ? 208 : 184;
 
     setMenuPosition({
       top: buttonRect.bottom + 8,
-      left: Math.min(
-        Math.max(viewportPadding, buttonRect.left),
-        window.innerWidth - menuWidth - viewportPadding
+      left: Math.max(
+        viewportPadding,
+        Math.min(
+          buttonRect.right - menuWidth,
+          window.innerWidth - menuWidth - viewportPadding
+        )
       ),
       width: menuWidth,
     });
@@ -146,23 +142,74 @@ export default function ThemeMenu() {
     buttonRef.current?.blur();
   };
 
-  const themeLabel = `${theme.charAt(0).toUpperCase()}${theme.slice(1)}`;
+  const effectiveThemeLabel = effectiveTheme === 'dark' ? 'Dark' : 'Light';
+  const accessibleThemeLabel =
+    theme === 'system'
+      ? `Automatic, currently ${effectiveThemeLabel}`
+      : effectiveThemeLabel;
+
+  const themeOptions: Array<{
+    value: Theme;
+    label: string;
+    description?: string;
+  }> = [
+    {
+      value: 'system',
+      label: 'Automatic',
+      description: `Device setting · ${effectiveThemeLabel}`,
+    },
+    { value: 'light', label: 'Light' },
+    { value: 'dark', label: 'Dark' },
+  ];
 
   return (
     <div className="relative" ref={menuRef} onKeyDown={handleKeyDown}>
       <button
         id="theme-menu-button"
-        className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/40 px-3 py-2 text-xs text-dark transition-colors hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:text-light dark:hover:bg-white/10"
+        className="group hover:text-dark focus-visible:outline-primary dark:hover:text-light inline-flex size-10 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-black/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2 md:h-9 md:w-auto md:gap-2 md:px-2 dark:text-zinc-400 dark:hover:bg-white/[0.06]"
         onClick={toggleMenu}
         ref={buttonRef}
         aria-haspopup="menu"
         aria-expanded={menuOpen}
-        aria-label={`Theme, current selection: ${themeLabel}`}
+        aria-label={`Color theme: ${accessibleThemeLabel}`}
       >
-        <span className="hidden md:inline">Theme:</span>
-        <span>{themeLabel}</span>
         <svg
-          className={`size-3 transition-transform ${menuOpen ? 'rotate-180' : ''}`}
+          className="size-[18px]"
+          viewBox="0 0 20 20"
+          fill="none"
+          aria-hidden="true"
+        >
+          {effectiveTheme === 'dark' ? (
+            <path
+              d="M16.4 12.2A6.7 6.7 0 0 1 7.8 3.6 6.7 6.7 0 1 0 16.4 12.2Z"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          ) : (
+            <>
+              <circle
+                cx="10"
+                cy="10"
+                r="3.25"
+                stroke="currentColor"
+                strokeWidth="1.4"
+              />
+              <path
+                d="M10 1.75v1.5M10 16.75v1.5M18.25 10h-1.5M3.25 10h-1.5M15.83 4.17l-1.06 1.06M5.23 14.77l-1.06 1.06M15.83 15.83l-1.06-1.06M5.23 5.23 4.17 4.17"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </>
+          )}
+        </svg>
+        <span className="text-xxs hidden tracking-[0.08em] uppercase md:inline">
+          {effectiveThemeLabel}
+        </span>
+        <svg
+          className={`hidden size-3 transition-transform md:block ${menuOpen ? 'rotate-180' : ''}`}
           viewBox="0 0 12 12"
           fill="none"
           aria-hidden="true"
@@ -176,37 +223,40 @@ export default function ThemeMenu() {
           />
         </svg>
       </button>
-      <span
-        ref={systemButtonRef}
-        className="pointer-events-none invisible absolute left-0 top-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-transparent px-3 py-2 text-xs md:hidden"
-        aria-hidden="true"
-      >
-        <span>System</span>
-        <span className="size-3 shrink-0" />
-      </span>
       {menuOpen &&
         createPortal(
           <div
             ref={menuPanelRef}
-            className="fixed z-[100] overflow-clip rounded-lg bg-white/60 p-1 font-mono ring-1 ring-inset ring-black/[0.06] backdrop-blur-2xl dark:bg-zinc-950/50 dark:text-light dark:ring-white/[0.08]"
+            className="dark:text-light fixed z-[100] overflow-clip rounded-lg bg-white/60 p-1 font-mono ring-1 ring-black/[0.06] backdrop-blur-2xl ring-inset dark:bg-zinc-950/50 dark:ring-white/[0.08]"
             style={menuPosition}
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="theme-menu-button"
           >
-            {(['system', 'light', 'dark'] as Theme[]).map((t, index) => (
+            {themeOptions.map((option, index) => (
               <button
-                key={t}
+                key={option.value}
                 ref={index === 0 ? firstItemRef : null}
-                className={`flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-xxs uppercase tracking-[0.08em] transition-colors hover:bg-black/5 hover:text-dark dark:hover:bg-white/[0.07] dark:hover:text-light ${theme === t ? 'bg-black/[0.035] text-primary dark:bg-white/[0.05] dark:text-primary' : 'text-zinc-600 dark:text-zinc-300'}`}
-                onClick={(event) => handleThemeChange(t, event.detail === 0)}
+                className={`hover:text-dark dark:hover:text-light flex min-h-10 w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-left transition-colors hover:bg-black/5 dark:hover:bg-white/[0.07] ${theme === option.value ? 'text-primary dark:text-primary bg-black/[0.035] dark:bg-white/[0.05]' : 'text-zinc-600 dark:text-zinc-300'}`}
+                onClick={(event) =>
+                  handleThemeChange(option.value, event.detail === 0)
+                }
                 role="menuitemradio"
-                aria-checked={theme === t}
+                aria-checked={theme === option.value}
               >
-                <span>{t}</span>
-                {theme === t && (
+                <span className="flex flex-col gap-0.5">
+                  <span className="text-xxs tracking-[0.08em] uppercase">
+                    {option.label}
+                  </span>
+                  {option.description && (
+                    <span className="font-sans text-[10px] tracking-normal text-zinc-500 uppercase dark:text-zinc-400">
+                      {option.description}
+                    </span>
+                  )}
+                </span>
+                {theme === option.value && (
                   <span
-                    className="size-1 rounded-full bg-current"
+                    className="size-1.5 shrink-0 rounded-full bg-current"
                     aria-hidden="true"
                   />
                 )}
