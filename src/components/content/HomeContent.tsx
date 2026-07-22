@@ -126,7 +126,7 @@ export default function HomeContent() {
                         href={project.caseStudyUrl}
                         className="group/link inline-flex items-center gap-3"
                       >
-                        Read project note
+                        Read about the project
                         <span className="transition-transform group-hover/link:translate-x-1">
                           <Arrow />
                         </span>
