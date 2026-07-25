@@ -181,28 +181,44 @@ export default function PostFormFields({
             >
               Category
             </label>
-            <select
-              id="category"
-              value={categoryId ?? ''}
-              onChange={(e) =>
-                setCategoryId(e.target.value ? Number(e.target.value) : null)
-              }
-              disabled={categoriesLoading}
-              className="cms-editor-field bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-11 w-full rounded-xl border border-zinc-200 px-3 text-xs transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-70 dark:border-zinc-700"
-            >
-              <option value="">
-                {categoriesLoading
-                  ? 'Loading categories...'
-                  : categories.length === 0
-                    ? 'No categories available'
-                    : 'Uncategorized'}
-              </option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
+            <div className="relative">
+              <select
+                id="category"
+                value={categoryId ?? ''}
+                onChange={(e) =>
+                  setCategoryId(e.target.value ? Number(e.target.value) : null)
+                }
+                disabled={categoriesLoading}
+                className="cms-editor-field bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-11 w-full appearance-none rounded-xl border border-zinc-200 py-0 pr-10 pl-3 text-xs transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-70 dark:border-zinc-700"
+              >
+                <option value="">
+                  {categoriesLoading
+                    ? 'Loading categories...'
+                    : categories.length === 0
+                      ? 'No categories available'
+                      : 'Uncategorized'}
                 </option>
-              ))}
-            </select>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+              <svg
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/2 right-4 size-3 -translate-y-1/2 text-zinc-500 dark:text-zinc-400"
+              >
+                <path
+                  d="m3 4.5 3 3 3-3"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
           </div>
         </section>
 

@@ -16,16 +16,16 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h2 className="mb-0 pt-10 text-dark dark:text-light" {...props} />
+    <h2 className="text-dark dark:text-light mb-0 pt-10" {...props} />
   ),
   h2: (props: HeadingProps) => (
-    <h2 className="mb-3 mt-7 text-dark dark:text-light" {...props} />
+    <h2 className="text-dark dark:text-light mt-7 mb-3" {...props} />
   ),
   h3: ({ children, ...props }: HeadingProps) => {
     if (typeof children !== 'string' && !Array.isArray(children)) {
       return (
         <h3
-          className="mb-3 mt-7 text-2xl font-medium text-dark dark:text-light"
+          className="text-dark dark:text-light mt-7 mb-3 text-3xl font-medium"
           {...props}
         >
           {children}
@@ -42,12 +42,12 @@ export const components = {
     return (
       <h3
         id={slug}
-        className="mb-3 mt-7 scroll-mt-24 text-2xl font-medium leading-tight text-dark lg:leading-normal dark:text-light"
+        className="text-dark dark:text-light mt-7 mb-3 scroll-mt-24 text-3xl leading-tight font-medium lg:leading-normal"
         {...props}
       >
         <a href={`#${slug}`} className="group relative">
           <span
-            className="absolute -left-5 text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+            className="text-primary absolute -left-5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
             aria-hidden="true"
           >
             #
@@ -73,19 +73,19 @@ export const components = {
   h4: (props: HeadingProps) => <h4 className="" {...props} />,
   p: (props: ParagraphProps) => (
     <p
-      className="my-5 font-serif text-lg font-normal leading-relaxed"
+      className="my-5 font-serif text-lg leading-relaxed font-normal"
       {...props}
     />
   ),
   ol: (props: ListProps) => (
     <ol
-      className="list-decimal space-y-2 pl-5 text-dark dark:text-light"
+      className="text-dark dark:text-light list-decimal space-y-2 pl-5"
       {...props}
     />
   ),
   ul: (props: ListProps) => (
     <ul
-      className="my-6 list-disc space-y-1 pl-5 text-dark dark:text-light"
+      className="text-dark dark:text-light my-6 list-disc space-y-1 pl-5"
       {...props}
     />
   ),
@@ -130,7 +130,7 @@ export const components = {
     if (!isInsidePre) {
       return (
         <code
-          className="rounded-md bg-primary/10 px-1.5 py-0.5 font-mono text-[0.9em] font-normal text-primary ring-1 ring-inset ring-primary/20"
+          className="bg-primary/10 text-primary ring-primary/20 rounded-md px-1.5 py-0.5 font-mono text-[0.9em] font-normal ring-1 ring-inset"
           {...props}
         >
           {children}
@@ -176,7 +176,7 @@ export const components = {
     return (
       <code
         dangerouslySetInnerHTML={{ __html: codeHTML }}
-        className="rounded bg-zinc-200 px-1.5 py-0.5 font-mono text-sm text-dark dark:bg-zinc-800 dark:text-light"
+        className="text-dark dark:text-light rounded bg-zinc-200 px-1.5 py-0.5 font-mono text-sm dark:bg-zinc-800"
         {...props}
       />
     );
@@ -206,7 +206,7 @@ export const components = {
     return (
       <div className="group relative">
         <pre
-          className="overflow-y-none line-highlight-enabled my-6 overflow-x-auto rounded-lg bg-zinc-100 p-5 font-mono text-sm scrollbar scrollbar-track-zinc-600 scrollbar-thumb-zinc-500 dark:bg-zinc-900"
+          className="overflow-y-none line-highlight-enabled scrollbar my-6 scrollbar-thumb-zinc-500 scrollbar-track-zinc-600 overflow-x-auto rounded-lg bg-zinc-100 p-5 font-mono text-sm dark:bg-zinc-900"
           {...props}
         >
           {children}
@@ -218,7 +218,7 @@ export const components = {
           />
         )}
         {language && (
-          <span className="absolute bottom-2 right-2 rounded px-1.5 py-0.5 text-xxs text-zinc-500 dark:text-zinc-400">
+          <span className="text-xxs absolute right-2 bottom-2 rounded px-1.5 py-0.5 text-zinc-500 dark:text-zinc-400">
             {language}
           </span>
         )}
@@ -309,7 +309,7 @@ export const components = {
         />
       )}
       {caption && (
-        <figcaption className="mt-2 text-right text-xxs uppercase text-gray-600 dark:text-gray-400">
+        <figcaption className="text-xxs mt-2 text-right text-gray-600 uppercase dark:text-gray-400">
           {caption}
         </figcaption>
       )}

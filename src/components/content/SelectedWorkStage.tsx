@@ -36,38 +36,25 @@ function ProjectMedia({
     <Image
       src={project.visual.src}
       alt={project.visual.alt}
-      width={1440}
-      height={900}
+      width={1448}
+      height={1086}
       priority={priority}
       sizes="(min-width: 768px) 58vw, 100vw"
-      className="h-auto w-full"
-      style={{ objectPosition: project.visual.position ?? 'center' }}
+      className="h-full w-full object-cover"
+      style={{ objectPosition: project.visual.position ?? 'bottom' }}
     />
   );
 
   return (
-    <div className="relative min-h-72 overflow-hidden bg-zinc-950 sm:min-h-96 md:col-span-7 md:min-h-[520px]">
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-zinc-800/60 via-zinc-950 to-black"
-        aria-hidden="true"
-      />
+    <div className="relative min-h-80 overflow-hidden bg-stone-100 sm:min-h-110 md:col-span-7 lg:min-h-140">
       <a
         href={project.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Open ${project.title} project (opens in a new tab)`}
-        className="absolute top-1/2 left-5 w-[108%] -translate-y-1/2 sm:left-8 sm:w-[104%] md:left-10 md:w-[108%]"
+        className="absolute inset-0"
       >
-        <span
-          className="block overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl shadow-black/70"
-          style={{
-            transform:
-              'perspective(1200px) rotateX(1deg) rotateY(-4deg) rotateZ(-1deg)',
-            transformOrigin: 'center',
-          }}
-        >
-          {image}
-        </span>
+        <span className="block h-full w-full overflow-hidden">{image}</span>
       </a>
     </div>
   );

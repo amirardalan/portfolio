@@ -80,7 +80,7 @@ export default function AdminPostList({
                       )}
                     </div>
                     <Link
-                      href={`/admin/blog/edit/${post.slug}`}
+                      href={`/blog/${post.slug}`}
                       className="hover:text-primary text-xl leading-tight font-medium transition-colors md:text-2xl"
                     >
                       {post.title}
@@ -104,14 +104,12 @@ export default function AdminPostList({
                     </div>
                   </div>
                   <div className="flex shrink-0 items-center gap-4 text-xs tracking-[0.12em] uppercase">
-                    {!isDrafts && (
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="hover:text-primary text-zinc-500 transition-colors dark:text-zinc-400"
-                      >
-                        View ↗
-                      </Link>
-                    )}
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="hover:text-primary text-zinc-500 transition-colors dark:text-zinc-400"
+                    >
+                      {isDrafts ? 'Preview' : 'View'} ↗
+                    </Link>
                     <Link
                       href={`/admin/blog/edit/${post.slug}`}
                       className="hover:border-primary hover:text-primary inline-flex min-h-10 items-center rounded-full border border-zinc-300 px-4 transition-colors dark:border-zinc-700"
