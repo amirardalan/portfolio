@@ -1,27 +1,36 @@
-export type ProjectMedia = {
+export type ProjectHero = {
   src: string;
   alt: string;
+  treatment: 'between' | 'manifold';
+  position?: string;
 };
 
 export type Project = {
   title: string;
   summary: string;
-  year?: string;
-  role?: string[];
-  collaborators?: string[];
-  status?: string;
-  liveUrl?: string;
-  sourceUrl?: string;
+  year: string;
+  role: string[];
+  status: string;
+  liveUrl: string;
   caseStudyUrl?: string;
-  media?: ProjectMedia[];
-  technologies?: string[];
-  contribution?: string;
-  constraints?: string[];
-  decisions?: string[];
-  outcomes?: string[];
+  hero: ProjectHero;
 };
 
 export const selectedProjects: Project[] = [
+  {
+    title: 'Between',
+    summary:
+      'Catch a thought, image, sound, drawing, or place before it disappears. Arrange fragments into fields and notice what forms between them.',
+    year: '2026',
+    role: ['Product design', 'Interaction design', 'Frontend engineering'],
+    status: 'Independent project',
+    liveUrl: 'https://between.cards/',
+    hero: {
+      src: '/work/between/between-featured.webp',
+      alt: 'A dark Between example Field with image, audio, location, quote, and drawing fragments connected across the canvas.',
+      treatment: 'between',
+    },
+  },
   {
     title: 'manifold.observer',
     summary:
@@ -31,31 +40,10 @@ export const selectedProjects: Project[] = [
     status: 'Independent project',
     liveUrl: 'https://manifold.observer',
     caseStudyUrl: '/blog/manifold-observer',
-    media: [
-      {
-        src: 'Work/manifold-orbital-MNF-09YPON9O_4_uwdfqu',
-        alt: 'A luminous orbital form in manifold.observer.',
-      },
-      {
-        src: 'Work/manifold-mandala-MNF-9LQOWU_2_ggmbwv',
-        alt: 'A luminous mandala form in manifold.observer.',
-      },
-      {
-        src: 'Work/manifold-wormhole-MNF-0NU0MXZC_q5wpta',
-        alt: 'A luminous wormhole form in manifold.observer.',
-      },
-      {
-        src: 'Work/manifold-helix-MNF-0EL5C2U8_fmka99',
-        alt: 'A luminous helix form in manifold.observer.',
-      },
-      {
-        src: 'Work/manifold-observer-3_lvy9qm',
-        alt: 'An amorphous form in the manifold.observer interface.',
-      },
-      {
-        src: 'Work/manifold-terrain-MNF-03RSVFL5_fizyhn.png',
-        alt: 'A luminous terrain form in manifold.observer.',
-      },
-    ],
+    hero: {
+      src: '/work/manifold-composite.webp',
+      alt: 'Six vertical slices combine cyan, magenta, teal, amber, violet, and lime generative forms from manifold.observer.',
+      treatment: 'manifold',
+    },
   },
 ];
