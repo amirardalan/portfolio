@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
+import ManifoldSlideshow from '@/components/content/ManifoldSlideshow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
 import type { Project } from '@/content/projects';
 
@@ -21,61 +22,53 @@ function ProjectMedia({
   project: Project;
   priority: boolean;
 }) {
+  if (project.visual.treatment === 'manifold') {
+    return (
+      <ManifoldSlideshow
+        images={project.visual.images}
+        liveUrl={project.liveUrl}
+        projectTitle={project.title}
+      />
+    );
+  }
+
   const image = (
     <Image
-      key={project.hero.src}
-      src={project.hero.src}
-      alt={project.hero.alt}
-      fill={project.hero.treatment === 'manifold'}
-      width={project.hero.treatment === 'between' ? 1440 : undefined}
-      height={project.hero.treatment === 'between' ? 900 : undefined}
+      src={project.visual.src}
+      alt={project.visual.alt}
+      width={1440}
+      height={900}
       priority={priority}
       sizes="(min-width: 768px) 58vw, 100vw"
-      className={
-        project.hero.treatment === 'manifold' ? 'object-cover' : 'h-auto w-full'
-      }
-      style={{ objectPosition: project.hero.position ?? 'center' }}
+      className="h-auto w-full"
+      style={{ objectPosition: project.visual.position ?? 'center' }}
     />
   );
 
   return (
     <div className="relative min-h-72 overflow-hidden bg-zinc-950 sm:min-h-96 md:col-span-7 md:min-h-[520px]">
-      {project.hero.treatment === 'between' ? (
-        <>
-          <div
-            className="absolute inset-0 bg-gradient-to-br from-zinc-800/60 via-zinc-950 to-black"
-            aria-hidden="true"
-          />
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${project.title} project (opens in a new tab)`}
-            className="absolute top-1/2 left-5 w-[108%] -translate-y-1/2 sm:left-8 sm:w-[104%] md:left-10 md:w-[108%]"
-          >
-            <span
-              className="block overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl shadow-black/70"
-              style={{
-                transform:
-                  'perspective(1200px) rotateX(1deg) rotateY(-4deg) rotateZ(-1deg)',
-                transformOrigin: 'center',
-              }}
-            >
-              {image}
-            </span>
-          </a>
-        </>
-      ) : (
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${project.title} project (opens in a new tab)`}
-          className="absolute inset-0"
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-zinc-800/60 via-zinc-950 to-black"
+        aria-hidden="true"
+      />
+      <a
+        href={project.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${project.title} project (opens in a new tab)`}
+        className="absolute top-1/2 left-5 w-[108%] -translate-y-1/2 sm:left-8 sm:w-[104%] md:left-10 md:w-[108%]"
+      >
+        <span
+          className="block overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl shadow-black/70"
+          style={{
+            transform:
+              'perspective(1200px) rotateX(1deg) rotateY(-4deg) rotateZ(-1deg)',
+            transformOrigin: 'center',
+          }}
         >
           {image}
-        </a>
-      )}
+        </span>
+      </a>
     </div>
   );
 }
@@ -147,7 +140,7 @@ export default function SelectedWorkStage({
               tabIndex={active ? 0 : -1}
               onClick={() => selectProject(index)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
-              className={`-mb-px flex min-h-11 shrink-0 items-baseline gap-2 border-b px-1 py-3 text-left transition-colors first:pr-6 last:pl-6 md:first:pr-8 md:last:pl-8 ${
+              className={`-mb-px flex min-h-11 shrink-0 cursor-pointer items-baseline gap-2 border-b px-1 py-3 text-left transition-colors first:pr-6 last:pl-6 md:first:pr-8 md:last:pl-8 ${
                 active
                   ? 'border-primary text-dark dark:text-light'
                   : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
