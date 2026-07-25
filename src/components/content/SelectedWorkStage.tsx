@@ -104,42 +104,54 @@ export default function SelectedWorkStage({
 
   return (
     <div>
-      <div
-        role="tablist"
-        aria-label="Selected projects"
-        className="mb-6 flex overflow-x-auto border-b border-zinc-200 md:mb-8 dark:border-zinc-800"
-      >
-        {projects.map((item, index) => {
-          const active = index === activeIndex;
-          const number = String(index + 1).padStart(2, '0');
+      <div className="mb-6 overflow-x-auto overflow-y-hidden md:mb-8">
+        <div
+          role="tablist"
+          aria-label="Selected projects"
+          className="flex w-max min-w-full border-b border-zinc-200 dark:border-zinc-800"
+        >
+          {projects.map((item, index) => {
+            const active = index === activeIndex;
+            const number = String(index + 1).padStart(2, '0');
 
-          return (
-            <button
-              key={item.title}
-              ref={(element) => {
-                tabRefs.current[index] = element;
-              }}
-              id={`project-tab-${index}`}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              aria-controls="selected-project-panel"
-              tabIndex={active ? 0 : -1}
-              onClick={() => selectProject(index)}
-              onKeyDown={(event) => handleTabKeyDown(event, index)}
-              className={`-mb-px flex min-h-11 shrink-0 cursor-pointer items-baseline gap-2 border-b px-1 py-3 text-left transition-colors first:pr-6 last:pl-6 md:first:pr-8 md:last:pl-8 ${
-                active
-                  ? 'border-primary text-dark dark:text-light'
-                  : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
-              }`}
-            >
-              <span className="text-xxs w-5 shrink-0 font-mono tabular-nums">
-                {number}
-              </span>
-              <span className="text-sm font-medium">{item.title}</span>
-            </button>
-          );
-        })}
+            return (
+              <button
+                key={item.title}
+                ref={(element) => {
+                  tabRefs.current[index] = element;
+                }}
+                id={`project-tab-${index}`}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                aria-controls="selected-project-panel"
+                tabIndex={active ? 0 : -1}
+                onClick={() => selectProject(index)}
+                onKeyDown={(event) => handleTabKeyDown(event, index)}
+                className={`relative -mb-px flex min-h-11 shrink-0 cursor-pointer items-baseline gap-2 px-1 py-3 text-left transition-colors first:pr-6 last:px-6 md:first:pr-8 md:last:px-8 ${
+                  active
+                    ? 'text-dark dark:text-light'
+                    : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+                }`}
+              >
+                {active && (
+                  <span
+                    aria-hidden="true"
+                    className={`border-primary absolute right-1 bottom-0 border-b ${
+                      index === projects.length - 1
+                        ? 'left-6 md:left-8'
+                        : 'left-1'
+                    }`}
+                  />
+                )}
+                <span className="text-xxs w-5 shrink-0 font-mono tabular-nums">
+                  {number}
+                </span>
+                <span className="text-sm font-medium">{item.title}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <article
