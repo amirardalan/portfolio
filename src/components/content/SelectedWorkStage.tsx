@@ -147,13 +147,15 @@ export default function SelectedWorkStage({
               tabIndex={active ? 0 : -1}
               onClick={() => selectProject(index)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
-              className={`-mb-px flex min-h-11 shrink-0 items-center gap-3 border-b px-1 py-3 text-left transition-colors first:pr-6 last:pl-6 md:first:pr-8 md:last:pl-8 ${
+              className={`-mb-px flex min-h-11 shrink-0 items-baseline gap-2 border-b px-1 py-3 text-left transition-colors first:pr-6 last:pl-6 md:first:pr-8 md:last:pl-8 ${
                 active
                   ? 'border-primary text-dark dark:text-light'
                   : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
               }`}
             >
-              <span className="text-xxs font-mono tabular-nums">{number}</span>
+              <span className="text-xxs w-5 shrink-0 font-mono tabular-nums">
+                {number}
+              </span>
               <span className="text-sm font-medium">{item.title}</span>
             </button>
           );

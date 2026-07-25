@@ -18,7 +18,7 @@ export type Project = {
 
 export const selectedProjects: Project[] = [
   {
-    title: 'Between',
+    title: 'between',
     summary:
       'Catch a thought, image, sound, drawing, or place before it disappears. Arrange fragments into fields and notice what forms between them.',
     year: '2026',
@@ -27,7 +27,7 @@ export const selectedProjects: Project[] = [
     liveUrl: 'https://between.cards/',
     hero: {
       src: '/work/between/between-featured.webp',
-      alt: 'A dark Between example Field with image, audio, location, quote, and drawing fragments connected across the canvas.',
+      alt: 'A dark between example Field with image, audio, location, quote, and drawing fragments connected across the canvas.',
       treatment: 'between',
     },
   },
