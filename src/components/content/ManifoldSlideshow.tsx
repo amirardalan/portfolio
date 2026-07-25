@@ -77,7 +77,7 @@ export default function ManifoldSlideshow({
         href={liveUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Open ${projectTitle}`}
+        aria-label={`Open ${projectTitle} project (opens in a new tab)`}
         className="absolute inset-0"
       >
         {images.map((image, index) => (
@@ -89,9 +89,9 @@ export default function ManifoldSlideshow({
             fill
             priority={index === 0}
             sizes="(min-width: 768px) 58vw, 100vw"
-            className={`object-cover object-center transition-[opacity,transform] duration-[1800ms] ease-in-out motion-reduce:transform-none motion-reduce:transition-none ${
+            className={`object-cover object-center transition duration-500 ease-in-out motion-reduce:transform-none motion-reduce:transition-none ${
               index === activeIndex
-                ? 'opacity-100 group-hover:scale-[1.02]'
+                ? 'opacity-100 group-hover:scale-102'
                 : 'opacity-0'
             }`}
           />
@@ -99,9 +99,9 @@ export default function ManifoldSlideshow({
       </a>
 
       {images.length > 1 && (
-        <div className="absolute bottom-4 right-4 z-10 flex items-stretch overflow-hidden rounded-lg bg-zinc-950/60 font-mono text-light shadow-md shadow-black/20 backdrop-blur-xl">
+        <div className="text-light absolute right-4 bottom-4 z-10 flex items-stretch overflow-hidden rounded-lg bg-zinc-950/60 font-mono shadow-md shadow-black/20 backdrop-blur-xl">
           <div
-            className="flex items-center gap-1.5 border-r border-white/10 px-3 text-xxs tabular-nums text-white/45"
+            className="text-xxs flex items-center gap-1.5 border-r border-white/10 px-3 text-white/45 tabular-nums"
             aria-hidden="true"
           >
             <span className="text-white/90">

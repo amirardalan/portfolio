@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         destination: process.env.RESUME_URL!,
         permanent: true,
       },
+      {
+        source: '/auth/owner',
+        destination: '/cms',
+        permanent: true,
+      },
     ];
   },
   images: {
