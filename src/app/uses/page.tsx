@@ -107,8 +107,7 @@ export default function Uses() {
       title: 'Design',
       items: [
         { value: 'Figma' },
-        { value: 'Aseprite' },
-        { value: 'Paper + pencil' },
+        { value: 'Aseprite' }
       ],
     },
     {
@@ -124,7 +123,7 @@ export default function Uses() {
   const tools = [
     {
       title: 'Code',
-      items: [{ value: 'Codex' }],
+      items: [{ value: 'Codex CLI' }, { value: 'Garçon!'}],
     },
     {
       title: 'Shell',
