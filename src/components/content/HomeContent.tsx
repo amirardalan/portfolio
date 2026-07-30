@@ -128,7 +128,7 @@ export default function HomeContent() {
                     href="/about"
                     className="group text-primary inline-flex min-h-11 items-center gap-3"
                   >
-                    <span>More experience</span>
+                    <span>About me</span>
                     <ActionArrow direction="right" />
                   </Link>
                   <a
