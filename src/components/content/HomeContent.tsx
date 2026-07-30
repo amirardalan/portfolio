@@ -54,17 +54,6 @@ export default function HomeContent() {
         aria-labelledby="selected-work-heading"
         className="border-t border-zinc-200 dark:border-zinc-800"
       >
-        <div className="mx-auto max-w-[1440px] px-6 pt-10 md:px-10 md:pt-14 lg:px-16 lg:pt-16">
-          <div className="pb-4 md:pb-5">
-            <h2
-              id="selected-work-heading"
-              className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400"
-            >
-              <SectionGlyph /> Selected work
-            </h2>
-          </div>
-        </div>
-
         <SelectedWorkStage projects={selectedProjects} />
       </section>
 

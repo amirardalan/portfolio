@@ -37,8 +37,7 @@ function ProjectMedia({
       height={1086}
       priority={priority}
       sizes="(min-width: 768px) 58vw, 100vw"
-      className="h-full w-full object-cover"
-      style={{ objectPosition: project.visual.position ?? 'bottom' }}
+      className="h-full w-full object-cover object-center md:object-bottom"
     />
   );
 
@@ -75,6 +74,10 @@ export default function SelectedWorkStage({
     }
   };
 
+  const selectAdjacentProject = (offset: number) => {
+    selectProject((activeIndex + offset + projects.length) % projects.length);
+  };
+
   const handleTabKeyDown = (
     event: React.KeyboardEvent<HTMLButtonElement>,
     index: number
@@ -101,56 +104,97 @@ export default function SelectedWorkStage({
 
   return (
     <div>
-      <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
-        <div className="overflow-x-auto overflow-y-hidden">
-          <div
-            role="tablist"
-            aria-label="Selected projects"
-            className="flex w-max min-w-full"
+      <div className="mx-auto max-w-[1440px] px-6 pt-10 md:px-10 md:pt-14 lg:px-16 lg:pt-16">
+        <div className="md:flex md:items-center">
+          <h2
+            id="selected-work-heading"
+            className="text-xxs flex shrink-0 items-center gap-2.5 pb-2 font-sans tracking-[0.22em] text-zinc-500 uppercase md:min-h-14 md:pr-10 md:pb-0 dark:text-zinc-400"
           >
-            {projects.map((item, index) => {
-              const active = index === activeIndex;
-              const number = String(index + 1).padStart(2, '0');
+            <SectionGlyph /> Selected work
+          </h2>
 
-              return (
-                <button
-                  key={item.title}
-                  ref={(element) => {
-                    tabRefs.current[index] = element;
-                  }}
-                  id={`project-tab-${index}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  aria-controls="selected-project-panel"
-                  tabIndex={active ? 0 : -1}
-                  onClick={() => selectProject(index)}
-                  onKeyDown={(event) => handleTabKeyDown(event, index)}
-                  className={`group/tab flex min-h-14 min-w-56 shrink-0 cursor-pointer items-center justify-between gap-6 py-4 pr-8 text-left transition-colors ${
-                    active
-                      ? 'text-primary'
-                      : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
-                  }`}
-                >
-                  <span className="flex items-baseline gap-3">
-                    <span className="text-xxs shrink-0 font-mono tabular-nums opacity-60">
-                      {number} /
-                    </span>
-                    <span className="font-mono text-xxs font-medium tracking-[0.12em] uppercase">
-                      {item.title}
-                    </span>
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className={`size-1.5 shrink-0 bg-current transition-opacity ${
+          <div className="flex min-h-12 items-center justify-between gap-4 md:hidden">
+            <p className="text-primary flex min-w-0 items-center gap-4 font-mono text-xxs font-medium tracking-[0.12em] uppercase">
+              <span aria-live="polite" className="truncate">
+                {project.title}
+              </span>
+              <span aria-hidden="true" className="size-1.5 shrink-0 bg-current" />
+            </p>
+
+            <div className="flex shrink-0 items-center font-mono text-xxs tabular-nums">
+              <button
+                type="button"
+                aria-label="Show previous project"
+                onClick={() => selectAdjacentProject(-1)}
+                className="group flex size-11 cursor-pointer items-center justify-center"
+              >
+                <ActionArrow direction="left" />
+              </button>
+              <span className="text-zinc-500 dark:text-zinc-400">
+                {String(activeIndex + 1).padStart(2, '0')} /{' '}
+                {String(projects.length).padStart(2, '0')}
+              </span>
+              <button
+                type="button"
+                aria-label="Show next project"
+                onClick={() => selectAdjacentProject(1)}
+                className="group flex size-11 cursor-pointer items-center justify-center"
+              >
+                <ActionArrow direction="right" />
+              </button>
+            </div>
+          </div>
+
+          <div className="hidden min-w-0 overflow-x-auto overflow-y-hidden md:block md:flex-1">
+            <div
+              role="tablist"
+              aria-label="Selected projects"
+              className="flex w-max"
+            >
+              {projects.map((item, index) => {
+                const active = index === activeIndex;
+                const number = String(index + 1).padStart(2, '0');
+
+                return (
+                  <button
+                    key={item.title}
+                    ref={(element) => {
+                      tabRefs.current[index] = element;
+                    }}
+                    id={`project-tab-${index}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    aria-controls="selected-project-panel"
+                    tabIndex={active ? 0 : -1}
+                    onClick={() => selectProject(index)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
+                    className={`group/tab flex min-h-14 shrink-0 cursor-pointer items-center gap-4 px-5 py-4 text-left transition-colors first:pl-0 last:pr-0 ${
                       active
-                        ? 'opacity-100'
-                        : 'opacity-0 group-hover/tab:opacity-40'
+                        ? 'text-primary'
+                        : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
                     }`}
-                  />
-                </button>
-              );
-            })}
+                  >
+                    <span className="flex items-baseline gap-3">
+                      <span className="text-xxs shrink-0 font-mono tabular-nums opacity-60">
+                        {number} /
+                      </span>
+                      <span className="font-mono text-xxs font-medium tracking-[0.12em] uppercase">
+                        {item.title}
+                      </span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={`size-1.5 shrink-0 bg-current transition-opacity ${
+                        active
+                          ? 'opacity-100'
+                          : 'opacity-0 group-hover/tab:opacity-40'
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
