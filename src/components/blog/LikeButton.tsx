@@ -68,7 +68,7 @@ export default function LikeButton({
       <button
         onClick={handleLike}
         disabled={isLiking}
-        className="flex cursor-pointer items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex min-h-11 cursor-pointer items-center gap-2 px-2 transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-50"
         aria-label={isLiked ? 'Unlike post' : 'Like post'}
       >
         {showIcon && <IconLike active={isLiked} />}
@@ -83,7 +83,7 @@ export default function LikeButton({
         <button
           onClick={handleLike}
           disabled={isLiking}
-          className="flex cursor-pointer items-center rounded-full disabled:cursor-not-allowed"
+          className="flex min-h-11 min-w-11 cursor-pointer items-center justify-center transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-50"
           aria-label={isLiked ? 'Unlike post' : 'Like post'}
         >
           <IconLike active={isLiked} />

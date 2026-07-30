@@ -16,16 +16,22 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h2 className="text-dark dark:text-light mb-0 pt-10" {...props} />
+    <h2
+      className="font-editorial text-dark mb-5 pt-12 text-3xl leading-tight font-medium tracking-tight text-balance dark:text-light md:text-4xl"
+      {...props}
+    />
   ),
   h2: (props: HeadingProps) => (
-    <h2 className="text-dark dark:text-light mt-7 mb-3" {...props} />
+    <h2
+      className="font-editorial text-dark mt-12 mb-5 text-3xl leading-tight font-medium tracking-tight text-balance dark:text-light md:text-4xl"
+      {...props}
+    />
   ),
   h3: ({ children, ...props }: HeadingProps) => {
     if (typeof children !== 'string' && !Array.isArray(children)) {
       return (
         <h3
-          className="text-dark dark:text-light mt-7 mb-3 text-3xl font-medium"
+          className="font-editorial text-dark mt-10 mb-4 text-2xl leading-tight font-medium tracking-tight dark:text-light md:text-3xl"
           {...props}
         >
           {children}
@@ -42,12 +48,12 @@ export const components = {
     return (
       <h3
         id={slug}
-        className="text-dark dark:text-light mt-7 mb-3 scroll-mt-24 text-3xl leading-tight font-medium lg:leading-normal"
+        className="font-editorial text-dark mt-10 mb-4 scroll-mt-24 text-2xl leading-tight font-medium tracking-tight dark:text-light md:text-3xl"
         {...props}
       >
         <a href={`#${slug}`} className="group relative">
           <span
-            className="text-primary absolute -left-5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+            className="text-primary absolute -left-5 font-mono opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
             aria-hidden="true"
           >
             #
@@ -59,7 +65,7 @@ export const components = {
                 ) : (
                   <code
                     key={index}
-                    className="font-sans before:content-['`'] after:content-['`']"
+                    className="font-mono before:content-['`'] after:content-['`']"
                   >
                     {child.props.children}
                   </code>
@@ -70,35 +76,40 @@ export const components = {
       </h3>
     );
   },
-  h4: (props: HeadingProps) => <h4 className="" {...props} />,
+  h4: (props: HeadingProps) => (
+    <h4
+      className="font-editorial text-dark mt-8 mb-3 text-xl leading-tight font-semibold tracking-tight dark:text-light md:text-2xl"
+      {...props}
+    />
+  ),
   p: (props: ParagraphProps) => (
     <p
-      className="my-5 font-serif text-lg leading-relaxed font-normal"
+      className="font-editorial my-5 text-lg leading-8 font-normal text-zinc-700 dark:text-zinc-300"
       {...props}
     />
   ),
   ol: (props: ListProps) => (
     <ol
-      className="text-dark dark:text-light list-decimal space-y-2 pl-5"
+      className="font-editorial text-dark my-6 list-decimal space-y-3 pl-6 text-lg leading-8 marker:font-mono marker:text-primary dark:text-light"
       {...props}
     />
   ),
   ul: (props: ListProps) => (
     <ul
-      className="text-dark dark:text-light my-6 list-disc space-y-1 pl-5"
+      className="font-editorial text-dark my-6 list-disc space-y-3 pl-6 text-lg leading-8 marker:text-primary dark:text-light"
       {...props}
     />
   ),
-  li: (props: ListItemProps) => <li className="pl-1" {...props} />,
+  li: (props: ListItemProps) => <li className="pl-2" {...props} />,
   em: (props: ComponentPropsWithoutRef<'em'>) => (
-    <em className="text-dark dark:text-light" {...props} />
+    <em className="text-dark italic dark:text-light" {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
-    <strong className="text-dark dark:text-light" {...props} />
+    <strong className="text-dark font-semibold dark:text-light" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      'text-zinc-600 underline decoration-zinc-400/60 underline-offset-2 transition-colors hover:text-primary hover:decoration-primary focus-visible:text-primary focus-visible:decoration-primary dark:text-zinc-400 dark:decoration-zinc-600 dark:hover:text-primary dark:hover:decoration-primary dark:focus-visible:text-primary dark:focus-visible:decoration-primary';
+      'text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary focus-visible:decoration-primary';
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -130,7 +141,7 @@ export const components = {
     if (!isInsidePre) {
       return (
         <code
-          className="bg-primary/10 text-primary ring-primary/20 rounded-md px-1.5 py-0.5 font-mono text-[0.9em] font-normal ring-1 ring-inset"
+          className="border-primary/20 bg-primary/10 text-primary rounded-sm border px-1.5 py-0.5 font-mono text-[0.9em] font-normal"
           {...props}
         >
           {children}
@@ -176,7 +187,7 @@ export const components = {
     return (
       <code
         dangerouslySetInnerHTML={{ __html: codeHTML }}
-        className="text-dark dark:text-light rounded bg-zinc-200 px-1.5 py-0.5 font-mono text-sm dark:bg-zinc-800"
+        className="text-dark bg-zinc-200 px-1.5 py-0.5 font-mono text-sm dark:bg-zinc-800 dark:text-light"
         {...props}
       />
     );
@@ -206,7 +217,7 @@ export const components = {
     return (
       <div className="group relative">
         <pre
-          className="overflow-y-none line-highlight-enabled scrollbar my-6 scrollbar-thumb-zinc-500 scrollbar-track-zinc-600 overflow-x-auto rounded-lg bg-zinc-100 p-5 font-mono text-sm dark:bg-zinc-900"
+          className="line-highlight-enabled scrollbar my-8 overflow-x-auto overflow-y-hidden rounded-md border border-zinc-200 bg-zinc-100 p-5 font-mono text-sm dark:border-zinc-800 dark:bg-zinc-900"
           {...props}
         >
           {children}
@@ -218,7 +229,7 @@ export const components = {
           />
         )}
         {language && (
-          <span className="text-xxs absolute right-2 bottom-2 rounded px-1.5 py-0.5 text-zinc-500 dark:text-zinc-400">
+          <span className="text-xxs absolute right-2 bottom-2 bg-zinc-100 px-1.5 py-0.5 font-mono tracking-wider text-zinc-500 uppercase dark:bg-zinc-900 dark:text-zinc-400">
             {language}
           </span>
         )}
@@ -226,19 +237,32 @@ export const components = {
     );
   },
   Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
-    <table>
-      <thead>
+    <table className="font-editorial my-8 w-full border-collapse text-left text-base">
+      <thead className="border-b border-zinc-400 dark:border-zinc-600">
         <tr>
           {data.headers.map((header, index) => (
-            <th key={index}>{header}</th>
+            <th
+              key={index}
+              className="text-xxs px-3 py-3 font-sans tracking-[0.14em] uppercase first:pl-0 last:pr-0"
+            >
+              {header}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {data.rows.map((row, index) => (
-          <tr key={index}>
+          <tr
+            key={index}
+            className="border-b border-zinc-200 dark:border-zinc-800"
+          >
             {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell}</td>
+              <td
+                key={cellIndex}
+                className="px-3 py-3 first:pl-0 last:pr-0"
+              >
+                {cell}
+              </td>
             ))}
           </tr>
         ))}
@@ -247,7 +271,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="my-6 ml-[0.075em] border-l-4 border-zinc-300 pl-4 font-serif text-3xl text-zinc-400 dark:border-zinc-600 dark:text-zinc-500"
+      className="font-editorial text-dark my-10 border-l border-primary pl-6 text-2xl leading-snug font-medium tracking-tight dark:text-light md:text-3xl"
       {...props}
     />
   ),
@@ -309,7 +333,7 @@ export const components = {
         />
       )}
       {caption && (
-        <figcaption className="text-xxs mt-2 text-right text-gray-600 uppercase dark:text-gray-400">
+        <figcaption className="text-xxs mt-3 text-right font-sans tracking-[0.14em] text-zinc-500 uppercase dark:text-zinc-400">
           {caption}
         </figcaption>
       )}

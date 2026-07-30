@@ -10,7 +10,7 @@ interface SocialActionsProps {
 
 export default function SocialActions({ postId }: SocialActionsProps) {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-1">
       <Tooltip text="Like post" pos="b">
         <LikeButton postId={postId} showIcon={true} showCount={false} />
       </Tooltip>

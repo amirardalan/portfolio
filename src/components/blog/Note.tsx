@@ -41,14 +41,14 @@ export default function Note({ children, noteType = 'note' }: NoteProps) {
   const { icon, label, color } = noteConfig[noteType];
 
   return (
-    <div className="note relative my-8 rounded-lg border border-zinc-300 px-5 pb-5 pt-10 sm:px-6 sm:pb-6 sm:pt-11 dark:border-zinc-700">
-      <div className="absolute left-5 top-4 text-xxs uppercase sm:left-6">
-        <div className={`flex items-center gap-1 ${color}`}>
+    <aside className="note relative my-10 bg-zinc-100 px-5 py-5 sm:px-6 sm:py-6 dark:bg-zinc-900">
+      <div className="text-xxs mb-3 font-sans tracking-[0.16em] uppercase">
+        <div className={`flex items-center gap-2 ${color}`}>
           <div className="h-4 w-4">{icon}</div>
           <div>{label}</div>
         </div>
       </div>
-      <div className="italic">{children}</div>
-    </div>
+      <div className="font-editorial">{children}</div>
+    </aside>
   );
 }
