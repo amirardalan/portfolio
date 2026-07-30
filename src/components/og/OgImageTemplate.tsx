@@ -19,7 +19,7 @@ export const contentType = 'image/png';
 const colors = {
   background: '#09090b',
   border: '#2b2b30',
-  accent: '#c7e538',
+  accent: '#cbcc3b',
   accentInk: '#11130a',
   foreground: '#f4f4f5',
   muted: '#a1a1aa',
