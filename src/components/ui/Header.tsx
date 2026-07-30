@@ -48,12 +48,9 @@ export default function Header() {
         <Link
           href="/"
           aria-label="Home"
-          className="group flex items-center gap-3"
+          className="group flex items-center"
         >
           <Logo size={isTablet ? 25 : 35} />
-          <span className="text-xxs hidden items-center gap-1.5 font-sans tracking-wider uppercase opacity-55 lg:flex">
-            <span className="font-mono">00 /</span> amir.sh
-          </span>
         </Link>
         <div className="flex w-full max-w-screen-xl items-center justify-end space-x-4">
           <nav

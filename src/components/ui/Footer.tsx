@@ -5,12 +5,9 @@ export default async function Footer() {
     <footer className="bg-primary z-10 text-light dark:text-dark">
       <div className="mx-auto grid w-full max-w-[1440px] sm:grid-cols-2 lg:grid-cols-12">
         <div className="col-span-full flex min-h-40 flex-col justify-between border-b border-light/25 p-6 sm:p-8 lg:col-span-6 lg:border-r lg:border-b-0 lg:px-10 lg:py-8 dark:border-dark/25">
-          <div className="text-xxs flex items-center justify-between font-sans tracking-wider uppercase">
+          <div className="text-xxs flex items-center font-sans tracking-wider uppercase">
             <span>
-              <span className="font-mono">00 /</span> Identity
-            </span>
-            <span className="font-mono" aria-label="Copyright">
-              &copy; {new Date().getFullYear()}
+              <span className="font-mono">00 /</span> ID
             </span>
           </div>
 
@@ -18,7 +15,7 @@ export default async function Footer() {
             <div>
               <div className="flex items-center gap-4">
                 <Logo size={24} inverted />
-                <span className="font-editorial text-2xl font-medium tracking-tight">
+                <span className="font-editorial text-3xl font-medium tracking-tight">
                   amir.sh
                 </span>
               </div>
@@ -26,11 +23,8 @@ export default async function Footer() {
                 Amir Ardalan / Design Engineer
               </p>
             </div>
-            <span
-              className="hidden font-sans text-xs opacity-65 sm:block"
-              aria-hidden="true"
-            >
-              Product / Interaction / Code
+            <span className="font-mono text-xs opacity-65" aria-label="Copyright">
+              &copy; {new Date().getFullYear()}
             </span>
           </div>
         </div>
@@ -42,11 +36,10 @@ export default async function Footer() {
           rel="noopener noreferrer"
           aria-label="View portfolio source on GitHub (opens in a new tab)"
         >
-          <span className="text-xxs flex items-center justify-between font-sans tracking-wider uppercase">
+          <span className="text-xxs flex items-center font-sans tracking-wider uppercase">
             <span>
-              <span className="font-mono">01 /</span> Repository
+              <span className="font-mono">01 /</span> Repo
             </span>
-            <span aria-hidden="true">GH</span>
           </span>
           <span>
             <span className="font-editorial flex items-end justify-between gap-6 text-xl font-medium">
@@ -69,11 +62,10 @@ export default async function Footer() {
           aria-label="Email Amir at hi@amir.sh"
           className="group flex min-h-40 flex-col justify-between p-6 transition-colors hover:bg-light/10 sm:p-8 lg:col-span-3 dark:hover:bg-dark/10"
         >
-          <span className="text-xxs flex items-center justify-between font-sans tracking-wider uppercase">
+          <span className="text-xxs flex items-center font-sans tracking-wider uppercase">
             <span>
               <span className="font-mono">02 /</span> Contact
             </span>
-            <span aria-hidden="true">EM</span>
           </span>
           <span>
             <span className="font-editorial flex items-end justify-between gap-6 text-xl font-medium">

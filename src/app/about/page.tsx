@@ -67,12 +67,12 @@ export default function About() {
   return (
     <article className="text-dark w-full dark:text-light">
       <header className="mx-auto w-full max-w-[1440px] px-6 pt-32 pb-14 md:px-10 md:pt-40 md:pb-16 lg:px-16 lg:pt-44">
-        <div className="flex items-center justify-between border-b border-zinc-300 pb-4 dark:border-zinc-700">
+        <div className="flex items-center justify-between pb-4">
           <p className="text-primary text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
             <SectionGlyph /> Profile / About
           </p>
           <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
-            01 — 04
+            01 — 05
           </span>
         </div>
 
@@ -90,7 +90,7 @@ export default function About() {
           >
             <div>
               <p className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
-                <span className="font-mono">01 /</span> Focus
+                Focus
               </p>
               <p className="font-editorial mt-2 text-lg leading-snug font-normal tracking-tight">
                 Product design &amp; frontend engineering
@@ -99,7 +99,7 @@ export default function About() {
 
             <div>
               <p className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
-                <span className="font-mono">02 /</span> Strength
+                Strength
               </p>
               <p className="font-editorial mt-2 text-lg leading-snug font-normal tracking-tight">
                 Prototyping complex interactions
@@ -108,7 +108,7 @@ export default function About() {
 
             <div>
               <p className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
-                <span className="font-mono">03 /</span> Scope
+                Scope
               </p>
               <p className="font-editorial mt-2 text-lg leading-snug font-normal tracking-tight">
                 Early product direction to production code
@@ -134,11 +134,11 @@ export default function About() {
         className="bg-primary text-light dark:text-dark"
       >
         <div className="mx-auto max-w-[1440px] px-6 pt-14 pb-12 md:px-10 md:pt-20 md:pb-16 lg:px-16 lg:pt-24 lg:pb-20">
-          <div className="border-dark flex items-center justify-between border-b-3 pb-4">
+          <div className="border-light dark:border-dark flex items-center justify-between border-b-3 pb-4">
             <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
               <SectionGlyph className="text-current" /> How I work
             </p>
-            <span className="text-xxs font-mono opacity-60">02 — 04</span>
+            <span className="text-xxs font-mono opacity-60">02 — 05</span>
           </div>
 
           <div className="grid pt-9 md:grid-cols-12 md:gap-x-8 md:pt-12 lg:gap-x-12">
@@ -185,7 +185,7 @@ export default function About() {
               <SectionGlyph /> Principles
             </h2>
             <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
-              03 — 04
+              03 — 05
             </span>
           </div>
 
@@ -225,7 +225,7 @@ export default function About() {
         <div className="mx-auto grid max-w-[1440px] md:grid-cols-12">
           <div className="px-6 py-14 md:col-span-7 md:px-10 md:py-20 lg:col-span-8 lg:px-16 lg:py-24">
             <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
-              <SectionGlyph /> Selected experience
+              <SectionGlyph /> Experience &amp; Resume
             </p>
             <h2
               id="experience-heading"
@@ -240,19 +240,18 @@ export default function About() {
             </p>
           </div>
 
-          <div className="bg-zinc-950 p-6 text-zinc-100 md:col-span-5 md:px-8 md:pt-20 md:pb-8 lg:col-span-4 lg:px-10 lg:pt-24 lg:pb-10">
+          <div className="p-6 text-dark md:col-span-5 md:px-8 md:pt-20 md:pb-8 lg:col-span-4 lg:px-10 lg:pt-24 lg:pb-10 dark:text-light">
             <div className="flex flex-col">
-              <p className="text-xxs flex items-center gap-2.5 border-b border-zinc-800 pb-4 font-sans tracking-[0.16em] text-zinc-400 uppercase">
-                <SectionGlyph />
-                <span>Career profile</span>
-              </p>
+              <span className="text-xxs self-end font-mono text-zinc-400 dark:text-zinc-600">
+                04 — 05
+              </span>
 
               <div className="mt-9">
                 <p className="font-editorial text-4xl leading-none font-medium tracking-tight">
-                  Amir Ardalan
+                  Career overview
                 </p>
-                <p className="text-xxs mt-3 font-sans tracking-[0.16em] text-zinc-400 uppercase">
-                  Design engineer
+                <p className="text-xxs mt-3 font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
+                  Roles / Collaborations / Capabilities
                 </p>
               </div>
 
@@ -288,32 +287,37 @@ export default function About() {
               </h2>
             </div>
 
-            <div className="mt-12 border-t border-zinc-300 md:col-span-7 md:mt-0 dark:border-zinc-700">
-              {links.map((link, index) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.type === 'external' ? '_blank' : undefined}
-                  rel={
-                    link.type === 'external'
-                      ? 'noopener noreferrer'
-                      : undefined
-                  }
-                  className="group text-primary flex min-h-16 items-center justify-between gap-6 border-b border-zinc-300 font-mono text-xxs font-medium tracking-[0.12em] uppercase dark:border-zinc-700"
-                >
-                  <span className="flex items-baseline gap-4">
-                    <span className="text-zinc-400 tabular-nums dark:text-zinc-600">
-                      {String(index + 1).padStart(2, '0')} /
-                    </span>
-                    {link.label}
-                  </span>
-                  <ActionArrow
-                    direction={
-                      link.type === 'external' ? 'external' : 'right'
+            <div className="mt-12 md:col-span-7 md:mt-0">
+              <span className="text-xxs block text-right font-mono text-zinc-400 dark:text-zinc-600">
+                05 — 05
+              </span>
+              <div className="mt-7">
+                {links.map((link, index) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.type === 'external' ? '_blank' : undefined}
+                    rel={
+                      link.type === 'external'
+                        ? 'noopener noreferrer'
+                        : undefined
                     }
-                  />
-                </a>
-              ))}
+                    className="group text-primary flex min-h-16 items-center justify-between gap-6 border-b border-zinc-300 font-mono text-xxs font-medium tracking-[0.12em] uppercase last:border-b-0 dark:border-zinc-700"
+                  >
+                    <span className="flex items-baseline gap-4">
+                      <span className="text-zinc-400 tabular-nums dark:text-zinc-600">
+                        {String(index + 1).padStart(2, '0')} /
+                      </span>
+                      {link.label}
+                    </span>
+                    <ActionArrow
+                      direction={
+                        link.type === 'external' ? 'external' : 'right'
+                      }
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

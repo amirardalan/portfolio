@@ -26,7 +26,7 @@ const getNavLinkStyles = (
 ) => {
   const variantStyles = {
     header: clsx({
-      'mr-8 inline-flex min-h-10 items-center gap-2 font-mono text-xxs font-medium tracking-[0.12em] uppercase transition-colors':
+      'mr-8 inline-flex min-h-10 items-center font-mono text-xxs font-medium tracking-[0.12em] uppercase transition-colors':
         true,
       'text-dark hover:text-primary dark:text-light dark:hover:text-primary':
         !isActive,
@@ -84,14 +84,6 @@ export const NavLinks = ({
               index === links.length - 1
             )}
           >
-            {variant === 'header' && (
-              <span
-                className="font-mono text-xxs font-normal opacity-50"
-                aria-hidden="true"
-              >
-                {String(index + 1).padStart(2, '0')} /
-              </span>
-            )}
             {link.label}
             {link.external && (
               <span
