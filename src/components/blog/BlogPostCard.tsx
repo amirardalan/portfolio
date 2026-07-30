@@ -26,13 +26,16 @@ export default function BlogPostCard({
       <li className="border-b border-zinc-300 dark:border-zinc-700">
         <Link
           href={`/blog/${post.slug}`}
-          className="group grid gap-y-6 py-8 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:py-10 lg:gap-x-12"
+          className="group grid gap-y-7 py-7 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:gap-y-6 md:py-10 lg:gap-x-12"
         >
-          <div className="md:col-span-2">
+          <div className="flex items-baseline gap-4 md:col-span-2 md:block">
             <p className="text-primary text-xxs flex items-baseline gap-2 uppercase">
               <span className="font-mono tabular-nums">{index} /</span>
               <span className="font-sans tracking-[0.16em]">Featured</span>
             </p>
+            <span className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:hidden">
+              {category}
+            </span>
           </div>
 
           <div className="md:col-span-7">
@@ -46,14 +49,14 @@ export default function BlogPostCard({
             )}
           </div>
 
-          <div className="ml-auto flex flex-col items-end text-right md:col-span-3">
-            <span className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase">
+          <div className="flex items-center gap-5 md:col-span-3 md:ml-auto md:flex-col md:items-end md:gap-0 md:text-right">
+            <span className="text-xxs hidden font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:inline">
               {category}
             </span>
-            <time className="text-dark mt-4 font-mono text-xs tracking-[0.08em] uppercase dark:text-light">
+            <time className="font-mono text-xxs tracking-[0.08em] whitespace-nowrap text-zinc-500 uppercase md:mt-4 md:text-xs md:text-dark dark:text-zinc-400 md:dark:text-light">
               {dateFormatted}
             </time>
-            <span className="mt-2 font-mono text-xxs tracking-[0.12em] text-zinc-500 uppercase dark:text-zinc-400">
+            <span className="font-mono text-xxs tracking-[0.12em] whitespace-nowrap text-zinc-500 uppercase md:mt-2 dark:text-zinc-400">
               {readTime}
             </span>
           </div>
@@ -66,11 +69,14 @@ export default function BlogPostCard({
     <li className="border-b border-zinc-300 dark:border-zinc-700">
       <Link
         href={`/blog/${post.slug}`}
-        className="group grid gap-y-6 py-8 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:py-10 lg:gap-x-12"
+        className="group grid gap-y-7 py-7 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:gap-y-6 md:py-10 lg:gap-x-12"
       >
-        <div className="md:col-span-2">
+        <div className="flex items-baseline gap-4 md:col-span-2 md:block">
           <span className="text-xxs font-mono text-zinc-400 tabular-nums dark:text-zinc-600">
             {index} /
+          </span>
+          <span className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:hidden">
+            {category}
           </span>
         </div>
 
@@ -85,14 +91,14 @@ export default function BlogPostCard({
           )}
         </div>
 
-        <div className="ml-auto flex flex-col items-end text-right md:col-span-3">
-          <span className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase">
+        <div className="flex items-center gap-5 md:col-span-3 md:ml-auto md:flex-col md:items-end md:gap-0 md:text-right">
+          <span className="text-xxs hidden font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:inline">
             {category}
           </span>
-          <time className="text-dark mt-4 font-mono text-xs tracking-[0.08em] uppercase dark:text-light">
+          <time className="font-mono text-xxs tracking-[0.08em] whitespace-nowrap text-zinc-500 uppercase md:mt-4 md:text-xs md:text-dark dark:text-zinc-400 md:dark:text-light">
             {dateFormatted}
           </time>
-          <span className="mt-2 font-mono text-xxs tracking-[0.12em] text-zinc-500 uppercase dark:text-zinc-400">
+          <span className="font-mono text-xxs tracking-[0.12em] whitespace-nowrap text-zinc-500 uppercase md:mt-2 dark:text-zinc-400">
             {readTime}
           </span>
         </div>

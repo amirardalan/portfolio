@@ -61,7 +61,7 @@ export default function ManifoldSlideshow({
 
   return (
     <div
-      className="relative min-h-80 overflow-hidden sm:min-h-110 md:col-span-7 lg:min-h-140"
+      className="relative min-h-80 overflow-hidden sm:min-h-110 md:col-span-7 md:ml-10 lg:ml-[max(4rem,calc((100vw-90rem)/2+4rem))] lg:min-h-140"
       role="group"
       aria-label={`${projectTitle} image slideshow`}
       onMouseEnter={() => setIsInteracting(true)}

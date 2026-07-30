@@ -112,10 +112,13 @@ function getSearchScore(post: BlogPost, query: string) {
 export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false);
   const [activeSearchIndex, setActiveSearchIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const searchDialogRef = useRef<HTMLDivElement>(null);
   const searchTriggerRef = useRef<HTMLButtonElement>(null);
+  const mobileCategoryMenuRef = useRef<HTMLDivElement>(null);
+  const mobileCategoryTriggerRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoryFilter = searchParams?.get('category');
@@ -159,6 +162,10 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
     new Set(posts.map((post) => post.category?.name ?? 'Uncategorized'))
   ).sort();
   const allCategories = ['All', ...categories];
+  const activeCategory =
+    allCategories.find(
+      (category) => category.toLowerCase() === normalizedCategoryFilter
+    ) ?? 'All';
   const archiveResultCount = hasActiveFilters
     ? filteredPosts.length
     : posts.length;
@@ -179,7 +186,12 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
     setIsSearchOpen(false);
     setSearchTerm('');
     setActiveSearchIndex(0);
-    window.requestAnimationFrame(() => searchTriggerRef.current?.focus());
+    window.requestAnimationFrame(() =>
+      searchTriggerRef.current?.focus({
+        preventScroll: true,
+        focusVisible: false,
+      })
+    );
   };
 
   const handleSearchKeyDown = (
@@ -223,7 +235,12 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
         setIsSearchOpen(false);
         setSearchTerm('');
         setActiveSearchIndex(0);
-        window.requestAnimationFrame(() => searchTriggerRef.current?.focus());
+        window.requestAnimationFrame(() =>
+          searchTriggerRef.current?.focus({
+            preventScroll: true,
+            focusVisible: false,
+          })
+        );
       }
 
       if (event.key === 'Tab') {
@@ -255,6 +272,39 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
     };
   }, [isSearchOpen]);
 
+  useEffect(() => {
+    if (!isCategoryMenuOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        mobileCategoryMenuRef.current &&
+        !mobileCategoryMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsCategoryMenuOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+
+      setIsCategoryMenuOpen(false);
+      window.requestAnimationFrame(() =>
+        mobileCategoryTriggerRef.current?.focus({
+          preventScroll: true,
+          focusVisible: false,
+        })
+      );
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isCategoryMenuOpen]);
+
   return (
     <section aria-label="Writing archive">
       {isSearchOpen && (
@@ -264,7 +314,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="writing-search-title"
-          className="bg-light text-dark fixed inset-0 z-50 dark:bg-dark dark:text-light"
+          className="bg-light text-dark fixed inset-0 z-100 dark:bg-dark dark:text-light"
         >
           <div className="mx-auto flex h-full w-full max-w-[1440px] flex-col px-6 py-6 md:px-10 md:py-10 lg:px-16">
             <div className="flex items-center justify-between">
@@ -389,29 +439,108 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
       )}
 
       <div className="mx-auto max-w-[1440px] px-6 pb-14 md:px-10 md:pb-20 lg:px-16 lg:pb-24">
-        <div className="grid gap-y-3 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
+        <div className="flex items-center justify-between gap-4 border-y border-zinc-200 md:grid md:grid-cols-12 md:gap-x-8 lg:gap-x-12 dark:border-zinc-800">
           <button
             ref={searchTriggerRef}
             type="button"
-            onClick={() => setIsSearchOpen(true)}
+            onClick={() => {
+              setIsCategoryMenuOpen(false);
+              setIsSearchOpen(true);
+            }}
             aria-haspopup="dialog"
             aria-expanded={isSearchOpen}
             aria-controls="writing-search-dialog"
-            className="writing-search-trigger inline-flex min-h-11 cursor-pointer items-center gap-3 justify-self-start text-zinc-500 transition-colors hover:text-primary md:col-span-4 dark:text-zinc-400"
+            className="writing-search-trigger inline-flex min-h-16 shrink-0 cursor-pointer items-center gap-3 justify-self-start font-mono text-xxs font-medium tracking-[0.12em] text-zinc-500 uppercase transition-colors hover:text-primary md:col-span-4 dark:text-zinc-400"
           >
             <SearchIcon />
-            <span className="font-editorial text-base font-normal">
-              Search writing
-            </span>
+            <span>Search writing</span>
           </button>
 
-          <div className="flex min-h-11 items-center justify-end gap-6 overflow-hidden md:col-span-8">
+          <div
+            ref={mobileCategoryMenuRef}
+            className="relative min-w-0 md:hidden"
+          >
+            <button
+              ref={mobileCategoryTriggerRef}
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={isCategoryMenuOpen}
+              aria-controls="mobile-writing-categories"
+              onClick={() => setIsCategoryMenuOpen((isOpen) => !isOpen)}
+              className="text-primary inline-flex min-h-16 w-28 cursor-pointer items-center justify-end gap-2 font-mono text-xxs font-medium tracking-[0.12em] uppercase"
+            >
+              <span className="truncate">{activeCategory}</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 12 12"
+                fill="none"
+                className={clsx(
+                  'size-3 shrink-0 transition-transform',
+                  isCategoryMenuOpen && 'rotate-180'
+                )}
+              >
+                <path
+                  d="m3 4.5 3 3 3-3"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            {isCategoryMenuOpen && (
+              <nav
+                id="mobile-writing-categories"
+                aria-label="Filter writing by topic"
+                className="bg-light absolute top-full right-0 z-20 max-h-72 w-52 overflow-y-auto border border-zinc-200 py-2 dark:border-zinc-800 dark:bg-dark"
+              >
+                {allCategories.map((category) => {
+                  const isActive =
+                    category.toLowerCase() === activeCategory.toLowerCase();
+
+                  return (
+                    <Link
+                      key={category}
+                      href={
+                        category === 'All'
+                          ? '/blog'
+                          : `/blog?category=${encodeURIComponent(category)}`
+                      }
+                      aria-current={isActive ? 'page' : undefined}
+                      onClick={() => {
+                        setCurrentPage(1);
+                        setIsCategoryMenuOpen(false);
+                      }}
+                      className={clsx(
+                        'flex min-h-11 items-center justify-between gap-4 px-4 font-mono text-xxs font-medium tracking-[0.12em] uppercase transition-colors',
+                        isActive
+                          ? 'text-primary'
+                          : 'text-zinc-500 hover:text-dark dark:text-zinc-400 dark:hover:text-light'
+                      )}
+                    >
+                      <span>{category}</span>
+                      <span
+                        aria-hidden="true"
+                        className={clsx(
+                          'size-1.5 shrink-0 bg-current',
+                          !isActive && 'opacity-0'
+                        )}
+                      />
+                    </Link>
+                  );
+                })}
+              </nav>
+            )}
+          </div>
+
+          <div className="hidden min-h-16 min-w-0 items-center justify-end gap-6 overflow-hidden md:col-span-8 md:flex">
             <span className="text-xxs shrink-0 font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
               Filter /
             </span>
             <nav
               aria-label="Filter writing by topic"
-              className="scrollbar-hide flex gap-x-7 overflow-x-auto"
+              className="scrollbar-hide flex min-w-0 gap-x-6 overflow-x-auto md:gap-x-7"
             >
               {allCategories.map((category) => {
                 const isActive =
@@ -447,20 +576,20 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
         {hasActiveFilters && (
           <div className="mt-5 flex items-center justify-between gap-6">
             <p
-              className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400"
+              className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase dark:text-zinc-400"
               aria-live="polite"
             >
               <span className="font-mono tabular-nums">
                 {String(archiveResultCount).padStart(2, '0')} /
               </span>{' '}
-              Matching entries
+              Entries
             </p>
             <button
               type="button"
               onClick={handleClearFilters}
-              className="text-primary inline-flex min-h-11 cursor-pointer items-center gap-3 font-mono text-xxs font-medium tracking-[0.12em] uppercase"
+              className="text-primary inline-flex min-h-11 cursor-pointer items-center gap-3 text-left font-mono text-xxs font-medium tracking-[0.12em] whitespace-nowrap uppercase"
             >
-              <span>Clear filters</span>
+              <span>Clear</span>
               <span
                 aria-hidden="true"
                 className="inline-block text-base leading-none font-normal"

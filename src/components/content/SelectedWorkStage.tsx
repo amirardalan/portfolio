@@ -48,7 +48,7 @@ function ProjectMedia({
   );
 
   return (
-    <div className="relative min-h-80 overflow-hidden bg-stone-100 sm:min-h-110 md:col-span-7 lg:min-h-140">
+    <div className="relative min-h-80 overflow-hidden bg-stone-100 sm:min-h-110 md:col-span-7 md:ml-10 lg:ml-[max(4rem,calc((100vw-90rem)/2+4rem))] lg:min-h-140">
       <a
         href={project.liveUrl}
         target="_blank"
@@ -110,7 +110,7 @@ export default function SelectedWorkStage({
 
   return (
     <div>
-      <div className="mx-auto max-w-[1440px] px-6 pt-10 md:px-10 md:pt-14 lg:px-16 lg:pt-16">
+      <div className="mx-auto max-w-[1440px] px-6 pt-10 pb-4 md:px-10 md:pt-14 lg:px-16 lg:pt-16">
         <div className="md:flex md:items-center">
           <h2
             id="selected-work-heading"

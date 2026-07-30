@@ -60,7 +60,10 @@
     outline: none !important;
     outline-offset: 0 !important;
   }
-  :where(button.writing-search-trigger):focus,
+  input.writing-search::-webkit-search-cancel-button,
+  input.writing-search::-webkit-search-decoration {
+    appearance: none;
+  }
   :where(button.writing-search-trigger):focus-visible {
     outline: none !important;
     outline-offset: 0 !important;
