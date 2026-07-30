@@ -95,7 +95,7 @@ export default function MediaGallery({
         {[...Array(8)].map((_, index) => (
           <div
             key={index}
-            className="aspect-square animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-800"
+            className="aspect-square animate-pulse rounded-sm bg-zinc-200 dark:bg-zinc-800"
           />
         ))}
       </div>
@@ -114,15 +114,15 @@ export default function MediaGallery({
       />
       {uploading && (
         <p
-          className="bg-primary/10 text-primary mb-4 rounded-xl px-4 py-3 text-xs"
+          className="bg-primary/10 text-primary mb-4 rounded-sm px-4 py-3 font-mono text-xs"
           aria-live="polite"
         >
           Uploading selected images…
         </p>
       )}
       {images.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-zinc-300 px-6 py-14 text-center dark:border-zinc-700">
-          <p className="text-dark dark:text-light font-serif text-2xl italic">
+        <div className="border border-dashed border-zinc-300 px-6 py-14 text-center dark:border-zinc-700">
+          <p className="font-editorial text-dark dark:text-light text-2xl font-medium tracking-tight">
             No images yet.
           </p>
           <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
@@ -134,7 +134,7 @@ export default function MediaGallery({
           {paginatedImages.map((url) => (
             <div
               key={url}
-              className="group relative aspect-square overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800"
+              className="group relative aspect-square overflow-hidden rounded-sm bg-zinc-100 dark:bg-zinc-800"
             >
               <button
                 type="button"
@@ -161,7 +161,7 @@ export default function MediaGallery({
                     .split('.')[0];
                   if (publicId) handleDelete(publicId);
                 }}
-                className="text-light absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-950/70 text-lg leading-none opacity-100 backdrop-blur-sm transition hover:bg-red-600 md:opacity-0 md:group-hover:opacity-100"
+                className="text-light absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-sm bg-zinc-950/80 text-lg leading-none opacity-100 transition hover:bg-red-600 md:opacity-0 md:group-hover:opacity-100"
                 aria-label="Delete image"
               >
                 ×
@@ -177,7 +177,7 @@ export default function MediaGallery({
               type="button"
               key={index}
               onClick={() => handlePageClick(index + 1)}
-              className={`h-8 min-w-8 rounded-full px-2 font-mono text-xs transition-colors ${
+              className={`h-8 min-w-8 rounded-sm px-2 font-mono text-xs transition-colors ${
                 currentPage === index + 1
                   ? 'bg-dark text-light dark:bg-light dark:text-dark'
                   : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400'

@@ -41,15 +41,15 @@ export default function AdminStats() {
       <div className="mb-5 flex items-center justify-between">
         <h2
           id="library-heading"
-          className="text-xxs tracking-[0.2em] text-zinc-500 uppercase dark:text-zinc-400"
+          className="text-xxs font-sans tracking-[0.2em] text-zinc-500 uppercase dark:text-zinc-400"
         >
           Library at a glance
         </h2>
-        <span className="text-xxs tracking-[0.14em] text-zinc-400 uppercase dark:text-zinc-600">
+        <span className="text-xxs font-sans tracking-[0.14em] text-zinc-400 uppercase dark:text-zinc-600">
           All writing
         </span>
       </div>
-      <div className="text-dark dark:text-light overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-100/60 dark:border-zinc-800 dark:bg-zinc-900/60">
+      <div className="text-dark dark:text-light overflow-hidden border border-zinc-200 bg-zinc-100/60 dark:border-zinc-800 dark:bg-zinc-900/60">
         {loading && (
           <div className="grid grid-cols-1 divide-y divide-zinc-200 md:grid-cols-3 md:divide-x md:divide-y-0 dark:divide-zinc-800">
             {[...Array(3)].map((_, index) => (
@@ -74,7 +74,7 @@ export default function AdminStats() {
                 Published
               </p>
               <div className="mt-4 flex items-end justify-between">
-                <p className="font-serif text-5xl font-normal italic">
+                <p className="font-mono text-5xl leading-none font-normal tabular-nums">
                   {stats.publishedCount}
                 </p>
                 <span className="text-primary mb-1 transition-transform group-hover:translate-x-1">
@@ -90,7 +90,7 @@ export default function AdminStats() {
                 Drafts
               </p>
               <div className="mt-4 flex items-end justify-between">
-                <p className="font-serif text-5xl font-normal italic">
+                <p className="font-mono text-5xl leading-none font-normal tabular-nums">
                   {stats.draftCount}
                 </p>
                 <span className="text-primary mb-1 transition-transform group-hover:translate-x-1">
@@ -102,7 +102,7 @@ export default function AdminStats() {
               <p className="text-xxs tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
                 Total posts
               </p>
-              <p className="mt-4 font-serif text-5xl font-normal italic">
+              <p className="mt-4 font-mono text-5xl leading-none font-normal tabular-nums">
                 {totalCount}
               </p>
             </div>

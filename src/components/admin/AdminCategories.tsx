@@ -206,7 +206,7 @@ export default function AdminCategories() {
   const categoriesList = useMemo(() => {
     if (loading && categories.length === 0) {
       return (
-        <div className="space-y-px overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-800">
+        <div className="space-y-px overflow-hidden border border-zinc-200 bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-800">
           {[...Array(3)].map((_, index) => (
             <div
               key={index}
@@ -221,7 +221,7 @@ export default function AdminCategories() {
     }
 
     const renderedItems = (
-      <ul className="bg-light text-dark dark:bg-dark dark:text-light overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800">
+      <ul className="bg-light text-dark dark:bg-dark dark:text-light overflow-hidden border border-zinc-200 dark:border-zinc-800">
         {isNewCategory && (
           <li
             key="new-category"
@@ -235,7 +235,7 @@ export default function AdminCategories() {
                 type="text"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                className="bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-12 min-w-[180px] flex-grow rounded-xl border border-zinc-300 px-4 text-sm transition-colors outline-none dark:border-zinc-700"
+                className="font-editorial bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-12 min-w-45 flex-grow rounded-sm border border-zinc-300 px-4 text-sm transition-colors outline-none dark:border-zinc-700"
                 placeholder="New category name"
                 autoFocus
                 onKeyDown={(e) => {
@@ -250,7 +250,7 @@ export default function AdminCategories() {
                 <button
                   onClick={() => handleAddCategory()}
                   disabled={!editName.trim()}
-                  className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark min-h-10 rounded-full px-4 tracking-[0.1em] uppercase transition-colors disabled:opacity-40"
+                  className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark min-h-10 rounded-sm px-4 font-mono tracking-[0.1em] uppercase transition-colors disabled:opacity-40"
                 >
                   Add category
                 </button>
@@ -259,7 +259,7 @@ export default function AdminCategories() {
                     setEditingId(null);
                     setIsNewCategory(false);
                   }}
-                  className="text-xxs min-h-10 rounded-full border border-zinc-300 px-4 tracking-[0.1em] uppercase dark:border-zinc-700"
+                  className="text-xxs min-h-10 rounded-sm border border-zinc-300 px-4 font-mono tracking-[0.1em] uppercase dark:border-zinc-700"
                 >
                   Cancel
                 </button>
@@ -281,7 +281,7 @@ export default function AdminCategories() {
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-12 min-w-[180px] flex-grow rounded-xl border border-zinc-300 px-4 text-sm transition-colors outline-none dark:border-zinc-700"
+                  className="font-editorial bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-12 min-w-45 flex-grow rounded-sm border border-zinc-300 px-4 text-sm transition-colors outline-none dark:border-zinc-700"
                   autoFocus
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleUpdateCategory(cat.id);
@@ -292,13 +292,13 @@ export default function AdminCategories() {
                   <button
                     onClick={() => handleUpdateCategory(cat.id)}
                     disabled={!editName.trim()}
-                    className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark min-h-10 rounded-full px-4 tracking-[0.1em] uppercase transition-colors disabled:opacity-40"
+                    className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark min-h-10 rounded-sm px-4 font-mono tracking-[0.1em] uppercase transition-colors disabled:opacity-40"
                   >
                     Save
                   </button>
                   <button
                     onClick={() => setEditingId(null)}
-                    className="text-xxs min-h-10 rounded-full border border-zinc-300 px-4 tracking-[0.1em] uppercase dark:border-zinc-700"
+                    className="text-xxs min-h-10 rounded-sm border border-zinc-300 px-4 font-mono tracking-[0.1em] uppercase dark:border-zinc-700"
                   >
                     Cancel
                   </button>
@@ -311,7 +311,9 @@ export default function AdminCategories() {
                   className="min-w-0 flex-grow text-left"
                   onClick={() => startEditing(cat)}
                 >
-                  <span className="block text-lg font-medium">{cat.name}</span>
+                  <span className="font-editorial block text-lg font-medium">
+                    {cat.name}
+                  </span>
                   <span className="mt-1 block font-mono text-xs font-normal text-zinc-500 dark:text-zinc-400">
                     /{cat.slug}
                   </span>
@@ -319,7 +321,7 @@ export default function AdminCategories() {
                 <div className="ml-auto flex gap-1">
                   <button
                     onClick={() => startEditing(cat)}
-                    className="group flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                    className="group flex h-10 w-10 items-center justify-center rounded-sm transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     title="Edit category"
                     aria-label={`Edit ${cat.name}`}
                   >
@@ -327,7 +329,7 @@ export default function AdminCategories() {
                   </button>
                   <button
                     onClick={() => startDeleteConfirmation(cat)}
-                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-red-50 dark:hover:bg-red-950/40"
+                    className="flex h-10 w-10 items-center justify-center rounded-sm transition-colors hover:bg-red-50 dark:hover:bg-red-950/40"
                     title="Delete category"
                     aria-label={`Delete ${cat.name}`}
                   >
@@ -343,8 +345,8 @@ export default function AdminCategories() {
 
     if (categories.length === 0 && !isNewCategory) {
       return (
-        <div className="rounded-3xl border border-dashed border-zinc-300 px-6 py-16 text-center dark:border-zinc-700">
-          <p className="text-dark dark:text-light font-serif text-2xl italic">
+        <div className="border border-dashed border-zinc-300 px-6 py-16 text-center dark:border-zinc-700">
+          <p className="font-editorial text-dark dark:text-light text-2xl font-medium tracking-tight">
             No categories yet.
           </p>
           <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
@@ -381,7 +383,7 @@ export default function AdminCategories() {
         </div>
         <button
           onClick={startNewCategory}
-          className="bg-dark text-light hover:bg-primary dark:bg-light dark:text-dark dark:hover:bg-primary inline-flex min-h-11 items-center justify-center gap-3 self-start rounded-full px-5 text-xs tracking-[0.12em] uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40 sm:self-auto"
+          className="bg-dark text-light hover:bg-primary dark:bg-light dark:text-dark dark:hover:bg-primary inline-flex min-h-11 items-center justify-center gap-3 self-start rounded-sm px-5 font-mono text-xs tracking-[0.12em] uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40 sm:self-auto"
           disabled={isNewCategory}
         >
           New category <span aria-hidden="true">+</span>

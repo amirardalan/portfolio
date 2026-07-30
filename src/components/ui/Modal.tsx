@@ -31,25 +31,25 @@ export default function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/50 p-6 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 p-6"
       onClick={onCancel}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className={`bg-light w-full rounded-3xl border border-zinc-200 p-7 shadow-2xl dark:border-zinc-700 dark:bg-zinc-900 ${
+        className={`bg-light w-full rounded-sm border border-zinc-200 p-7 dark:border-zinc-700 dark:bg-zinc-900 ${
           size === 'large' ? 'max-w-4xl' : 'max-w-md'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         <h3
           id="modal-title"
-          className="dark:text-light mb-3 text-2xl font-medium text-zinc-900"
+          className="font-editorial dark:text-light mb-3 text-2xl font-medium tracking-tight text-zinc-900"
         >
           {title}
         </h3>
-        <p className="mb-7 text-sm leading-relaxed font-normal text-zinc-600 dark:text-zinc-400">
+        <p className="font-editorial mb-7 text-sm leading-relaxed font-normal text-zinc-600 dark:text-zinc-400">
           {message}
         </p>
         {children && <div className="mb-6">{children}</div>}{' '}

@@ -46,13 +46,15 @@ export default async function EditBlogPost({
           <p className="text-xxs text-primary tracking-[0.2em] uppercase">
             Missing post
           </p>
-          <h1 className="mt-4 font-serif text-4xl italic">Post not found</h1>
-          <p className="mt-4 text-sm font-normal text-zinc-500 dark:text-zinc-400">
+          <h1 className="font-editorial mt-4 text-4xl font-medium tracking-tight">
+            Post not found
+          </h1>
+          <p className="font-editorial mt-4 text-sm font-normal text-zinc-500 dark:text-zinc-400">
             The post you&apos;re trying to edit could not be found.
           </p>
           <Link
             href="/admin/blog/drafts"
-            className="hover:border-primary hover:text-primary mt-7 inline-flex min-h-10 items-center rounded-full border border-zinc-300 px-4 text-xs tracking-[0.1em] uppercase transition-colors dark:border-zinc-700"
+            className="hover:border-primary hover:text-primary mt-7 inline-flex min-h-10 items-center rounded-sm border border-zinc-300 px-4 font-mono text-xs tracking-[0.1em] uppercase transition-colors dark:border-zinc-700"
           >
             Back to drafts
           </Link>

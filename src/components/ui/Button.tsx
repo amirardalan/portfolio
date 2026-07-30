@@ -25,18 +25,13 @@ export default function Button({
 }: ButtonProps) {
   const buttonClasses = clsx(
     // Base
-    'inline-flex items-center justify-center rounded-full font-medium uppercase tracking-[0.1em] transition-[background-color,border-color,color,opacity] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+    'inline-flex items-center justify-center rounded-sm text-center font-mono leading-none font-medium uppercase tracking-[0.1em] transition-[background-color,border-color,color,opacity] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
     // Size-specific
-    size === 'default' ? 'h-[35px] text-xxs' : 'min-w-[120px] text-lg',
+    size === 'default' ? 'min-h-9 text-xxs' : 'min-w-30 text-lg',
     // Spacing
     {
-      // Primary / Danger
-      'px-4 py-2': size === 'default' && variant !== 'secondary',
-      'px-6 py-3': size === 'large' && variant !== 'secondary',
-
-      // Secondary
-      'px-[15px] py-[7px]': size === 'default' && variant === 'secondary',
-      'px-[23px] py-[11px]': size === 'large' && variant === 'secondary',
+      'px-4 py-2': size === 'default',
+      'px-6 py-3': size === 'large',
     },
     {
       // Custom color

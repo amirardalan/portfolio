@@ -22,21 +22,21 @@ export default function AdminMenu() {
   const getLinkClass = (href: string) => {
     const active = href === '/admin' ? pathname === href : isActive(href);
     return clsx(
-      'relative whitespace-nowrap rounded-full px-4 py-2 text-xxs uppercase tracking-[0.14em] transition-colors',
+      'relative border-b-2 px-4 py-3 font-mono text-xxs tracking-[0.12em] whitespace-nowrap uppercase transition-colors',
       !active &&
-        'text-zinc-500 hover:bg-zinc-200/70 hover:text-dark dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-light',
-      active && 'bg-dark text-light shadow-sm dark:bg-light dark:text-dark'
+        'border-transparent text-zinc-500 hover:text-primary dark:text-zinc-400',
+      active && 'border-primary text-primary'
     );
   };
 
   return (
     <Container size="wide" className="pt-24 md:pt-28">
-      <div className="border-b border-zinc-200 pb-5 dark:border-zinc-800">
+      <div className="border-b border-zinc-200 dark:border-zinc-800">
         <nav
           aria-label="Content management"
           className="-mx-2 overflow-x-auto px-2"
         >
-          <div className="flex w-max min-w-full items-center gap-1">
+          <div className="flex w-max min-w-full items-center">
             {links.map((link) => (
               <Link
                 key={link.href}
