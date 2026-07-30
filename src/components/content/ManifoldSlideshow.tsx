@@ -61,7 +61,7 @@ export default function ManifoldSlideshow({
 
   return (
     <div
-      className="relative min-h-[320px] overflow-hidden sm:min-h-[440px] md:col-span-7 lg:min-h-[560px]"
+      className="relative min-h-80 overflow-hidden sm:min-h-110 md:col-span-7 lg:min-h-140"
       role="group"
       aria-label={`${projectTitle} image slideshow`}
       onMouseEnter={() => setIsInteracting(true)}
@@ -91,7 +91,7 @@ export default function ManifoldSlideshow({
             sizes="(min-width: 768px) 58vw, 100vw"
             className={`object-cover object-center transition duration-500 ease-in-out motion-reduce:transform-none motion-reduce:transition-none ${
               index === activeIndex
-                ? 'opacity-100 group-hover:scale-102'
+                ? 'opacity-100 group-hover/card:scale-102'
                 : 'opacity-0'
             }`}
           />
@@ -99,21 +99,23 @@ export default function ManifoldSlideshow({
       </a>
 
       {images.length > 1 && (
-        <div className="text-light absolute right-4 bottom-4 z-10 flex items-stretch overflow-hidden rounded-lg bg-zinc-950/60 font-mono shadow-md shadow-black/20 backdrop-blur-xl">
+        <div className="text-light absolute bottom-0 left-0 z-10 flex items-stretch bg-black/75 font-mono opacity-40 transition-opacity hover:opacity-100 focus-within:opacity-100">
           <div
-            className="text-xxs flex items-center gap-1.5 border-r border-white/10 px-3 text-white/45 tabular-nums"
+            className="text-xxs flex items-center gap-1.5 border-r border-white/10 px-3 font-mono tabular-nums"
             aria-hidden="true"
           >
-            <span className="text-white/90">
+            <span>
               {String(activeIndex + 1).padStart(2, '0')}
             </span>
-            <span>/</span>
-            <span>{String(images.length).padStart(2, '0')}</span>
+            <span className="opacity-50">/</span>
+            <span className="opacity-50">
+              {String(images.length).padStart(2, '0')}
+            </span>
           </div>
           <button
             type="button"
             onClick={showPrevious}
-            className="flex h-10 w-10 items-center justify-center border-r border-white/10 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+            className="flex size-10 items-center justify-center border-r border-white/10 opacity-70 transition hover:bg-white/10 hover:opacity-100"
             aria-label="Show previous project image"
           >
             <svg
@@ -134,7 +136,7 @@ export default function ManifoldSlideshow({
           <button
             type="button"
             onClick={() => setIsPaused((paused) => !paused)}
-            className="flex h-10 w-10 items-center justify-center border-r border-white/10 text-white/70 transition-colors hover:bg-white/10 hover:text-white disabled:text-white/30 disabled:hover:bg-transparent"
+            className="flex size-10 items-center justify-center border-r border-white/10 opacity-70 transition hover:bg-white/10 hover:opacity-100 disabled:opacity-30 disabled:hover:bg-transparent"
             aria-label={
               reduceMotion
                 ? 'Slideshow paused for reduced motion'
@@ -173,7 +175,7 @@ export default function ManifoldSlideshow({
           <button
             type="button"
             onClick={showNext}
-            className="flex h-10 w-10 items-center justify-center text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+            className="flex size-10 items-center justify-center opacity-70 transition hover:bg-white/10 hover:opacity-100"
             aria-label="Show next project image"
           >
             <svg

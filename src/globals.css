@@ -10,7 +10,7 @@
   /* Colors */
   --color-light: oklch(0.985 0 0);
   --color-dark: oklch(0.141 0.005 285.823);
-  --color-primary: oklch(0.42 0.12 320);
+  --color-primary: oklch(0.546 0.245 262.881);
   --color-primary-dark: oklch(0.82 0.16 110);
   --color-selection-text: var(--color-light);
   --color-skeleton-light: oklch(0.95 0.01 240);

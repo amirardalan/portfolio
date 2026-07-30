@@ -11,6 +11,12 @@ const config = {
       sans: ['Jura', 'system-ui'],
       serif: ['Manuale', 'serif'],
       mono: ['JetBrains Mono', 'monospace'],
+      editorial: [
+        'var(--font-editorial)',
+        'Helvetica Neue',
+        'Arial',
+        'sans-serif',
+      ],
     },
     extend: {
       colors: {

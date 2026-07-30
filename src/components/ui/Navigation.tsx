@@ -26,9 +26,11 @@ const getNavLinkStyles = (
 ) => {
   const variantStyles = {
     header: clsx({
-      'mr-12 text-xxs uppercase': true,
-      'text-dark dark:text-light': !isActive,
-      'border-none text-primary': isActive,
+      'mr-8 inline-flex min-h-10 items-center gap-2 font-mono text-xxs font-medium tracking-[0.12em] uppercase transition-colors':
+        true,
+      'text-dark hover:text-primary dark:text-light dark:hover:text-primary':
+        !isActive,
+      'text-primary': isActive,
     }),
     footer: clsx({
       'mr-6': !isLast,
@@ -37,7 +39,8 @@ const getNavLinkStyles = (
         isActive,
     }),
     mobile: clsx({
-      'block w-full text-md font-medium mt-4': true,
+      'mt-4 block w-full font-mono text-md font-medium tracking-[0.12em] uppercase':
+        true,
       'text-dark dark:text-light': !isActive,
       'text-primary border-none': isActive,
     }),
@@ -81,9 +84,20 @@ export const NavLinks = ({
               index === links.length - 1
             )}
           >
+            {variant === 'header' && (
+              <span
+                className="font-mono text-xxs font-normal opacity-50"
+                aria-hidden="true"
+              >
+                {String(index + 1).padStart(2, '0')} /
+              </span>
+            )}
             {link.label}
             {link.external && (
-              <span className="ml-1.5" aria-hidden="true">
+              <span
+                className="ml-1 font-mono text-xxs font-normal"
+                aria-hidden="true"
+              >
                 ↗
               </span>
             )}
