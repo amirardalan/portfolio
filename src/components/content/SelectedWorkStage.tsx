@@ -29,6 +29,12 @@ function ProjectMedia({
     );
   }
 
+  const desktopPositionClass = {
+    top: 'md:object-top',
+    center: 'md:object-center',
+    bottom: 'md:object-bottom',
+  }[project.visual.position ?? 'bottom'];
+
   const image = (
     <Image
       src={project.visual.src}
@@ -37,7 +43,7 @@ function ProjectMedia({
       height={1086}
       priority={priority}
       sizes="(min-width: 768px) 58vw, 100vw"
-      className="h-full w-full object-cover object-center md:object-bottom"
+      className={`h-full w-full object-cover object-center ${desktopPositionClass}`}
     />
   );
 

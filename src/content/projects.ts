@@ -8,7 +8,7 @@ export type ProjectVisual =
       treatment: 'between';
       src: string;
       alt: string;
-      position?: string;
+      position?: 'top' | 'center' | 'bottom';
     }
   | {
       treatment: 'manifold';
