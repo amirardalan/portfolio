@@ -55,6 +55,17 @@
     outline: 2px solid var(--color-primary) !important;
     outline-offset: 4px !important;
   }
+  :where(input.writing-search):focus,
+  :where(input.writing-search):focus-visible {
+    outline: none !important;
+    outline-offset: 0 !important;
+  }
+  :where(button.writing-search-trigger):focus,
+  :where(button.writing-search-trigger):focus-visible {
+    outline: none !important;
+    outline-offset: 0 !important;
+    color: var(--color-primary) !important;
+  }
   :where(input, textarea, select).cms-editor-field:focus,
   :where(input, textarea, select).cms-editor-field:focus-visible {
     outline: none !important;

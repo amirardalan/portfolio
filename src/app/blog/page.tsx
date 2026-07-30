@@ -1,12 +1,12 @@
 import { getPublishedPosts } from '@/db/queries/posts';
 
-import Container from '@/components/content/Container';
-import PageHeading from '@/components/ui/PageHeading';
 import BlogPosts from '@/components/blog/BlogPosts';
+import SectionGlyph from '@/components/ui/SectionGlyph';
 
 import { BlogPost } from '@/types/blog';
+import type { Metadata } from 'next';
 
-export const generateMetadata = () => {
+export const generateMetadata = (): Metadata => {
   return {
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
     title: 'Writing — Amir Ardalan',
@@ -29,17 +29,20 @@ export default async function Blog() {
   }
 
   return (
-    <Container>
-      <div>
-        <PageHeading title="Writing" />
-        <div className="text-dark dark:text-light">
-          {posts.length > 0 ? (
-            <BlogPosts posts={posts} />
-          ) : (
-            <p>Nothing published yet.</p>
-          )}
+    <article className="text-dark w-full dark:text-light">
+      <header className="mx-auto w-full max-w-[1440px] px-6 pt-28 pb-6 md:px-10 md:pt-32 lg:px-16">
+        <div className="flex items-center justify-between">
+          <h1 className="text-primary text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
+            <SectionGlyph /> Archive / Writing
+          </h1>
+          <span className="text-xxs font-mono text-zinc-400 uppercase tabular-nums dark:text-zinc-600">
+            {String(posts.length).padStart(2, '0')}{' '}
+            {posts.length === 1 ? 'Entry' : 'Entries'}
+          </span>
         </div>
-      </div>
-    </Container>
+      </header>
+
+      <BlogPosts posts={posts} />
+    </article>
   );
 }
