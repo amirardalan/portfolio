@@ -246,7 +246,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="p-6 text-dark md:col-span-5 md:px-8 md:pt-20 md:pb-8 lg:col-span-4 lg:px-10 lg:pt-24 lg:pb-10 dark:text-light">
+          <div className="border-t border-zinc-200 p-6 text-dark md:col-span-5 md:border-t-0 md:px-8 md:pt-20 md:pb-8 lg:col-span-4 lg:px-10 lg:pt-24 lg:pb-10 dark:border-zinc-800 dark:text-light">
             <div className="flex flex-col">
               <span className="text-xxs self-end font-mono text-zinc-400 dark:text-zinc-600">
                 04 — 05
