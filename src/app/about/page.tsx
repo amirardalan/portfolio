@@ -1,6 +1,6 @@
 import ActionArrow from '@/components/ui/ActionArrow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
-import TerrainBackground from '@/components/content/TerrainBackground';
+import TerrainHero from '@/components/content/TerrainHero';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -67,19 +67,9 @@ const links = [
 export default function About() {
   return (
     <article className="text-dark w-full dark:text-light">
-      <header className="relative isolate overflow-hidden">
-        <TerrainBackground />
-        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pt-24 pb-14 md:px-10 md:pt-40 md:pb-16 lg:px-16 lg:pt-44">
-          <div className="flex items-center justify-between pb-4">
-            <p className="text-primary text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
-              <SectionGlyph /> Profile / About
-            </p>
-            <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
-              01 — 05
-            </span>
-          </div>
-
-          <div className="grid gap-y-8 pt-10 md:grid-cols-12 md:gap-x-8 md:pt-14 lg:gap-x-12">
+      <header>
+        <TerrainHero eyebrow="Profile / About" counter="01 — 05">
+          <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
             <div className="md:col-span-8 lg:col-span-9">
               <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
                 I’m Amir.
@@ -132,7 +122,7 @@ export default function About() {
               it.
             </p>
           </div>
-        </div>
+        </TerrainHero>
       </header>
 
       <section

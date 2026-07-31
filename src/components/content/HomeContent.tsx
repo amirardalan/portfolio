@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import TerrainBackground from '@/components/content/TerrainBackground';
+import TerrainHero from '@/components/content/TerrainHero';
 import SelectedWorkStage from '@/components/content/SelectedWorkStage';
 import ActionArrow from '@/components/ui/ActionArrow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
@@ -8,42 +8,35 @@ import { selectedProjects } from '@/content/projects';
 export default function HomeContent() {
   return (
     <div className="text-dark dark:text-light w-full">
-      <section className="relative isolate overflow-hidden md:flex md:min-h-[620px] md:items-center">
-        <TerrainBackground />
-
-        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pt-[97px] pb-10 md:px-10 md:pt-32 md:pb-7 lg:px-16">
-          <div className="max-w-5xl">
-            <p className="text-xxs text-primary mb-4 flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase md:mb-6">
-              <SectionGlyph /> Amir Ardalan · Design Engineer
-            </p>
-            <h1 className="font-editorial text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
-              Complex ideas.
-              <br />
-              Clear, working interfaces.
-            </h1>
-            <p className="font-editorial mt-6 max-w-2xl text-lg leading-relaxed font-normal text-zinc-600 text-pretty md:mt-8 md:text-xl dark:text-zinc-300">
-              I bridge product design and frontend engineering, from early
-              prototype to production.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xxs font-medium tracking-[0.12em] uppercase md:mt-10">
-              <a
-                href="#selected-work"
-                className="group text-primary pointer-events-auto inline-flex min-h-11 items-center gap-3"
-              >
-                <span>View selected work</span>
-                <ActionArrow direction="down" />
-              </a>
-              <Link
-                href="/about"
-                className="group pointer-events-auto inline-flex min-h-11 items-center gap-3"
-              >
-                <span>About me</span>
-                <ActionArrow direction="right" />
-              </Link>
-            </div>
+      <TerrainHero eyebrow="Amir Ardalan · Design Engineer">
+        <div className="max-w-5xl">
+          <h1 className="font-editorial text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
+            Complex ideas.
+            <br />
+            Clear, working interfaces.
+          </h1>
+          <p className="font-editorial mt-6 max-w-2xl text-lg leading-relaxed font-normal text-zinc-600 text-pretty md:mt-8 md:text-xl dark:text-zinc-300">
+            I bridge product design and frontend engineering, from early
+            prototype to production.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xxs font-medium tracking-[0.12em] uppercase md:mt-10">
+            <a
+              href="#selected-work"
+              className="group text-primary pointer-events-auto inline-flex min-h-11 items-center gap-3"
+            >
+              <span>View selected work</span>
+              <ActionArrow direction="down" />
+            </a>
+            <Link
+              href="/about"
+              className="group pointer-events-auto inline-flex min-h-11 items-center gap-3"
+            >
+              <span>About me</span>
+              <ActionArrow direction="right" />
+            </Link>
           </div>
         </div>
-      </section>
+      </TerrainHero>
 
       <section
         id="selected-work"
