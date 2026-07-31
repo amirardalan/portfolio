@@ -216,11 +216,15 @@ export default function SelectedWorkStage({
 
         <div className="bg-primary flex flex-col justify-between p-7 text-light md:col-span-5 md:p-8 lg:p-10 dark:text-dark">
           <div className="flex flex-1 flex-col">
-            <div className="text-xxs flex items-center justify-between gap-6 border-b border-light/25 pb-4 font-sans tracking-[0.16em] uppercase dark:border-dark/25">
+            <div className="text-xxs flex items-center gap-3 pb-4 font-sans tracking-[0.16em] uppercase">
               <span className="flex items-center gap-2">
                 <SectionGlyph className="text-current" />
                 {project.status}
               </span>
+              <span
+                aria-hidden="true"
+                className="h-px w-10 shrink-0 bg-current opacity-40"
+              />
               <span className="font-mono opacity-60">{project.year}</span>
             </div>
 
