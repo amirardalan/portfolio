@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import SectionGlyph from '@/components/ui/SectionGlyph';
+import ActionArrow from '@/components/ui/ActionArrow';
 
 interface ProjectCTAProps {
   href: string;
@@ -46,9 +47,13 @@ export default function ProjectCTA({
           className="flex shrink-0 items-center justify-center overflow-hidden font-mono text-base"
           aria-hidden="true"
         >
-          <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-            {!isInternal && !isHashLink ? '↗' : '→'}
-          </span>
+          {!isInternal && !isHashLink ? (
+            <ActionArrow direction="external" />
+          ) : (
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+              →
+            </span>
+          )}
         </span>
       </span>
     </>

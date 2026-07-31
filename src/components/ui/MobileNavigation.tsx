@@ -6,6 +6,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import IconMobileNav from '@/components/icons/IconMobileNav';
 import IconGithub from '@/components/icons/IconGithub';
 import AuthMenu from '@/components/auth/AuthMenu';
+import ActionArrow from '@/components/ui/ActionArrow';
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -153,7 +154,7 @@ export default function MobileNavigation() {
               }}
             />
             <a
-              className="mt-8 flex items-center gap-3 border-t border-black/10 pt-6 text-sm text-dark dark:border-white/10 dark:text-light [&_svg]:size-5"
+              className="mt-8 flex items-center gap-3 border-t border-black/10 pt-6 text-sm text-dark dark:border-white/10 dark:text-light"
               href="https://github.com/amirardalan/portfolio"
               target="_blank"
               rel="noopener noreferrer"
@@ -163,12 +164,12 @@ export default function MobileNavigation() {
               }}
               aria-label="View portfolio source on GitHub (opens in a new tab)"
             >
-              <span aria-hidden="true">
+              <span className="[&_svg]:size-5" aria-hidden="true">
                 <IconGithub />
               </span>
               <span>View source on GitHub</span>
-              <span className="ml-auto" aria-hidden="true">
-                ↗
+              <span className="ml-auto">
+                <ActionArrow direction="external" />
               </span>
             </a>
           </div>

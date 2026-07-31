@@ -55,6 +55,7 @@ const nextConfig: NextConfig = {
   },
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
+  allowedDevOrigins: ['192.168.50.233'],
 };
 
 const withMDX = createMDX({});

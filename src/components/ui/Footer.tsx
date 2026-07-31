@@ -1,4 +1,5 @@
 import Logo from '@/components/ui/Logo';
+import ActionArrow from '@/components/ui/ActionArrow';
 
 export default async function Footer() {
   return (
@@ -44,12 +45,7 @@ export default async function Footer() {
           <span>
             <span className="font-editorial flex items-end justify-between gap-6 text-xl font-medium">
               Source code
-              <span
-                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              >
-                ↗
-              </span>
+              <ActionArrow direction="external" />
             </span>
             <span className="text-xxs mt-3 block font-sans tracking-wider uppercase opacity-65">
               Public / GitHub

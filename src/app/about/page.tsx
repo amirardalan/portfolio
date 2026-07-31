@@ -1,5 +1,6 @@
 import ActionArrow from '@/components/ui/ActionArrow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
+import TerrainBackground from '@/components/content/TerrainBackground';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -66,66 +67,71 @@ const links = [
 export default function About() {
   return (
     <article className="text-dark w-full dark:text-light">
-      <header className="mx-auto w-full max-w-[1440px] px-6 pt-32 pb-14 md:px-10 md:pt-40 md:pb-16 lg:px-16 lg:pt-44">
-        <div className="flex items-center justify-between pb-4">
-          <p className="text-primary text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
-            <SectionGlyph /> Profile / About
-          </p>
-          <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
-            01 — 05
-          </span>
-        </div>
-
-        <div className="grid gap-y-12 pt-10 md:grid-cols-12 md:gap-x-8 md:pt-14 lg:gap-x-12">
-          <div className="md:col-span-8 lg:col-span-9">
-            <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
-              I’m Amir.
-              <br />I turn ideas into working products.
-            </h1>
+      <header className="relative isolate overflow-hidden">
+        <TerrainBackground />
+        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 pt-24 pb-14 md:px-10 md:pt-40 md:pb-16 lg:px-16 lg:pt-44">
+          <div className="flex items-center justify-between pb-4">
+            <p className="text-primary text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
+              <SectionGlyph /> Profile / About
+            </p>
+            <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
+              01 — 05
+            </span>
           </div>
 
-          <aside
-            aria-label="Practice summary"
-            className="flex self-stretch flex-col justify-between gap-8 py-1 md:col-span-4 lg:col-span-3"
-          >
-            <div>
-              <p className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
-                Focus
-              </p>
-              <p className="font-editorial mt-2 text-lg leading-snug font-normal tracking-tight">
-                Product design &amp; frontend engineering
-              </p>
+          <div className="grid gap-y-8 pt-10 md:grid-cols-12 md:gap-x-8 md:pt-14 lg:gap-x-12">
+            <div className="md:col-span-8 lg:col-span-9">
+              <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
+                I’m Amir.
+                <br />I turn ideas into working products.
+              </h1>
             </div>
 
-            <div>
-              <p className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
-                Strength
-              </p>
-              <p className="font-editorial mt-2 text-lg leading-snug font-normal tracking-tight">
-                Prototyping complex interactions
-              </p>
-            </div>
+            <aside
+              aria-label="Practice summary"
+              className="grid self-stretch divide-y divide-zinc-300 md:col-span-4 md:flex md:flex-col md:justify-between md:gap-8 md:divide-y-0 md:py-1 lg:col-span-3 dark:divide-zinc-700"
+            >
+              <div className="grid grid-cols-4 gap-4 py-4 md:block md:py-0">
+                <p className="text-xxs col-span-1 pt-1 font-sans tracking-[0.16em] text-zinc-500 uppercase md:pt-0 dark:text-zinc-400">
+                  Focus
+                </p>
+                <p className="font-editorial col-span-3 text-base leading-snug font-normal tracking-tight md:mt-2 md:text-lg">
+                  Product design &amp; frontend engineering
+                </p>
+              </div>
 
-            <div>
-              <p className="text-xxs font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
-                Scope
-              </p>
-              <p className="font-editorial mt-2 text-lg leading-snug font-normal tracking-tight">
-                Early product direction to production code
-              </p>
-            </div>
-          </aside>
-        </div>
+              <div className="grid grid-cols-4 gap-4 py-4 md:block md:py-0">
+                <p className="text-xxs col-span-1 pt-1 font-sans tracking-[0.16em] text-zinc-500 uppercase md:pt-0 dark:text-zinc-400">
+                  Strength
+                </p>
+                <p className="font-editorial col-span-3 text-base leading-snug font-normal tracking-tight md:mt-2 md:text-lg">
+                  Prototyping complex product interactions
+                </p>
+              </div>
 
-        <div className="mt-12 grid gap-y-8 border-t border-zinc-300 pt-10 md:mt-16 md:grid-cols-12 md:gap-x-8 md:pt-12 lg:gap-x-12 dark:border-zinc-700">
-          <p className="font-editorial max-w-xl text-2xl leading-tight font-normal tracking-tight text-zinc-800 md:col-span-5 md:text-3xl dark:text-zinc-200">
-            I like being involved early, while a product is still taking shape.
-          </p>
-          <p className="font-editorial max-w-3xl text-lg leading-relaxed font-normal text-zinc-600 md:col-start-7 md:col-span-6 md:text-xl dark:text-zinc-300">
-            I work across interaction design and frontend engineering, using
-            each to inform the other. I care about clarity, intrigue, thoughtful
-            details, and software that respects the people using it.
-          </p>
+              <div className="grid grid-cols-4 gap-4 py-4 md:block md:py-0">
+                <p className="text-xxs col-span-1 pt-1 font-sans tracking-[0.16em] text-zinc-500 uppercase md:pt-0 dark:text-zinc-400">
+                  Scope
+                </p>
+                <p className="font-editorial col-span-3 text-base leading-snug font-normal tracking-tight md:mt-2 md:text-lg">
+                  Early product direction to production code
+                </p>
+              </div>
+            </aside>
+          </div>
+
+          <div className="mt-8 grid gap-y-8 border-zinc-300 pt-6 md:mt-16 md:grid-cols-12 md:gap-x-8 md:border-t md:pt-12 lg:gap-x-12 dark:border-zinc-700">
+            <p className="font-editorial max-w-xl text-2xl leading-tight font-normal tracking-tight text-zinc-800 md:col-span-5 md:text-3xl dark:text-zinc-200">
+              I like being involved early, while a product is still taking
+              shape.
+            </p>
+            <p className="font-editorial max-w-3xl text-lg leading-relaxed font-normal text-zinc-600 md:col-start-7 md:col-span-6 md:text-xl dark:text-zinc-300">
+              I work across interaction design and frontend engineering, using
+              each to inform the other. I care about clarity, intrigue,
+              thoughtful details, and software that respects the people using
+              it.
+            </p>
+          </div>
         </div>
       </header>
 
@@ -274,24 +280,27 @@ export default function About() {
         className="border-t border-zinc-200 dark:border-zinc-800"
       >
         <div className="mx-auto max-w-[1440px] px-6 py-14 md:px-10 md:py-20 lg:px-16 lg:py-24">
-          <div className="grid md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
+          <div className="flex items-center justify-between">
+            <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
+              <SectionGlyph /> Get in touch
+            </p>
+            <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
+              05 — 05
+            </span>
+          </div>
+
+          <div className="mt-7 grid md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
             <div className="md:col-span-5">
-              <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
-                <SectionGlyph /> Get in touch
-              </p>
               <h2
                 id="contact-heading"
-                className="font-editorial mt-7 text-4xl leading-none font-medium tracking-tight sm:text-5xl"
+                className="font-editorial text-4xl leading-none font-medium tracking-tight sm:text-5xl"
               >
                 Get in touch.
               </h2>
             </div>
 
-            <div className="mt-12 md:col-span-7 md:mt-0">
-              <span className="text-xxs block text-right font-mono text-zinc-400 dark:text-zinc-600">
-                05 — 05
-              </span>
-              <div className="mt-7">
+            <div className="mt-8 md:col-span-7 md:mt-0">
+              <div>
                 {links.map((link, index) => (
                   <a
                     key={link.label}

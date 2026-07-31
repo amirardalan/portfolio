@@ -439,7 +439,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
       )}
 
       <div className="mx-auto max-w-[1440px] px-6 pb-14 md:px-10 md:pb-20 lg:px-16 lg:pb-24">
-        <div className="flex items-center justify-between gap-4 border-y border-zinc-200 md:grid md:grid-cols-12 md:gap-x-8 lg:gap-x-12 dark:border-zinc-800">
+        <div className="flex items-center justify-between gap-4 bg-zinc-100 px-4 md:grid md:grid-cols-12 md:gap-x-8 md:px-5 lg:gap-x-12 dark:bg-zinc-900">
           <button
             ref={searchTriggerRef}
             type="button"
@@ -450,7 +450,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
             aria-haspopup="dialog"
             aria-expanded={isSearchOpen}
             aria-controls="writing-search-dialog"
-            className="writing-search-trigger inline-flex min-h-16 shrink-0 cursor-pointer items-center gap-3 justify-self-start font-mono text-xxs font-medium tracking-[0.12em] text-zinc-500 uppercase transition-colors hover:text-primary md:col-span-4 dark:text-zinc-400"
+            className="writing-search-trigger inline-flex min-h-16 flex-1 cursor-pointer items-center gap-3 font-mono text-xxs font-medium tracking-[0.12em] text-zinc-500 uppercase transition-colors hover:text-primary md:col-span-5 dark:text-zinc-400"
           >
             <SearchIcon />
             <span>Search writing</span>
@@ -493,7 +493,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
               <nav
                 id="mobile-writing-categories"
                 aria-label="Filter writing by topic"
-                className="bg-light absolute top-full right-0 z-20 max-h-72 w-52 overflow-y-auto border border-zinc-200 py-2 dark:border-zinc-800 dark:bg-dark"
+                className="bg-light absolute top-full -right-4 z-20 max-h-72 w-48 overflow-y-auto border border-zinc-200 py-1 dark:border-zinc-800 dark:bg-dark"
               >
                 {allCategories.map((category) => {
                   const isActive =
@@ -534,7 +534,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
             )}
           </div>
 
-          <div className="hidden min-h-16 min-w-0 items-center justify-end gap-6 overflow-hidden md:col-span-8 md:flex">
+          <div className="hidden min-h-16 min-w-0 items-center justify-end gap-6 overflow-hidden md:col-span-7 md:flex">
             <span className="text-xxs shrink-0 font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
               Filter /
             </span>
@@ -601,7 +601,7 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
         )}
 
         {paginatedPosts.length > 0 || showPinnedPost ? (
-          <ul className="mt-6">
+          <ul className={hasActiveFilters ? 'mt-1 md:mt-6' : 'mt-6'}>
             {showPinnedPost && pinnedPost && (
               <BlogPostCard post={pinnedPost} pinned index="00" />
             )}

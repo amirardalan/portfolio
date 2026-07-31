@@ -23,37 +23,40 @@ export default function BlogPostCard({
 
   if (pinned) {
     return (
-      <li className="border-b border-zinc-300 dark:border-zinc-700">
+      <li className="border-b border-zinc-400 dark:border-zinc-800">
         <Link
           href={`/blog/${post.slug}`}
           className="group grid gap-y-7 py-7 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:gap-y-6 md:py-10 lg:gap-x-12"
         >
-          <div className="flex items-baseline gap-4 md:col-span-2 md:block">
-            <p className="text-primary text-xxs flex items-baseline gap-2 uppercase">
-              <span className="font-mono tabular-nums">{index} /</span>
-              <span className="font-sans tracking-[0.16em]">Featured</span>
-            </p>
-            <span className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:hidden">
-              {category}
+          <div className="flex flex-col items-start gap-3 md:col-span-2">
+            <div className="flex items-baseline gap-4">
+              <p className="text-xxs uppercase">
+                <span className="font-mono text-zinc-400 tabular-nums dark:text-zinc-600">
+                  {index} /
+                </span>
+              </p>
+              <span className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase">
+                {category}
+              </span>
+            </div>
+            <span className="text-primary text-xxs font-sans tracking-[0.16em] uppercase">
+              Featured
             </span>
           </div>
 
           <div className="md:col-span-7">
-            <h2 className="font-editorial text-2xl leading-tight font-medium tracking-tight transition-colors md:text-3xl md:group-hover:text-primary lg:text-4xl">
+            <h2 className="font-editorial text-2xl leading-tight font-medium tracking-tight transition-colors md:-translate-y-px md:text-3xl md:group-hover:text-primary lg:text-4xl">
               {post.title}
             </h2>
             {post.excerpt && (
-              <p className="font-editorial mt-3 max-w-3xl text-base leading-relaxed font-normal text-zinc-600 md:text-lg dark:text-zinc-300">
+              <p className="font-editorial mt-3 max-w-3xl text-base leading-relaxed font-normal text-zinc-700 md:text-lg dark:text-zinc-400">
                 {post.excerpt}
               </p>
             )}
           </div>
 
           <div className="flex items-center gap-5 md:col-span-3 md:ml-auto md:flex-col md:items-end md:gap-0 md:text-right">
-            <span className="text-xxs hidden font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:inline">
-              {category}
-            </span>
-            <time className="font-mono text-xxs tracking-[0.08em] whitespace-nowrap text-zinc-500 uppercase md:mt-4 md:text-xs md:text-dark dark:text-zinc-400 md:dark:text-light">
+            <time className="font-mono text-xxs tracking-[0.08em] whitespace-nowrap text-zinc-500 uppercase md:text-dark dark:text-zinc-400 md:dark:text-light">
               {dateFormatted}
             </time>
             <span className="font-mono text-xxs tracking-[0.12em] whitespace-nowrap text-zinc-500 uppercase md:mt-2 dark:text-zinc-400">
@@ -66,36 +69,33 @@ export default function BlogPostCard({
   }
 
   return (
-    <li className="border-b border-zinc-300 dark:border-zinc-700">
+    <li className="border-b border-zinc-400 dark:border-zinc-800">
       <Link
         href={`/blog/${post.slug}`}
         className="group grid gap-y-7 py-7 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:gap-y-6 md:py-10 lg:gap-x-12"
       >
-        <div className="flex items-baseline gap-4 md:col-span-2 md:block">
+        <div className="flex items-baseline gap-4 md:col-span-2">
           <span className="text-xxs font-mono text-zinc-400 tabular-nums dark:text-zinc-600">
             {index} /
           </span>
-          <span className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:hidden">
+          <span className="text-xxs font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase">
             {category}
           </span>
         </div>
 
         <div className="md:col-span-7">
-          <h2 className="font-editorial text-2xl leading-tight font-medium tracking-tight transition-colors md:text-3xl md:group-hover:text-primary lg:text-4xl">
+          <h2 className="font-editorial text-2xl leading-tight font-medium tracking-tight transition-colors md:-translate-y-px md:text-3xl md:group-hover:text-primary lg:text-4xl">
             {post.title}
           </h2>
           {post.excerpt && (
-            <p className="font-editorial mt-3 max-w-3xl text-base leading-relaxed font-normal text-zinc-600 md:text-lg dark:text-zinc-300">
+            <p className="font-editorial mt-3 max-w-3xl text-base leading-relaxed font-normal text-zinc-700 md:text-lg dark:text-zinc-400">
               {post.excerpt}
             </p>
           )}
         </div>
 
         <div className="flex items-center gap-5 md:col-span-3 md:ml-auto md:flex-col md:items-end md:gap-0 md:text-right">
-          <span className="text-xxs hidden font-sans tracking-[0.16em] whitespace-nowrap text-zinc-500 uppercase md:inline">
-            {category}
-          </span>
-          <time className="font-mono text-xxs tracking-[0.08em] whitespace-nowrap text-zinc-500 uppercase md:mt-4 md:text-xs md:text-dark dark:text-zinc-400 md:dark:text-light">
+          <time className="font-mono text-xxs tracking-[0.08em] whitespace-nowrap text-zinc-500 uppercase md:text-dark dark:text-zinc-400 md:dark:text-light">
             {dateFormatted}
           </time>
           <span className="font-mono text-xxs tracking-[0.12em] whitespace-nowrap text-zinc-500 uppercase md:mt-2 dark:text-zinc-400">

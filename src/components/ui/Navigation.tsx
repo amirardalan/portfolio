@@ -3,6 +3,7 @@
 import { useActiveLink } from '@/hooks/useActiveLink';
 import Link from 'next/link';
 import clsx from 'clsx';
+import ActionArrow from '@/components/ui/ActionArrow';
 
 interface NavigationProps {
   header?: boolean;
@@ -86,11 +87,8 @@ export const NavLinks = ({
           >
             {link.label}
             {link.external && (
-              <span
-                className="ml-1 font-mono text-xxs font-normal"
-                aria-hidden="true"
-              >
-                ↗
+              <span className="ml-1">
+                <ActionArrow direction="external" />
               </span>
             )}
           </span>
