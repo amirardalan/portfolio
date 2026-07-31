@@ -15,9 +15,10 @@ export default function HomeContent() {
             <br />
             Clear, working interfaces.
           </h1>
-          <p className="font-editorial mt-6 max-w-2xl text-lg leading-relaxed font-normal text-zinc-600 text-pretty md:mt-8 md:text-xl dark:text-zinc-300">
-            I bridge product design and frontend engineering, from early
-            prototype to production.
+          <p className="font-editorial mt-6 max-w-2xl text-lg leading-relaxed font-normal text-zinc-600 text-pretty md:mt-8 md:text-2xl dark:text-zinc-300">
+            I bridge product design and frontend engineering,{' '}
+            <br className="hidden md:block" />
+            from early prototype to production.
           </p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xxs font-medium tracking-[0.12em] uppercase md:mt-10">
             <a
