@@ -31,6 +31,7 @@ const config = {
         md: '1rem',
         xs: '.85rem',
         xxs: '.75rem',
+        xxxs: '.625rem',
         xxl: '1.7rem',
       },
       gridTemplateRows: {

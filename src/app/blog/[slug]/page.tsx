@@ -23,7 +23,6 @@ import SocialActions from '@/components/blog/SocialActions';
 import SectionGlyph from '@/components/ui/SectionGlyph';
 
 import { formatDate } from '@/utils/format-date';
-import calculateReadTime from '@/utils/calculate-readtime';
 
 export const dynamicParams = true;
 
@@ -123,8 +122,8 @@ export default async function BlogPost({
         />
 
         <header className="border-b border-zinc-300 pb-8 dark:border-zinc-700">
-          <div className="flex items-center justify-between gap-3">
-            <div className="text-xxs flex min-w-0 items-center gap-3 uppercase">
+          <div className="flex items-center justify-between gap-5">
+            <div className="text-xxs flex shrink-0 items-center uppercase">
               <Link
                 href={`/blog?category=${encodeURIComponent(post.category?.name ?? 'uncategorized')}`}
                 className="text-primary flex items-center gap-2 font-sans tracking-[0.16em] whitespace-nowrap transition-opacity hover:opacity-70"
@@ -132,21 +131,12 @@ export default async function BlogPost({
                 <SectionGlyph />
                 {post.category?.name ?? 'uncategorized'}
               </Link>
-              <span
-                className="text-zinc-400 dark:text-zinc-600"
-                aria-hidden="true"
-              >
-                /
-              </span>
-              <span className="font-mono tracking-[0.08em] whitespace-nowrap text-zinc-500 dark:text-zinc-400">
-                {calculateReadTime(post.content)}
-              </span>
             </div>
             <span
-              className="mx-1 w-full border-t border-zinc-300 dark:border-zinc-700 sm:mx-3"
+              className="min-w-0 flex-1 border-t border-zinc-300 dark:border-zinc-700"
               aria-hidden="true"
             />
-            <div className="text-xxs flex items-center font-mono tracking-[0.08em] whitespace-nowrap uppercase">
+            <div className="text-xxxs flex shrink-0 items-center font-mono tracking-[0.08em] whitespace-nowrap uppercase">
               <ClientViewCount
                 route={`/blog/${post.slug}`}
                 textColor="text-zinc-500 dark:text-zinc-400"
@@ -165,7 +155,7 @@ export default async function BlogPost({
           <div className="mt-8 flex w-full items-center justify-between gap-6 text-zinc-500 dark:text-zinc-400">
             <div className="text-xxs flex min-w-0 items-center uppercase">
               <time
-                className="font-mono tracking-[0.08em] whitespace-nowrap"
+                className="font-mono text-xxxs tracking-[0.08em] whitespace-nowrap"
                 title={formatDate(post.created_at)}
                 aria-label={`Posted on ${formatDate(post.created_at)}`}
               >

@@ -10,6 +10,7 @@ interface LikeButtonProps {
   children?: ReactNode;
   showIcon?: boolean;
   showCount?: boolean;
+  iconClassName?: string;
 }
 
 const FETCH_DEBOUNCE_TIME = 30000; // 30 seconds
@@ -19,6 +20,7 @@ export default function LikeButton({
   children,
   showIcon = true,
   showCount = true,
+  iconClassName,
 }: LikeButtonProps) {
   const { updateLike, fetchLikes } = useLikesStore();
   const [isLiking, setIsLiking] = useState(false);
@@ -71,7 +73,9 @@ export default function LikeButton({
         className="flex min-h-11 cursor-pointer items-center gap-2 px-2 transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-50"
         aria-label={isLiked ? 'Unlike post' : 'Like post'}
       >
-        {showIcon && <IconLike active={isLiked} />}
+        {showIcon && (
+          <IconLike active={isLiked} className={iconClassName} />
+        )}
         {showCount && children}
       </button>
     );
@@ -86,7 +90,7 @@ export default function LikeButton({
           className="flex min-h-11 min-w-11 cursor-pointer items-center justify-center transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-50"
           aria-label={isLiked ? 'Unlike post' : 'Like post'}
         >
-          <IconLike active={isLiked} />
+          <IconLike active={isLiked} className={iconClassName} />
         </button>
       </div>
     </div>

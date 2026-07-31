@@ -1,8 +1,9 @@
 type IconLikeProps = {
   active: boolean;
+  className?: string;
 };
 
-export default function IconLike({ active }: IconLikeProps) {
+export default function IconLike({ active, className }: IconLikeProps) {
   const iconHeight = 24;
   const iconWidth = 24;
 
@@ -12,8 +13,10 @@ export default function IconLike({ active }: IconLikeProps) {
         <svg
           width={iconWidth}
           height={iconHeight}
+          className={className}
           viewBox="0 0 139 139"
           fill="none"
+          shapeRendering="geometricPrecision"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -25,8 +28,10 @@ export default function IconLike({ active }: IconLikeProps) {
         <svg
           width={iconWidth}
           height={iconHeight}
+          className={className}
           viewBox="0 0 139 139"
           fill="none"
+          shapeRendering="geometricPrecision"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
