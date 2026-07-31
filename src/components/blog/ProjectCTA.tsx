@@ -20,7 +20,7 @@ export default function ProjectCTA({
   const isInternal = href.startsWith('/');
   const isHashLink = href.startsWith('#');
   const className =
-    'bg-primary group relative my-12 flex w-full flex-col overflow-clip border border-primary p-6 text-light no-underline dark:text-dark sm:p-7';
+    'bg-primary group relative -mx-6 my-12 flex w-screen flex-col overflow-clip border border-primary p-6 text-light no-underline sm:mx-0 sm:w-full sm:p-7 dark:text-dark';
 
   const content = (
     <>

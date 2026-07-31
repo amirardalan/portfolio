@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 interface AdjacentPost {
   slug: string;
@@ -40,26 +37,17 @@ export default function AdjacentPostNavigation({
   previous,
   next,
 }: AdjacentPostNavigationProps) {
-  const isMobile = useMediaQuery(768);
-
-  const truncateText = (text: string, maxLength: number = 30) => {
-    if (!isMobile) return text;
-    return text.length > maxLength
-      ? `${text.substring(0, maxLength)}...`
-      : text;
-  };
-
   return (
     <nav
       className="border-t border-zinc-300 text-zinc-600 dark:border-zinc-700 dark:text-zinc-400"
       aria-label="Adjacent posts"
     >
-      <div className="grid grid-cols-2 gap-6">
-        <div className="col-span-1">
+      <div className="grid grid-cols-2 gap-3 px-4 sm:gap-6 sm:px-0">
+        <div className="col-span-1 min-w-0">
           {previous && (
             <Link
               href={`/blog/${previous.slug}`}
-              className="group flex min-h-24 items-center gap-3 border-r border-zinc-300 pr-3 transition-colors md:hover:text-primary dark:border-zinc-700"
+              className="group flex min-h-24 min-w-0 items-center gap-2 transition-colors sm:gap-3 md:hover:text-primary"
             >
               <span
                 aria-hidden="true"
@@ -72,31 +60,31 @@ export default function AdjacentPostNavigation({
                   Previous
                 </span>
                 <span
-                  className="font-editorial mt-1 block break-words text-base leading-tight text-dark dark:text-light md:text-lg"
+                  className="font-editorial mt-1 block truncate text-base leading-tight text-dark sm:overflow-visible sm:text-clip sm:whitespace-normal sm:break-words dark:text-light md:text-lg"
                   title={previous.title}
                 >
-                  {truncateText(previous.title)}
+                  {previous.title}
                 </span>
               </span>
             </Link>
           )}
         </div>
 
-        <div className="col-span-1 text-right">
+        <div className="col-span-1 min-w-0 text-right">
           {next && (
             <Link
               href={`/blog/${next.slug}`}
-              className="group flex min-h-24 items-center justify-end gap-3 pl-3 transition-colors md:hover:text-primary"
+              className="group flex min-h-24 min-w-0 items-center justify-end gap-2 transition-colors sm:gap-3 md:hover:text-primary"
             >
               <span className="min-w-0">
                 <span className="text-xxs block font-sans tracking-[0.14em] uppercase">
                   Next
                 </span>
                 <span
-                  className="font-editorial mt-1 block break-words text-right text-base leading-tight text-dark dark:text-light md:text-lg"
+                  className="font-editorial mt-1 block truncate text-right text-base leading-tight text-dark sm:overflow-visible sm:text-clip sm:whitespace-normal sm:break-words dark:text-light md:text-lg"
                   title={next.title}
                 >
-                  {truncateText(next.title)}
+                  {next.title}
                 </span>
               </span>
               <span

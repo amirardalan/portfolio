@@ -290,7 +290,7 @@ export const components = {
         width={736}
         height={552}
         priority={isPriority}
-        className="my-6 h-auto w-full"
+        className="-mx-6 my-6 h-auto w-screen max-w-none sm:mx-0 sm:w-full sm:max-w-full"
       />
     );
   },
@@ -311,13 +311,13 @@ export const components = {
   }) => (
     <figure className="my-6">
       {aspect === 'wide' ? (
-        <div className="relative aspect-video w-full overflow-clip">
+        <div className="relative -mx-6 aspect-video w-screen overflow-clip sm:mx-0 sm:w-full">
           <Image
             src={src}
             alt={alt ?? ''}
             fill
             priority={priority}
-            sizes="(min-width: 736px) 672px, calc(100vw - 48px)"
+            sizes="(min-width: 736px) 672px, (min-width: 640px) calc(100vw - 48px), 100vw"
             className="object-cover"
             style={{ objectPosition: position }}
           />
@@ -329,7 +329,7 @@ export const components = {
           width={736}
           height={552}
           priority={priority}
-          className="h-auto w-full"
+          className="-mx-6 h-auto w-screen max-w-none sm:mx-0 sm:w-full sm:max-w-full"
         />
       )}
       {caption && (

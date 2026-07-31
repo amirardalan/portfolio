@@ -121,7 +121,7 @@ export default async function BlogPost({
           published={post.published ?? false}
         />
 
-        <header className="border-b border-zinc-300 pb-8 dark:border-zinc-700">
+        <header className="border-b border-zinc-300 pb-6 sm:pb-8 dark:border-zinc-700">
           <div className="flex items-center justify-between gap-5">
             <div className="text-xxs flex shrink-0 items-center uppercase">
               <Link
@@ -147,12 +147,12 @@ export default async function BlogPost({
           </div>
 
           <h1
-            className="font-editorial mt-8 text-4xl leading-none font-medium tracking-tight text-balance sm:text-5xl"
+            className="font-editorial mt-6 text-4xl leading-none font-medium tracking-tight text-balance sm:mt-8 sm:text-5xl"
             id="post-title"
           >
             {post.title}
           </h1>
-          <div className="mt-8 flex w-full items-center justify-between gap-6 text-zinc-500 dark:text-zinc-400">
+          <div className="mt-4 flex w-full items-center justify-between gap-6 text-zinc-500 sm:mt-8 dark:text-zinc-400">
             <div className="text-xxs flex min-w-0 items-center uppercase">
               <time
                 className="font-mono text-xxxs tracking-[0.08em] whitespace-nowrap"
@@ -184,7 +184,7 @@ export default async function BlogPost({
         <div className="mdx-content mt-10" aria-labelledby="post-title">
           {content}
         </div>
-        <footer className="mt-16 border-t border-zinc-300 dark:border-zinc-700">
+        <footer className="-mx-6 mt-16 w-screen border-t border-zinc-300 sm:mx-0 sm:w-auto dark:border-zinc-700">
           <BlogSupport postId={post.id} />
           {post.published && (adjacentPosts.previous || adjacentPosts.next) && (
             <AdjacentPostNavigation
