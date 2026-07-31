@@ -41,15 +41,15 @@ export default function AdminDashboard() {
       <div className="mb-5 flex items-center justify-between">
         <h2
           id="quick-actions-heading"
-          className="text-xxs tracking-[0.2em] text-zinc-500 uppercase dark:text-zinc-400"
+          className="text-xxs font-sans tracking-[0.2em] text-zinc-500 uppercase dark:text-zinc-400"
         >
           Workspace
         </h2>
-        <span className="text-xxs tracking-[0.14em] text-zinc-400 uppercase dark:text-zinc-600">
+        <span className="text-xxs font-sans tracking-[0.14em] text-zinc-400 uppercase dark:text-zinc-600">
           Quick actions
         </span>
       </div>
-      <div className="grid gap-px overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-200 md:grid-cols-2 dark:border-zinc-800 dark:bg-zinc-800">
+      <div className="grid gap-px overflow-hidden border border-zinc-200 bg-zinc-200 md:grid-cols-2 dark:border-zinc-800 dark:bg-zinc-800">
         {actions.map((item) => (
           <Link
             key={item.href}
@@ -59,21 +59,21 @@ export default function AdminDashboard() {
             <div className="flex h-full flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between">
-                  <p className="text-xxs text-primary tracking-[0.16em] uppercase">
+                  <p className="text-xxs text-primary font-sans tracking-[0.16em] uppercase">
                     {item.kicker}
                   </p>
                   <span className="text-xxs font-mono text-zinc-300 dark:text-zinc-700">
                     {item.index}
                   </span>
                 </div>
-                <h3 className="text-dark dark:text-light mt-7 text-2xl leading-tight font-medium">
+                <h3 className="font-editorial text-dark dark:text-light mt-7 text-2xl leading-tight font-medium tracking-tight">
                   {item.title}
                 </h3>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed font-normal text-zinc-600 dark:text-zinc-400">
+                <p className="font-editorial mt-3 max-w-sm text-sm leading-relaxed font-normal text-zinc-600 dark:text-zinc-400">
                   {item.description}
                 </p>
               </div>
-              <span className="text-dark dark:text-light mt-8 inline-flex items-center gap-3 text-xs tracking-[0.12em] uppercase">
+              <span className="text-dark dark:text-light mt-8 inline-flex items-center gap-3 font-mono text-xs tracking-[0.12em] uppercase">
                 {item.action}
                 <span
                   className="transition-transform group-hover:translate-x-1"

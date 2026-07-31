@@ -9,8 +9,9 @@ export { size, contentType };
 
 export default async function Image() {
   return generateOgImage({
-    title: 'Amir Ardalan — Design Engineer',
+    title: 'Complex ideas.\nClear, working interfaces.',
     description:
-      'I design and build thoughtful software, from early exploration through interaction design to production code.',
+      'I bridge product design and frontend engineering,\nfrom early prototype to production.',
+    eyebrow: 'Portfolio / Design engineer',
   });
 }

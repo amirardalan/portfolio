@@ -16,16 +16,16 @@ export default function BlogSupport({ postId }: BlogSupportProps) {
   const isLoading = initialLoadingStates[postId] !== false;
 
   return (
-    <div className="mb-6 mt-12 flex w-full items-center gap-2 rounded-xl border border-zinc-300 p-5 sm:p-6 dark:border-zinc-700">
+    <aside className="flex w-full items-center gap-2 px-6 py-5">
       <div className="flex w-full flex-col items-center justify-between sm:flex-row">
         <div className="flex items-center">
-          <p className="mb-4 text-sm text-zinc-500 sm:mb-0 sm:text-lg dark:text-zinc-400">
-            Enjoyed this? Like or share.
+          <p className="font-editorial mb-4 text-sm font-normal text-zinc-500 sm:mb-0 dark:text-zinc-400">
+            If this resonated, leave a signal.
           </p>
         </div>
 
-        <div className="flex items-center">
-          <div className="mr-3 flex w-24 items-center text-center text-xs uppercase lg:mr-6">
+        <div className="flex items-center gap-2 font-mono text-xxs tracking-[0.1em] uppercase">
+          <div className="flex items-center text-center">
             <Tooltip text="Like post" pos="l">
               <LikeButton postId={postId} showIcon={true}>
                 <LikeCount count={count} isLoading={isLoading} />
@@ -37,6 +37,6 @@ export default function BlogSupport({ postId }: BlogSupportProps) {
           </Tooltip>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

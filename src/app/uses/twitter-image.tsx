@@ -8,5 +8,6 @@ export default async function Image() {
   return generateTwitterImage({
     title: 'Uses — Amir Ardalan',
     description: 'Hardware, software, and tools I use.',
+    eyebrow: 'Index / Uses',
   });
 }

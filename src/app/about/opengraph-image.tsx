@@ -12,5 +12,6 @@ export default async function Image() {
     title: 'About — Amir Ardalan',
     description:
       'About Amir Ardalan, a design engineer working across interaction design and frontend engineering.',
+    eyebrow: 'Profile / About',
   });
 }

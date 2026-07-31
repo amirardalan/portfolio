@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import Logo from '@/components/ui/Logo';
 import { NavLinks } from '@/components/ui/Navigation';
 import HeaderControls from '@/components/ui/HeaderControls';
@@ -11,8 +10,6 @@ import { useState, useEffect } from 'react';
 
 export default function Header() {
   const isTablet = useMediaQuery(1024);
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,12 +25,13 @@ export default function Header() {
 
   const headerBaseClasses =
     'animate-fade-in-top fixed top-0 z-30 w-full px-6 py-4 transition-[background-color,box-shadow,backdrop-filter] duration-300 lg:px-10 lg:py-6';
-  const transparentHomeClasses =
+  const transparentHeaderClasses =
     'bg-transparent backdrop-blur-none';
   const glassHeaderClasses =
-    'bg-zinc-50/80 shadow-sm backdrop-blur-xl dark:bg-zinc-950/80 dark:shadow-zinc-950/30';
-  const headerBgClasses =
-    isHomePage && !isScrolled ? transparentHomeClasses : glassHeaderClasses;
+    'bg-zinc-50/65 shadow-xs shadow-black/5 backdrop-blur-xl dark:bg-zinc-950/50 dark:shadow-black/10';
+  const headerBgClasses = isScrolled
+    ? glassHeaderClasses
+    : transparentHeaderClasses;
 
   return (
     <header className={`${headerBaseClasses} ${headerBgClasses}`}>
@@ -44,8 +42,12 @@ export default function Header() {
         Skip to main content
       </a>
 
-      <div className="flex w-full flex-row items-center justify-between">
-        <Link href="/" aria-label="Home">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-row items-center justify-between">
+        <Link
+          href="/"
+          aria-label="Home"
+          className="group flex items-center"
+        >
           <Logo size={isTablet ? 25 : 35} />
         </Link>
         <div className="flex w-full max-w-screen-xl items-center justify-end space-x-4">

@@ -16,11 +16,11 @@ export default function ShareOnXButton({
   return (
     <button
       onClick={handleShare}
-      className="flex cursor-pointer items-center text-zinc-500 dark:text-zinc-400"
+      className="flex min-h-11 cursor-pointer items-center gap-2 px-2 font-mono text-xxs tracking-[0.1em] text-zinc-500 uppercase transition-opacity hover:opacity-70 dark:text-zinc-400"
       aria-label="Share on X"
     >
-      <IconX size={20} aria-hidden="true" />
-      {showText && <span className="ml-2 text-xs">Share on X</span>}
+      <IconX size={18} aria-hidden="true" />
+      {showText && <span>Share on X</span>}
     </button>
   );
 }

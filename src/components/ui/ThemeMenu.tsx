@@ -161,7 +161,7 @@ export default function ThemeMenu() {
     <div className="relative" ref={menuRef} onKeyDown={handleKeyDown}>
       <button
         id="theme-menu-button"
-        className="group hover:text-dark focus-visible:outline-primary dark:hover:text-light inline-flex size-10 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-black/4 focus-visible:outline-2 focus-visible:outline-offset-2 md:h-9 md:w-auto md:gap-2 md:px-2 dark:text-zinc-400 dark:hover:bg-white/6"
+        className="group hover:text-primary focus-visible:outline-primary dark:hover:text-primary inline-flex size-10 items-center justify-center text-zinc-500 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 md:h-10 md:w-auto md:gap-2 md:px-2 dark:text-zinc-400"
         onClick={toggleMenu}
         ref={buttonRef}
         aria-haspopup="menu"
@@ -200,7 +200,7 @@ export default function ThemeMenu() {
             </>
           )}
         </svg>
-        <span className="text-xxs hidden tracking-[0.08em] uppercase md:inline">
+        <span className="text-xxs hidden font-mono tracking-[0.08em] uppercase md:inline">
           {effectiveThemeLabel}
         </span>
         <svg
@@ -222,7 +222,7 @@ export default function ThemeMenu() {
         createPortal(
           <div
             ref={menuPanelRef}
-            className="dark:text-light fixed z-100 overflow-clip rounded-lg bg-white/60 p-1 font-mono ring-1 ring-black/6 backdrop-blur-2xl ring-inset dark:bg-zinc-950/50 dark:ring-white/8"
+            className="dark:text-light fixed z-100 overflow-clip border border-black/10 bg-white/60 p-1 font-mono backdrop-blur-2xl dark:border-white/10 dark:bg-zinc-950/50"
             style={menuPosition}
             role="menu"
             aria-orientation="vertical"
@@ -232,7 +232,7 @@ export default function ThemeMenu() {
               <button
                 key={option.value}
                 ref={index === 0 ? firstItemRef : null}
-                className={`hover:text-dark dark:hover:text-light flex min-h-10 w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-left transition-colors hover:bg-black/5 dark:hover:bg-white/7 ${theme === option.value ? 'text-primary dark:text-primary bg-black/3.5 dark:bg-white/5' : 'text-zinc-600 dark:text-zinc-300'}`}
+                className={`hover:text-dark dark:hover:text-light flex min-h-10 w-full items-center justify-between gap-3 px-3 py-2 text-left transition-colors hover:bg-black/5 dark:hover:bg-white/7 ${theme === option.value ? 'text-primary dark:text-primary bg-black/3.5 dark:bg-white/5' : 'text-zinc-600 dark:text-zinc-300'}`}
                 onClick={(event) =>
                   handleThemeChange(option.value, event.detail === 0)
                 }
@@ -244,7 +244,7 @@ export default function ThemeMenu() {
                 </span>
                 {theme === option.value && (
                   <span
-                    className="size-1.5 shrink-0 rounded-full bg-current"
+                    className="size-1.5 shrink-0 bg-current"
                     aria-hidden="true"
                   />
                 )}

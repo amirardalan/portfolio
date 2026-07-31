@@ -4,16 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import ManifoldSlideshow from '@/components/content/ManifoldSlideshow';
+import ActionArrow from '@/components/ui/ActionArrow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
 import type { Project } from '@/content/projects';
 
 type SelectedWorkStageProps = {
   projects: Project[];
 };
-
-const ProjectArrow = ({ external = false }: { external?: boolean }) => (
-  <span aria-hidden="true">{external ? '↗' : '→'}</span>
-);
 
 function ProjectMedia({
   project,
@@ -32,6 +29,12 @@ function ProjectMedia({
     );
   }
 
+  const desktopPositionClass = {
+    top: 'md:object-top',
+    center: 'md:object-center',
+    bottom: 'md:object-bottom',
+  }[project.visual.position ?? 'bottom'];
+
   const image = (
     <Image
       src={project.visual.src}
@@ -40,13 +43,12 @@ function ProjectMedia({
       height={1086}
       priority={priority}
       sizes="(min-width: 768px) 58vw, 100vw"
-      className="h-full w-full object-cover"
-      style={{ objectPosition: project.visual.position ?? 'bottom' }}
+      className={`h-full w-full object-cover object-center ${desktopPositionClass}`}
     />
   );
 
   return (
-    <div className="relative min-h-80 overflow-hidden bg-stone-100 sm:min-h-110 md:col-span-7 lg:min-h-140">
+    <div className="relative min-h-80 overflow-hidden bg-stone-100 sm:min-h-110 md:col-span-7 md:ml-10 lg:ml-[max(4rem,calc((100vw-90rem)/2+4rem))] lg:min-h-140">
       <a
         href={project.liveUrl}
         target="_blank"
@@ -78,6 +80,10 @@ export default function SelectedWorkStage({
     }
   };
 
+  const selectAdjacentProject = (offset: number) => {
+    selectProject((activeIndex + offset + projects.length) % projects.length);
+  };
+
   const handleTabKeyDown = (
     event: React.KeyboardEvent<HTMLButtonElement>,
     index: number
@@ -104,53 +110,98 @@ export default function SelectedWorkStage({
 
   return (
     <div>
-      <div className="mb-6 overflow-x-auto overflow-y-hidden md:mb-8">
-        <div
-          role="tablist"
-          aria-label="Selected projects"
-          className="flex w-max min-w-full border-b border-zinc-200 dark:border-zinc-800"
-        >
-          {projects.map((item, index) => {
-            const active = index === activeIndex;
-            const number = String(index + 1).padStart(2, '0');
+      <div className="mx-auto max-w-[1440px] px-6 pt-10 pb-4 md:px-10 md:pt-14 lg:px-16 lg:pt-16">
+        <div className="md:flex md:items-center">
+          <h2
+            id="selected-work-heading"
+            className="text-xxs flex shrink-0 items-center gap-2.5 pb-2 font-sans tracking-[0.22em] text-zinc-500 uppercase md:min-h-14 md:pr-10 md:pb-0 dark:text-zinc-400"
+          >
+            <SectionGlyph /> Selected work
+          </h2>
 
-            return (
+          <div className="flex min-h-12 items-center justify-between gap-4 md:hidden">
+            <p className="text-primary flex min-w-0 items-center gap-4 font-mono text-xxs font-medium tracking-[0.12em] uppercase">
+              <span aria-live="polite" className="truncate">
+                {project.title}
+              </span>
+              <span aria-hidden="true" className="size-1.5 shrink-0 bg-current" />
+            </p>
+
+            <div className="flex shrink-0 items-center font-mono text-xxs tabular-nums">
               <button
-                key={item.title}
-                ref={(element) => {
-                  tabRefs.current[index] = element;
-                }}
-                id={`project-tab-${index}`}
                 type="button"
-                role="tab"
-                aria-selected={active}
-                aria-controls="selected-project-panel"
-                tabIndex={active ? 0 : -1}
-                onClick={() => selectProject(index)}
-                onKeyDown={(event) => handleTabKeyDown(event, index)}
-                className={`relative -mb-px flex min-h-11 shrink-0 cursor-pointer items-baseline gap-2 px-1 py-3 text-left transition-colors first:pr-6 last:px-6 md:first:pr-8 md:last:px-8 ${
-                  active
-                    ? 'text-dark dark:text-light'
-                    : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
-                }`}
+                aria-label="Show previous project"
+                onClick={() => selectAdjacentProject(-1)}
+                className="group flex size-11 cursor-pointer items-center justify-center"
               >
-                {active && (
-                  <span
-                    aria-hidden="true"
-                    className={`border-primary absolute right-1 bottom-0 border-b ${
-                      index === projects.length - 1
-                        ? 'left-6 md:left-8'
-                        : 'left-1'
-                    }`}
-                  />
-                )}
-                <span className="text-xxs w-5 shrink-0 font-mono tabular-nums">
-                  {number}
-                </span>
-                <span className="text-sm font-medium">{item.title}</span>
+                <ActionArrow direction="left" />
               </button>
-            );
-          })}
+              <span className="text-zinc-500 dark:text-zinc-400">
+                {String(activeIndex + 1).padStart(2, '0')} /{' '}
+                {String(projects.length).padStart(2, '0')}
+              </span>
+              <button
+                type="button"
+                aria-label="Show next project"
+                onClick={() => selectAdjacentProject(1)}
+                className="group flex size-11 cursor-pointer items-center justify-center"
+              >
+                <ActionArrow direction="right" />
+              </button>
+            </div>
+          </div>
+
+          <div className="hidden min-w-0 overflow-x-auto overflow-y-hidden md:block md:flex-1">
+            <div
+              role="tablist"
+              aria-label="Selected projects"
+              className="flex w-max"
+            >
+              {projects.map((item, index) => {
+                const active = index === activeIndex;
+                const number = String(index + 1).padStart(2, '0');
+
+                return (
+                  <button
+                    key={item.title}
+                    ref={(element) => {
+                      tabRefs.current[index] = element;
+                    }}
+                    id={`project-tab-${index}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    aria-controls="selected-project-panel"
+                    tabIndex={active ? 0 : -1}
+                    onClick={() => selectProject(index)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
+                    className={`group/tab flex min-h-14 shrink-0 cursor-pointer items-center gap-4 px-5 py-4 text-left transition-colors first:pl-0 last:pr-0 ${
+                      active
+                        ? 'text-primary'
+                        : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+                    }`}
+                  >
+                    <span className="flex items-baseline gap-3">
+                      <span className="text-xxs shrink-0 font-mono tabular-nums opacity-60">
+                        {number} /
+                      </span>
+                      <span className="font-mono text-xxs font-medium tracking-[0.12em] uppercase">
+                        {item.title}
+                      </span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={`size-1.5 shrink-0 bg-current transition-opacity ${
+                        active
+                          ? 'opacity-100'
+                          : 'opacity-0 group-hover/tab:opacity-40'
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -159,42 +210,41 @@ export default function SelectedWorkStage({
         role="tabpanel"
         aria-labelledby={`project-tab-${activeIndex}`}
         tabIndex={0}
-        className="group text-dark dark:text-light grid overflow-hidden rounded-3xl bg-zinc-100 md:grid-cols-12 dark:bg-zinc-900"
+        className="group/card grid overflow-hidden md:grid-cols-12"
       >
         <ProjectMedia project={project} priority={activeIndex === 0} />
 
-        <div className="work-card-gradient text-light flex flex-col justify-between p-7 md:col-span-5 md:p-8 lg:p-10">
-          <div>
-            <div className="text-xxs mb-5 flex items-center gap-3 font-mono tracking-[0.16em] uppercase">
-              <span className="flex items-center gap-2 text-(--color-primary-dark)">
-                <SectionGlyph className="text-(--color-primary-dark)" />
+        <div className="bg-primary flex flex-col justify-between p-7 text-light md:col-span-5 md:p-8 lg:p-10 dark:text-dark">
+          <div className="flex flex-1 flex-col">
+            <div className="text-xxs flex items-center justify-between gap-6 border-b border-light/25 pb-4 font-sans tracking-[0.16em] uppercase dark:border-dark/25">
+              <span className="flex items-center gap-2">
+                <SectionGlyph className="text-current" />
                 {project.status}
               </span>
-              <span className="h-px w-5 bg-white/25" aria-hidden="true" />
-              <span className="text-white/45">{project.year}</span>
+              <span className="font-mono opacity-60">{project.year}</span>
             </div>
-            <h3 className="text-3xl leading-tight font-medium md:text-2xl lg:text-4xl">
+
+            <h3 className="font-editorial mt-8 text-4xl leading-none font-medium tracking-tight md:text-3xl lg:text-5xl">
               {project.title}
             </h3>
-            <p className="mt-4 max-w-lg text-base leading-relaxed font-normal text-white/70 md:mt-6">
+            <p className="font-editorial mt-5 max-w-lg text-base leading-relaxed font-normal opacity-75 md:mt-6 md:text-lg">
               {project.summary}
             </p>
-            <p className="text-xxs mt-6 leading-relaxed tracking-wide text-white/50 uppercase">
-              {project.role.join(' · ')}
+
+            <p className="text-xxs mt-7 border-t border-light/25 pt-4 font-sans leading-relaxed tracking-wider uppercase opacity-65 dark:border-dark/25">
+              {project.role.join(' / ')}
             </p>
           </div>
 
-          <div className="mt-10 flex flex-col items-start gap-4 text-sm tracking-wide uppercase md:mt-14">
+          <div className="mt-10 flex flex-col items-start gap-1 font-mono text-xxs font-medium tracking-[0.12em] uppercase md:mt-14">
             {project.caseStudyUrl && (
               <Link
                 href={project.caseStudyUrl}
                 aria-label={`Read about ${project.title}`}
-                className="group/link inline-flex items-center gap-3"
+                className="group inline-flex min-h-11 items-center gap-2.5"
               >
-                Read about the project
-                <span className="transition-transform group-hover/link:translate-x-1">
-                  <ProjectArrow />
-                </span>
+                <span>Read about the project</span>
+                <ActionArrow direction="right" />
               </Link>
             )}
             <a
@@ -202,12 +252,10 @@ export default function SelectedWorkStage({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open ${project.title} project (opens in a new tab)`}
-              className="group/link inline-flex items-center gap-3 text-white/70"
+              className="group inline-flex min-h-11 items-center gap-2.5 opacity-70 transition-opacity hover:opacity-100"
             >
-              Open project
-              <span className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
-                <ProjectArrow external />
-              </span>
+              <span>Open project</span>
+              <ActionArrow direction="external" />
             </a>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function PostFormControls({
       : 'No unsaved changes';
 
   return (
-    <div className="bg-light/90 sticky bottom-4 z-20 mt-6 flex items-center justify-between gap-3 rounded-2xl border border-zinc-200 p-3 shadow-[0_16px_45px_rgba(0,0,0,0.12)] backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/90">
+    <div className="bg-light sticky bottom-4 z-20 mt-6 flex items-center justify-between gap-3 rounded-sm border border-zinc-200 p-3 dark:border-zinc-700 dark:bg-zinc-900">
       <div>
         {showDelete && onDelete && onDeleteText && (
           <Button
@@ -52,7 +52,7 @@ export default function PostFormControls({
       </div>
       <div className="flex items-center gap-5">
         <span
-          className={`text-xxs hidden items-center gap-2 tracking-[0.12em] uppercase sm:inline-flex ${
+          className={`text-xxs hidden items-center gap-2 font-mono tracking-[0.12em] uppercase sm:inline-flex ${
             isSubmitting || hasUnsavedChanges
               ? 'text-primary'
               : 'text-zinc-500 dark:text-zinc-400'

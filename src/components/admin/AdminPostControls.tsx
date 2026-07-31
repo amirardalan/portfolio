@@ -20,14 +20,14 @@ export default function AdminPostControls({
     <div className="mb-6 flex items-center gap-2">
       <Link
         href={`/admin/blog/edit/${slug}`}
-        className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark inline-flex min-h-9 cursor-pointer items-center rounded-full px-4 tracking-[0.1em] uppercase transition-colors"
+        className="bg-dark text-xxs text-light hover:bg-primary dark:bg-light dark:text-dark inline-flex min-h-9 cursor-pointer items-center rounded-sm px-4 font-mono tracking-[0.1em] uppercase transition-colors"
       >
         Edit Post
       </Link>
       {!published && (
         <Link
           href="/admin/blog/drafts"
-          className="text-xxs cursor-pointer rounded-full bg-amber-100 px-3 py-1.5 tracking-[0.1em] text-amber-800 uppercase dark:bg-amber-950 dark:text-amber-300"
+          className="text-xxs cursor-pointer rounded-sm bg-amber-100 px-3 py-1.5 font-sans tracking-[0.1em] text-amber-800 uppercase dark:bg-amber-950 dark:text-amber-300"
           title="View all drafts"
         >
           Draft

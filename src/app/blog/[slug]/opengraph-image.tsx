@@ -14,20 +14,27 @@ export async function generateStaticParams() {
   return posts;
 }
 
-export default async function Image({ params }: { params: { slug: string } }) {
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   try {
-    const post = await getPostBySlug(params.slug);
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
 
     if (!post || (!post.published && !(await getAuthorizedSession()))) {
       return generateOgImage({
         title: 'Writing — Amir Ardalan',
         description: 'Read this post on amir.sh.',
+        eyebrow: 'Writing',
       });
     }
 
     return generateOgImage({
       title: post.title,
       description: post.excerpt || 'Read this post on amir.sh.',
+      eyebrow: 'Writing',
       category: post.category?.name || undefined,
     });
   } catch (error) {
@@ -37,6 +44,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
     return generateOgImage({
       title: 'Writing — Amir Ardalan',
       description: 'Read this post on amir.sh.',
+      eyebrow: 'Writing',
     });
   }
 }

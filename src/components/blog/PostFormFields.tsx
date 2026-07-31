@@ -77,7 +77,7 @@ export default function PostFormFields({
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-      <div className="bg-light dark:bg-dark overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800">
+      <div className="bg-light dark:bg-dark overflow-hidden border border-zinc-200 dark:border-zinc-800">
         <div className="group border-b border-zinc-200 p-6 transition-colors focus-within:bg-zinc-50/70 md:p-8 dark:border-zinc-800 dark:focus-within:bg-zinc-900/40">
           <label
             htmlFor="title"
@@ -92,7 +92,7 @@ export default function PostFormFields({
             value={title}
             onChange={handleTitleChange}
             required
-            className="cms-editor-field text-dark dark:text-light block w-full bg-transparent font-sans text-3xl leading-tight font-medium outline-none placeholder:text-zinc-300 md:text-4xl dark:placeholder:text-zinc-600"
+            className="cms-editor-field font-editorial text-dark dark:text-light block w-full bg-transparent text-3xl leading-tight font-medium tracking-tight outline-none placeholder:text-zinc-300 md:text-4xl dark:placeholder:text-zinc-600"
           />
         </div>
 
@@ -110,7 +110,7 @@ export default function PostFormFields({
             onChange={(e) => setExcerpt(e.target.value)}
             required
             rows={3}
-            className="cms-editor-field text-dark dark:text-light block w-full resize-none bg-transparent font-sans text-base leading-relaxed font-normal outline-none placeholder:text-zinc-300 dark:placeholder:text-zinc-600"
+            className="cms-editor-field font-editorial text-dark dark:text-light block w-full resize-none bg-transparent text-base leading-relaxed font-normal outline-none placeholder:text-zinc-300 dark:placeholder:text-zinc-600"
           />
         </div>
 
@@ -130,7 +130,7 @@ export default function PostFormFields({
             <button
               type="button"
               onClick={() => setShowGallery(true)}
-              className="text-xxs text-dark hover:border-primary hover:text-primary dark:text-light inline-flex min-h-10 shrink-0 items-center gap-2 rounded-full border border-zinc-300 px-4 font-sans tracking-[0.1em] uppercase transition-colors dark:border-zinc-700"
+              className="text-xxs text-dark hover:border-primary hover:text-primary dark:text-light inline-flex min-h-10 shrink-0 items-center gap-2 rounded-sm border border-zinc-300 px-4 font-mono tracking-[0.1em] uppercase transition-colors dark:border-zinc-700"
             >
               Insert image <span aria-hidden="true">+</span>
             </button>
@@ -144,7 +144,7 @@ export default function PostFormFields({
                 setContent(e.target.value)
               }
               required
-              className="cms-editor-field text-dark dark:text-light block min-h-[32rem] w-full bg-transparent px-6 py-7 font-mono text-sm leading-7 font-normal outline-none placeholder:text-zinc-300 md:px-8 dark:placeholder:text-zinc-600"
+              className="cms-editor-field text-dark dark:text-light block min-h-128 w-full bg-transparent px-6 py-7 font-mono text-sm leading-7 font-normal outline-none placeholder:text-zinc-300 md:px-8 dark:placeholder:text-zinc-600"
               textareaRef={textareaRef}
               onSelect={onTextAreaSelect}
             />
@@ -153,7 +153,7 @@ export default function PostFormFields({
       </div>
 
       <aside className="space-y-6 lg:sticky lg:top-28">
-        <section className="rounded-3xl border border-zinc-200 bg-zinc-100/60 p-6 font-sans dark:border-zinc-800 dark:bg-zinc-900/60">
+        <section className="border border-zinc-200 bg-zinc-100/60 p-6 font-sans dark:border-zinc-800 dark:bg-zinc-900/60">
           <h2 className="text-xxs tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
             Post details
           </h2>
@@ -171,7 +171,7 @@ export default function PostFormFields({
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               required
-              className="cms-editor-field bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-11 w-full rounded-xl border border-zinc-200 px-3 font-mono text-xs font-normal transition-colors outline-none dark:border-zinc-700"
+              className="cms-editor-field bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-11 w-full rounded-sm border border-zinc-200 px-3 font-mono text-xs font-normal transition-colors outline-none dark:border-zinc-700"
             />
           </div>
           <div className="group mt-5">
@@ -189,7 +189,7 @@ export default function PostFormFields({
                   setCategoryId(e.target.value ? Number(e.target.value) : null)
                 }
                 disabled={categoriesLoading}
-                className="cms-editor-field bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-11 w-full appearance-none rounded-xl border border-zinc-200 py-0 pr-10 pl-3 text-xs transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-70 dark:border-zinc-700"
+                className="cms-editor-field bg-light text-dark focus:border-primary dark:bg-dark dark:text-light h-11 w-full appearance-none rounded-sm border border-zinc-200 py-0 pr-10 pl-3 text-xs transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-70 dark:border-zinc-700"
               >
                 <option value="">
                   {categoriesLoading
@@ -222,7 +222,7 @@ export default function PostFormFields({
           </div>
         </section>
 
-        <fieldset className="bg-light dark:bg-dark overflow-hidden rounded-3xl border border-zinc-200 font-sans dark:border-zinc-800">
+        <fieldset className="bg-light dark:bg-dark overflow-hidden border border-zinc-200 font-sans dark:border-zinc-800">
           <legend className="sr-only">Publishing options</legend>
           <div className="border-b border-zinc-200 px-6 py-5 dark:border-zinc-800">
             <p className="text-xxs tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
@@ -232,7 +232,7 @@ export default function PostFormFields({
           <div className="border-b border-zinc-200 px-6 py-5 dark:border-zinc-800">
             <p className="text-sm">Post status</p>
             <div
-              className="mt-3 grid grid-cols-2 gap-1 rounded-xl border border-zinc-200 bg-zinc-100 p-1 dark:border-zinc-700 dark:bg-zinc-900"
+              className="mt-3 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-zinc-200 bg-zinc-200 p-px dark:border-zinc-700 dark:bg-zinc-700"
               role="group"
               aria-label="Post status"
             >
@@ -243,10 +243,10 @@ export default function PostFormFields({
                   setPublished(false);
                   setFeatured?.(false);
                 }}
-                className={`text-xxs min-h-9 rounded-lg px-3 tracking-[0.1em] uppercase transition-colors ${
+                className={`text-xxs min-h-9 px-3 font-mono tracking-[0.1em] uppercase transition-colors ${
                   !published
-                    ? 'bg-light text-dark dark:text-light shadow-sm dark:bg-zinc-700'
-                    : 'hover:text-dark dark:hover:text-light text-zinc-500 dark:text-zinc-400'
+                    ? 'bg-dark text-light dark:bg-light dark:text-dark'
+                    : 'bg-light hover:text-dark dark:bg-dark dark:hover:text-light text-zinc-500 dark:text-zinc-400'
                 }`}
               >
                 Draft
@@ -255,10 +255,10 @@ export default function PostFormFields({
                 type="button"
                 aria-pressed={published}
                 onClick={() => setPublished(true)}
-                className={`text-xxs min-h-9 rounded-lg px-3 tracking-[0.1em] uppercase transition-colors ${
+                className={`text-xxs min-h-9 px-3 font-mono tracking-[0.1em] uppercase transition-colors ${
                   published
-                    ? 'bg-light text-dark dark:text-light shadow-sm dark:bg-zinc-700'
-                    : 'hover:text-dark dark:hover:text-light text-zinc-500 dark:text-zinc-400'
+                    ? 'bg-dark text-light dark:bg-light dark:text-dark'
+                    : 'bg-light hover:text-dark dark:bg-dark dark:hover:text-light text-zinc-500 dark:text-zinc-400'
                 }`}
               >
                 Published
@@ -297,7 +297,7 @@ export default function PostFormFields({
                 checked={Boolean(featured && published)}
                 onChange={(e) => setFeatured?.(e.target.checked)}
                 disabled={!published}
-                className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-[var(--color-primary)] disabled:cursor-not-allowed"
+                className="accent-primary mt-0.5 h-5 w-5 shrink-0 cursor-pointer disabled:cursor-not-allowed"
               />
             </label>
           )}
@@ -314,7 +314,7 @@ export default function PostFormFields({
                 id="show_updated"
                 checked={showUpdated}
                 onChange={(e) => setShowUpdated?.(e.target.checked)}
-                className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-[var(--color-primary)]"
+                className="accent-primary mt-0.5 h-5 w-5 shrink-0 cursor-pointer"
               />
             </label>
           )}
