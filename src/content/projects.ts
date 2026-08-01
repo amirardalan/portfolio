@@ -28,21 +28,6 @@ export type Project = {
 
 export const selectedProjects: Project[] = [
   {
-    title: 'between',
-    summary:
-      'Catch a thought, image, sound, drawing, or place before it disappears. Arrange fragments into fields and notice what forms between them.',
-    year: '2026',
-    role: ['Product design', 'Interaction design', 'Frontend engineering'],
-    status: 'Independent project',
-    liveUrl: 'https://between.cards/',
-    caseStudyUrl: '/blog/between',
-    visual: {
-      src: 'https://res.cloudinary.com/amir-ardalan/image/upload/v1785437862/Work/between-hero_dpetb6.png',
-      alt: 'An ivory between field with connected cards containing photographs, notes, audio waveforms, drawings, and locations.',
-      treatment: 'between',
-    },
-  },
-  {
     title: 'manifold.observer',
     summary:
       'An audiovisual experiment that gives information another shape. Add a source, change the conditions, and watch a responsive form reorganize in real time.',
@@ -79,6 +64,21 @@ export const selectedProjects: Project[] = [
           alt: 'A luminous terrain form in manifold.observer.',
         },
       ],
+    },
+  },
+  {
+    title: 'between',
+    summary:
+      'Catch a thought, image, sound, drawing, or place before it disappears. Arrange fragments into fields and notice what forms between them.',
+    year: '2026',
+    role: ['Product design', 'Interaction design', 'Frontend engineering'],
+    status: 'Independent project',
+    liveUrl: 'https://between.cards/',
+    caseStudyUrl: '/blog/between',
+    visual: {
+      src: 'https://res.cloudinary.com/amir-ardalan/image/upload/v1785437862/Work/between-hero_dpetb6.png',
+      alt: 'An ivory between field with connected cards containing photographs, notes, audio waveforms, drawings, and locations.',
+      treatment: 'between',
     },
   },
 ];
