@@ -4,7 +4,6 @@
 :root {
   /* Typopgrahy */
   --font-sans: 'Jura', sans-serif;
-  --font-serif: 'Manuale', serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Colors */
@@ -119,6 +118,34 @@
 }
 
 @layer components {
+  .writing-search-motion {
+    display: grid;
+    transition:
+      grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease-out;
+  }
+
+  .writing-search-motion[data-visible='true'] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .writing-search-motion[data-visible='false'] {
+    grid-template-rows: 0fr;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .writing-search-motion__inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .writing-search-motion--collapsed[data-visible='true']
+    .writing-search-motion__inner {
+    overflow: visible;
+  }
+
   .work-card-gradient {
     background:
       radial-gradient(

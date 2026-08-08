@@ -8,12 +8,7 @@ import { getTheme } from '@/utils/get-theme';
 import '@/src/globals.css';
 import clsx from 'clsx';
 
-import {
-  Instrument_Sans,
-  Jura,
-  Manuale,
-  JetBrains_Mono,
-} from 'next/font/google';
+import { Instrument_Sans, Jura, JetBrains_Mono } from 'next/font/google';
 import DarkIcon from '@/public/images/favicon-dark.png';
 import LightIcon from '@/public/images/favicon-light.png';
 
@@ -24,12 +19,6 @@ import MobileNavigation from '@/components/ui/MobileNavigation';
 const sans = Jura({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
-  display: 'swap',
-});
-const serif = Manuale({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
   display: 'swap',
 });
 const mono = JetBrains_Mono({
@@ -112,7 +101,6 @@ export default async function RootLayout({
         data-scroll-behavior="smooth"
         className={clsx(
           sans.className,
-          serif.className,
           mono.className,
           editorial.variable,
           theme || 'dark'

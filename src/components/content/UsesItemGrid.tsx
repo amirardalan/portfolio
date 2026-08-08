@@ -21,7 +21,7 @@ const UsesItemGrid = ({
 
   return (
     <div
-      className={`grid gap-6 ${gridCols[columns]} ${className}`}
+      className={`grid ${gridCols[columns]} ${className}`}
       aria-labelledby={ariaLabelledBy}
     >
       {children}

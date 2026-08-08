@@ -4,6 +4,7 @@ type Item = {
 };
 
 export type UsesItemCardProps = {
+  number?: string;
   title?: string;
   subtitle?: string;
   items?: Item[];
@@ -12,6 +13,7 @@ export type UsesItemCardProps = {
 };
 
 const UsesItemCard = ({
+  number,
   title,
   subtitle,
   items,
@@ -19,28 +21,42 @@ const UsesItemCard = ({
   'aria-label': ariaLabel,
 }: UsesItemCardProps) => {
   return (
-    <div className={`mb-4 ${className}`} aria-label={ariaLabel} role="group">
-      {title && <h3 className="mb-2 text-dark dark:text-light">{title}</h3>}
-      {subtitle && <p className="text-dark dark:text-light">{subtitle}</p>}
+    <article className={`flex flex-col ${className}`} aria-label={ariaLabel}>
+      {number && (
+        <span className="text-xxs font-mono text-zinc-400 tabular-nums dark:text-zinc-600">
+          {number} /
+        </span>
+      )}
+      {title && (
+        <h3 className="font-editorial mt-7 text-2xl leading-tight font-medium tracking-tight text-dark md:text-3xl dark:text-light">
+          {title}
+        </h3>
+      )}
+      {subtitle && (
+        <p className="font-editorial mt-3 text-zinc-600 dark:text-zinc-300">
+          {subtitle}
+        </p>
+      )}
       {items && items.length > 0 && (
-        <ul className="list-none pl-0">
+        <ul className="mt-6 border-t border-zinc-200 dark:border-zinc-800">
           {items.map((item, index) => (
-            <li key={index} className="flex pt-1">
+            <li
+              key={index}
+              className="font-editorial flex border-b border-zinc-200 py-2.5 text-sm leading-snug text-zinc-600 last:border-b-0 md:text-base dark:border-zinc-800 dark:text-zinc-300"
+            >
               {item.label ? (
-                <span className="flex text-zinc-500 dark:text-zinc-400">
+                <span className="flex">
                   <span className="sr-only">Type: </span>
                   {item.label}: <span className="ml-1">{item.value}</span>
                 </span>
               ) : (
-                <span className="text-zinc-500 dark:text-zinc-400">
-                  {item.value}
-                </span>
+                <span>{item.value}</span>
               )}
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </article>
   );
 };
 
