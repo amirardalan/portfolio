@@ -1,6 +1,7 @@
 import ActionArrow from '@/components/ui/ActionArrow';
 import SectionGlyph from '@/components/ui/SectionGlyph';
 import TerrainHero from '@/components/content/TerrainHero';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -320,6 +321,33 @@ export default function About() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section
+        aria-labelledby="uses-link-heading"
+        className="border-t border-zinc-200 dark:border-zinc-800"
+      >
+        <Link
+          href="/uses"
+          className="group mx-auto flex min-h-24 max-w-360 items-center justify-between gap-8 px-6 py-6 md:px-10 lg:px-16"
+        >
+          <div className="flex min-w-0 items-center gap-6 md:gap-10">
+            <h2
+              id="uses-link-heading"
+              className="text-xxs flex shrink-0 items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400"
+            >
+              <SectionGlyph /> Working setup
+            </h2>
+            <p className="font-editorial hidden truncate text-base text-zinc-600 sm:block dark:text-zinc-300">
+              Hardware, software, and tools I use.
+            </p>
+          </div>
+
+          <span className="text-primary flex shrink-0 items-center gap-2.5 font-mono text-xxs font-medium tracking-[0.12em] uppercase">
+            <span>View uses</span>
+            <ActionArrow direction="right" />
+          </span>
+        </Link>
       </section>
     </article>
   );

@@ -9,7 +9,6 @@ const config = {
   theme: {
     fontFamily: {
       sans: ['Jura', 'system-ui'],
-      serif: ['Manuale', 'serif'],
       mono: ['JetBrains Mono', 'monospace'],
       editorial: [
         'var(--font-editorial)',

@@ -8,7 +8,7 @@ export default async function Footer() {
         <div className="col-span-full flex min-h-40 flex-col justify-between border-b border-light/25 p-6 sm:p-8 lg:col-span-6 lg:border-r lg:border-b-0 lg:px-10 lg:py-8 dark:border-dark/25">
           <div className="text-xxs flex items-center font-sans tracking-wider uppercase">
             <span>
-              <span className="font-mono">00 /</span> ID
+              <span className="font-mono text-[0.6875rem]">00 /</span> ID
             </span>
           </div>
 
@@ -39,7 +39,7 @@ export default async function Footer() {
         >
           <span className="text-xxs flex items-center font-sans tracking-wider uppercase">
             <span>
-              <span className="font-mono">01 /</span> Repo
+              <span className="font-mono text-[0.6875rem]">01 /</span> Repo
             </span>
           </span>
           <span>
@@ -60,7 +60,7 @@ export default async function Footer() {
         >
           <span className="text-xxs flex items-center font-sans tracking-wider uppercase">
             <span>
-              <span className="font-mono">02 /</span> Contact
+              <span className="font-mono text-[0.6875rem]">02 /</span> Contact
             </span>
           </span>
           <span>
