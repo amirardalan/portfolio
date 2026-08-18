@@ -75,7 +75,7 @@ export default function Uses() {
       title: 'Headphones',
       items: [
         { value: 'Beyerdynamic DT 770 PRO' },
-        { value: 'Beyerdynamic DT270 PRO' },
+        { value: 'Beyerdynamic DT 270 PRO' },
         { value: 'Apple AirPods Pro (Gen 2)' },
       ],
     },
