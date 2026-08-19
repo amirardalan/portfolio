@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { getAuthorizedSession } from '@/lib/auth';
 import { AuthProvider } from '@/context/AuthProvider';
 import { PostHogProvider } from '@/context/PostHogProvider';
@@ -122,6 +123,7 @@ export default async function RootLayout({
             </div>
           </PostHogProvider>
           <MobileNavigation />
+          <SpeedInsights />
         </body>
       </html>
     </AuthProvider>
