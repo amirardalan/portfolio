@@ -92,7 +92,7 @@ export default function BlogPostCard({
   }
 
   return (
-    <li className="-mx-6 border-b border-zinc-400 md:-mx-10 lg:-mx-16 dark:border-zinc-800">
+    <li className="-mx-6 border-b border-zinc-200 md:-mx-10 lg:-mx-16 dark:border-zinc-800">
       <Link
         href={`/blog/${post.slug}`}
         className="group grid gap-y-7 px-6 py-7 md:min-h-44 md:grid-cols-12 md:gap-x-8 md:gap-y-6 md:px-10 md:py-10 lg:gap-x-12 lg:px-16"
