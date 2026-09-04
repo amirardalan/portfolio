@@ -16,41 +16,41 @@ export const metadata: Metadata = {
 const process = [
   {
     number: '01',
-    title: 'Pay attention',
-    body: 'Start with people, context, goals, and constraints. Treat early assumptions as provisional and stay alert to what changes.',
+    title: 'Understand the context',
+    body: 'Start with people, goals, constraints, and what needs to change. Treat early assumptions as provisional before reaching for a solution.',
   },
   {
     number: '02',
-    title: 'Make to learn',
-    body: 'Sketches, prototypes, and code make ideas concrete enough to observe and respond to. They reveal directions without forcing a single answer.',
+    title: 'Make it tangible',
+    body: 'Sketches, prototypes, and code turn ideas into something that can be examined. They make it easier to compare directions and find what is worth pursuing.',
   },
   {
     number: '03',
     title: 'Put it in motion',
-    body: 'Take the strongest direction into production. Watch what happens, learn from it, and begin again.',
+    body: 'Take the strongest direction into production. Watch how it holds up in real use, then feed what you learn back into the work.',
   },
 ];
 
 const principles = [
   {
     number: '01',
-    title: 'Care is in the details',
-    body: 'Clarity, consistency, and accessibility show people that their time and attention matter.',
+    title: 'Start with the problem',
+    body: 'Understand what needs to change before reaching for a solution. Let the technical architecture and visual language follow from there.',
   },
   {
     number: '02',
-    title: 'Leave room',
-    body: 'Structure can offer direction while leaving room for people to find their own way.',
+    title: 'Shape the relationship',
+    body: 'Some interfaces should feel like appliances that get out of the way. Others should feel like instruments that invite exploration and reward time spent with them.',
   },
   {
     number: '03',
-    title: 'Code is a design material',
-    body: 'Working in code can be a useful way to explore how an idea behaves and responds in use.',
+    title: 'Design in code',
+    body: 'Code is not the last step after design. Starting in code reveals a branching set of decisions and interactions in real time, right where the product will live.',
   },
   {
     number: '04',
-    title: 'Work in the open',
-    body: 'Share work early, explain tradeoffs clearly, and make space for better ideas.',
+    title: 'Close the loop',
+    body: 'The first version is a question, not a conclusion. Ship it, pay attention to what happens, and let real use inform what comes next.',
   },
 ];
 
@@ -69,7 +69,7 @@ export default function About() {
   return (
     <article className="text-dark w-full dark:text-light">
       <header>
-        <TerrainHero eyebrow="Profile / About" counter="01 — 05">
+        <TerrainHero eyebrow="Profile / About" compact>
           <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
             <div className="md:col-span-8 lg:col-span-9">
               <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
@@ -87,7 +87,7 @@ export default function About() {
                   Focus
                 </p>
                 <p className="font-editorial col-span-3 text-base leading-snug font-normal tracking-tight md:mt-2 md:text-lg">
-                  Product design &amp; frontend engineering
+                  Product design and interface engineering
                 </p>
               </div>
 
@@ -96,33 +96,21 @@ export default function About() {
                   Strength
                 </p>
                 <p className="font-editorial col-span-3 text-base leading-snug font-normal tracking-tight md:mt-2 md:text-lg">
-                  Prototyping complex product interactions
+                  Seeing the whole system and making the details work
                 </p>
               </div>
 
               <div className="grid grid-cols-4 gap-4 py-4 md:block md:py-0">
                 <p className="text-xxs col-span-1 pt-1 font-sans tracking-[0.16em] text-zinc-500 uppercase md:pt-0 dark:text-zinc-400">
-                  Scope
+                  Range
                 </p>
                 <p className="font-editorial col-span-3 text-base leading-snug font-normal tracking-tight md:mt-2 md:text-lg">
-                  Early product direction to production code
+                  Early product direction through production code
                 </p>
               </div>
             </aside>
           </div>
 
-          <div className="mt-8 grid gap-y-8 border-zinc-300 pt-6 md:mt-16 md:grid-cols-12 md:gap-x-8 md:border-t md:pt-12 lg:gap-x-12 dark:border-zinc-700">
-            <p className="font-editorial max-w-xl text-2xl leading-tight font-normal tracking-tight text-zinc-800 md:col-span-5 md:text-3xl dark:text-zinc-200">
-              I like being involved early, while a product is still taking
-              shape.
-            </p>
-            <p className="font-editorial max-w-3xl text-lg leading-relaxed font-normal text-zinc-600 md:col-start-7 md:col-span-6 md:text-xl dark:text-zinc-300">
-              I work across interaction design and frontend engineering, using
-              each to inform the other. I care about clarity, intrigue,
-              thoughtful details, and software that respects the people using
-              it.
-            </p>
-          </div>
         </TerrainHero>
       </header>
 
@@ -135,7 +123,7 @@ export default function About() {
             <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] uppercase">
               <SectionGlyph className="text-current" /> How I work
             </p>
-            <span className="text-xxs font-mono opacity-60">02 — 05</span>
+            <span className="text-xxs font-mono opacity-60">01 — 05</span>
           </div>
 
           <div className="grid pt-9 md:grid-cols-12 md:gap-x-8 md:pt-12 lg:gap-x-12">
@@ -182,7 +170,7 @@ export default function About() {
               <SectionGlyph /> Principles
             </h2>
             <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
-              03 — 05
+              02 — 05
             </span>
           </div>
 
@@ -216,14 +204,51 @@ export default function About() {
       </section>
 
       <section
-        aria-labelledby="experience-heading"
+        aria-labelledby="uses-link-heading"
         className="border-t border-zinc-200 dark:border-zinc-800"
       >
+        <Link
+          href="/uses"
+          className="group mx-auto flex min-h-24 max-w-360 items-center justify-between gap-8 px-6 py-6 md:grid md:grid-cols-12 md:px-10 lg:px-16"
+        >
+          <div className="flex min-w-0 items-center gap-6 md:col-span-7 md:gap-10 lg:col-span-8">
+            <h2
+              id="uses-link-heading"
+              className="text-xxs flex shrink-0 items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400"
+            >
+              <SectionGlyph /> Toolkit
+            </h2>
+            <p className="font-editorial hidden truncate text-base text-zinc-600 sm:block dark:text-zinc-300">
+              Hardware, software, equipment, and tools I use.
+            </p>
+          </div>
+
+          <span className="text-primary flex shrink-0 items-center justify-between gap-8 font-mono text-xxs font-medium tracking-[0.12em] uppercase md:col-start-8 md:col-span-5 md:w-full md:pl-8 lg:col-start-9 lg:col-span-4 lg:pl-10">
+            <span className="flex items-center gap-2.5 md:-translate-x-3 lg:translate-x-0">
+              <span>View toolkit</span>
+              <ActionArrow direction="right" />
+            </span>
+            <span className="text-xxs font-mono tracking-normal text-zinc-400 tabular-nums dark:text-zinc-600">
+              03 — 05
+            </span>
+          </span>
+        </Link>
+      </section>
+
+      <section
+        aria-labelledby="experience-heading"
+        className="relative border-t border-zinc-200 dark:border-zinc-800"
+      >
+        <span className="text-xxs absolute top-14 right-6 font-mono text-zinc-400 md:top-20 md:right-10 lg:top-24 lg:right-16 dark:text-zinc-600">
+          04 — 05
+        </span>
         <div className="mx-auto grid max-w-[1440px] md:grid-cols-12">
           <div className="px-6 py-14 md:col-span-7 md:px-10 md:py-20 lg:col-span-8 lg:px-16 lg:py-24">
-            <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
-              <SectionGlyph /> Experience &amp; Resume
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
+                <SectionGlyph /> Experience &amp; Resume
+              </p>
+            </div>
             <h2
               id="experience-heading"
               className="font-editorial mt-8 max-w-4xl text-4xl leading-none font-medium tracking-tight text-balance sm:text-5xl lg:text-6xl"
@@ -237,15 +262,11 @@ export default function About() {
             </p>
           </div>
 
-          <div className="border-t border-zinc-200 p-6 text-dark md:col-span-5 md:border-t-0 md:px-8 md:pt-20 md:pb-8 lg:col-span-4 lg:px-10 lg:pt-24 lg:pb-10 dark:border-zinc-800 dark:text-light">
+          <div className="p-6 text-dark md:col-span-5 md:pr-10 md:pl-8 md:pt-20 md:pb-8 lg:col-span-4 lg:pr-16 lg:pl-10 lg:pt-24 lg:pb-10 dark:text-light">
             <div className="flex flex-col">
-              <span className="text-xxs self-end font-mono text-zinc-400 dark:text-zinc-600">
-                04 — 05
-              </span>
-
               <div className="mt-9">
                 <p className="font-editorial text-4xl leading-none font-medium tracking-tight">
-                  Career overview
+                  Selected experience
                 </p>
                 <p className="text-xxs mt-3 font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
                   Roles / Collaborations / Capabilities
@@ -323,32 +344,6 @@ export default function About() {
         </div>
       </section>
 
-      <section
-        aria-labelledby="uses-link-heading"
-        className="border-t border-zinc-200 dark:border-zinc-800"
-      >
-        <Link
-          href="/uses"
-          className="group mx-auto flex min-h-24 max-w-360 items-center justify-between gap-8 px-6 py-6 md:px-10 lg:px-16"
-        >
-          <div className="flex min-w-0 items-center gap-6 md:gap-10">
-            <h2
-              id="uses-link-heading"
-              className="text-xxs flex shrink-0 items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400"
-            >
-              <SectionGlyph /> Working setup
-            </h2>
-            <p className="font-editorial hidden truncate text-base text-zinc-600 sm:block dark:text-zinc-300">
-              Hardware, software, and tools I use.
-            </p>
-          </div>
-
-          <span className="text-primary flex shrink-0 items-center gap-2.5 font-mono text-xxs font-medium tracking-[0.12em] uppercase">
-            <span>View uses</span>
-            <ActionArrow direction="right" />
-          </span>
-        </Link>
-      </section>
     </article>
   );
 }

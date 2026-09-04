@@ -15,17 +15,6 @@ export const metadata: Metadata = {
 export default function Uses() {
   const computers = [
     {
-      title: 'MacBook Pro',
-      items: [
-        { value: '14" / Silver' },
-        { value: 'Apple M3 Pro' },
-        { value: '12-core CPU / 18-core GPU' },
-        { value: '36GB unified memory' },
-        { value: '1TB SSD' },
-        { value: 'macOS Tahoe' },
-      ],
-    },
-    {
       title: 'Custom PC',
       items: [
         { value: 'Windows 11' },
@@ -40,13 +29,14 @@ export default function Uses() {
       ],
     },
     {
-      title: 'ThinkPad T440s',
+      title: 'MacBook Pro',
       items: [
-        { value: 'Omarchy' },
-        { value: '14"' },
-        { value: 'Intel Core i5-4200U 2.6GHz' },
-        { value: '12GB DDR3L' },
-        { value: 'Samsung EVO 850 500GB' },
+        { value: 'macOS Tahoe' },
+        { value: '14" / Silver' },
+        { value: 'Apple M3 Pro' },
+        { value: '12-core CPU / 18-core GPU' },
+        { value: '36GB unified memory' },
+        { value: '1TB SSD' },
       ],
     },
     {
@@ -57,6 +47,16 @@ export default function Uses() {
         { value: 'Intel® Core™ Ultra 7 165U' },
         { value: '32GB LPDDR5X 6400MHz' },
         { value: '512GB SSD' },
+      ],
+    },
+    {
+      title: 'ThinkPad T440s',
+      items: [
+        { value: 'Omarchy' },
+        { value: '14"' },
+        { value: 'Intel Core i5-4200U 2.6GHz' },
+        { value: '12GB DDR3L' },
+        { value: 'Samsung EVO 850 500GB' },
       ],
     },
   ];
@@ -76,6 +76,7 @@ export default function Uses() {
       items: [
         { value: 'Beyerdynamic DT 770 PRO' },
         { value: 'Beyerdynamic DT 270 PRO' },
+        { value: 'Sennheiser PC360' },
         { value: 'Apple AirPods Pro (Gen 2)' },
       ],
     },
@@ -86,6 +87,20 @@ export default function Uses() {
     {
       title: 'MIDI Controllers',
       items: [{ value: 'Korg nanoKONTROL 1' }, { value: 'Korg nanoPAD 1' }],
+    },
+  ];
+
+  const cameras = [
+    {
+      title: 'Photography',
+      items: [
+        { value: 'Fujifilm X-E5' },
+        { value: 'Fujinon XF23mm F/2.8 WR' },
+      ],
+    },
+    {
+      title: 'Action Cam',
+      items: [{ value: 'GoPro HERO8 Black' }],
     },
   ];
 
@@ -107,12 +122,12 @@ export default function Uses() {
       items: [{ value: 'Figma' }, { value: 'Aseprite' }],
     },
     {
-      title: 'Music Production',
-      items: [{ value: 'Ableton Live 12' }],
+      title: 'Editing',
+      items: [{ value: 'Darktable' }],
     },
     {
-      title: 'Playback',
-      items: [{ value: 'YouTube Music' }, { value: 'Apple Podcasts' }],
+      title: 'Music Production',
+      items: [{ value: 'Ableton Live 12' }],
     },
   ];
 
@@ -130,25 +145,26 @@ export default function Uses() {
   const sections = [
     {
       title: 'Computers',
-      description: 'The machines I build and work on.',
       items: computers,
       itemLabel: 'specifications',
     },
     {
       title: 'Peripherals',
-      description: 'Input, output, and audio equipment.',
       items: peripherals,
       itemLabel: 'peripherals',
     },
     {
+      title: 'Cameras',
+      items: cameras,
+      itemLabel: 'camera equipment',
+    },
+    {
       title: 'Software',
-      description: 'Applications for writing, designing, coding, and listening.',
       items: software,
       itemLabel: 'software',
     },
     {
       title: 'Tools',
-      description: 'The smaller utilities that keep the work moving.',
       items: tools,
       itemLabel: 'technology stack',
     },
@@ -157,27 +173,21 @@ export default function Uses() {
   return (
     <article className="w-full text-dark dark:text-light">
       <header>
-        <TerrainHero eyebrow="Index / Uses" counter="01 — 05">
+        <TerrainHero
+          eyebrow="Index / Uses"
+          showTerrainCanvas={false}
+          compact
+        >
           <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
-            <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:col-span-9 md:text-7xl lg:text-8xl">
-              The tools behind the work.
-            </h1>
-          </div>
-
-          <div className="mt-8 grid gap-y-8 border-zinc-300 pt-6 md:mt-16 md:grid-cols-12 md:gap-x-8 md:border-t md:pt-12 lg:gap-x-12 dark:border-zinc-700">
-            <p className="font-editorial max-w-xl text-2xl leading-tight font-normal tracking-tight text-zinc-800 md:col-span-5 md:text-3xl dark:text-zinc-200">
-              A working inventory of the things I use every day.
-            </p>
-            <p className="font-editorial max-w-3xl text-lg leading-relaxed font-normal text-zinc-600 md:col-start-7 md:col-span-6 md:text-xl dark:text-zinc-300">
-              Hardware, software, and small utilities for designing, building,
-              writing, and making music.
-            </p>
-          </div>
-        </TerrainHero>
+          <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:col-span-9 md:text-7xl lg:text-8xl">
+            The tools behind the work.
+          </h1>
+        </div>
+      </TerrainHero>
       </header>
 
       {sections.map((section, sectionIndex) => {
-        const sectionNumber = String(sectionIndex + 2).padStart(2, '0');
+        const sectionNumber = String(sectionIndex + 1).padStart(2, '0');
         const itemCount = section.items.reduce(
           (total, item) => total + item.items.length,
           0
@@ -206,9 +216,6 @@ export default function Uses() {
                 >
                   {section.title}
                 </h2>
-                <p className="font-editorial mt-4 max-w-sm text-base leading-relaxed text-zinc-600 md:text-lg dark:text-zinc-300">
-                  {section.description}
-                </p>
                 <p className="text-xxs mt-8 font-sans tracking-[0.16em] text-zinc-500 uppercase dark:text-zinc-400">
                   <span className="font-mono tabular-nums">
                     {String(itemCount).padStart(2, '0')} /
@@ -225,7 +232,6 @@ export default function Uses() {
                 {section.items.map((item, itemIndex) => (
                   <UsesItemCard
                     key={item.title}
-                    number={String(itemIndex + 1).padStart(2, '0')}
                     title={item.title}
                     items={item.items}
                     className={`border-zinc-200 p-6 md:p-8 lg:p-10 dark:border-zinc-800 ${

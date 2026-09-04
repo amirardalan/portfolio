@@ -4,7 +4,6 @@ type Item = {
 };
 
 export type UsesItemCardProps = {
-  number?: string;
   title?: string;
   subtitle?: string;
   items?: Item[];
@@ -13,7 +12,6 @@ export type UsesItemCardProps = {
 };
 
 const UsesItemCard = ({
-  number,
   title,
   subtitle,
   items,
@@ -22,11 +20,6 @@ const UsesItemCard = ({
 }: UsesItemCardProps) => {
   return (
     <article className={`flex flex-col ${className}`} aria-label={ariaLabel}>
-      {number && (
-        <span className="text-xxs font-mono text-zinc-400 tabular-nums dark:text-zinc-600">
-          {number} /
-        </span>
-      )}
       {title && (
         <h3 className="font-editorial mt-7 text-2xl leading-tight font-medium tracking-tight text-dark md:text-3xl dark:text-light">
           {title}
