@@ -69,7 +69,11 @@ export default function About() {
   return (
     <article className="text-dark w-full dark:text-light">
       <header>
-        <TerrainHero eyebrow="Profile / About" compact>
+        <TerrainHero
+          eyebrow="Profile / About"
+          compact
+          contentClassName="pb-20 md:pb-28"
+        >
           <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
             <div className="md:col-span-8 lg:col-span-9">
               <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
@@ -239,9 +243,11 @@ export default function About() {
         aria-labelledby="experience-heading"
         className="relative border-t border-zinc-200 dark:border-zinc-800"
       >
-        <span className="text-xxs absolute top-14 right-6 font-mono text-zinc-400 md:top-20 md:right-10 lg:top-24 lg:right-16 dark:text-zinc-600">
-          04 — 05
-        </span>
+        <div className="pointer-events-none absolute inset-x-0 top-14 mx-auto flex max-w-[1440px] justify-end px-6 md:top-20 md:px-10 lg:top-24 lg:px-16">
+          <span className="text-xxs font-mono text-zinc-400 dark:text-zinc-600">
+            04 — 05
+          </span>
+        </div>
         <div className="mx-auto grid max-w-[1440px] md:grid-cols-12">
           <div className="px-6 py-14 md:col-span-7 md:px-10 md:py-20 lg:col-span-8 lg:px-16 lg:py-24">
             <div className="flex items-center justify-between">
