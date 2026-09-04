@@ -161,7 +161,7 @@ export default function ThemeMenu() {
     <div className="relative" ref={menuRef} onKeyDown={handleKeyDown}>
       <button
         id="theme-menu-button"
-        className="group hover:text-primary focus-visible:outline-primary dark:hover:text-primary inline-flex size-10 items-center justify-center text-zinc-500 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 md:h-10 md:w-auto md:gap-2 md:px-2 dark:text-zinc-400"
+        className="group hover:text-primary focus-visible:outline-primary dark:hover:text-primary inline-flex size-10 cursor-pointer items-center justify-center text-zinc-500 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 md:h-10 md:w-auto md:gap-2 md:px-2 dark:text-zinc-400"
         onClick={toggleMenu}
         ref={buttonRef}
         aria-haspopup="menu"

@@ -8,7 +8,10 @@ import { selectedProjects } from '@/content/projects';
 export default function HomeContent() {
   return (
     <div className="text-dark dark:text-light w-full">
-      <TerrainHero eyebrow="Amir Ardalan · Design Engineer">
+      <TerrainHero
+        eyebrow="Amir Ardalan · Design Engineer"
+        showTerrainCanvas
+      >
         <div className="max-w-5xl">
           <h1 className="font-editorial text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-8xl">
             Complex ideas.

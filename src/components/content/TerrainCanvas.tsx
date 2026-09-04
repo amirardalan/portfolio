@@ -430,7 +430,13 @@ const getRandomArbitrary = (min: number, max: number) => {
 };
 
 // Canvas
-export default function TerrainCanvas() {
+export default function TerrainCanvas({
+  isReady,
+  onReady,
+}: {
+  isReady: boolean;
+  onReady: () => void;
+}) {
   const [detail] = useState(getRandomInt(MIN_DETAIL, MAX_DETAIL));
   const [amplitude] = useState(
     getRandomArbitrary(MIN_AMPLITUDE, MAX_AMPLITUDE)
@@ -478,13 +484,16 @@ export default function TerrainCanvas() {
     <button
       id="three-canvas"
       onClick={handleButtonClick}
-      className="animate-fade-in absolute inset-0 z-0 m-0 block h-full w-full cursor-pointer overflow-hidden border-none bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+      className={`absolute inset-0 z-0 m-0 block h-full w-full cursor-pointer overflow-hidden border-none bg-transparent p-0 outline-none transition-opacity duration-700 ease-out focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary ${isReady ? 'opacity-100' : 'opacity-0'}`}
       aria-label="Create a ripple in the interactive water study"
     >
       <Canvas
         gl={{ antialias: true }}
-        dpr={[1, 2]}
-        onCreated={({ camera }) => camera.lookAt(0.2, 0.2, 0.1)}
+        dpr={[1, 1.5]}
+        onCreated={({ camera }) => {
+          camera.lookAt(0.2, 0.2, 0.1);
+          onReady();
+        }}
         camera={{ position: [0.15, 0.4, 0.4] }}
       >
         <WaterSurface {...waterProps} />
