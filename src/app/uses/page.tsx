@@ -174,9 +174,10 @@ export default function Uses() {
     <article className="w-full text-dark dark:text-light">
       <header>
         <TerrainHero
-          eyebrow="Index / Uses"
+          eyebrow="Toolkit / Uses"
           showTerrainCanvas={false}
           compact
+          minHeightClassName="min-h-80 md:min-h-128"
         >
           <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
           <h1 className="font-editorial max-w-5xl text-5xl leading-none font-medium tracking-tight text-balance sm:text-6xl md:col-span-9 md:text-7xl lg:text-8xl">
@@ -197,10 +198,10 @@ export default function Uses() {
           <section
             key={section.title}
             aria-labelledby={`${section.title.toLowerCase()}-heading`}
-            className="border-t border-zinc-200 dark:border-zinc-800"
+            className={`${sectionIndex > 0 ? 'border-t' : ''} border-zinc-200 dark:border-zinc-800`}
           >
             <div className="mx-auto grid max-w-360 md:grid-cols-12">
-              <div className="px-6 py-10 md:col-span-4 md:px-10 md:py-14 lg:px-16 lg:py-16">
+              <div className="px-6 py-8 md:col-span-4 md:px-10 md:py-14 lg:px-16 lg:py-16">
                 <div className="flex items-center justify-between">
                   <p className="text-xxs flex items-center gap-2.5 font-sans tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
                     <SectionGlyph /> Inventory
@@ -226,7 +227,7 @@ export default function Uses() {
 
               <UsesItemGrid
                 columns={2}
-                className="border-t border-zinc-200 md:col-span-8 md:border-t-0 md:border-l dark:border-zinc-800"
+                className="md:col-span-8 md:border-l md:border-zinc-200 dark:border-zinc-800"
                 aria-labelledby={`${section.title.toLowerCase()}-heading`}
               >
                 {section.items.map((item, itemIndex) => (
@@ -234,9 +235,9 @@ export default function Uses() {
                     key={item.title}
                     title={item.title}
                     items={item.items}
-                    className={`border-zinc-200 p-6 md:p-8 lg:p-10 dark:border-zinc-800 ${
+                    className={`p-6 md:border-zinc-200 md:p-8 lg:p-10 dark:border-zinc-800 ${
                       itemIndex < section.items.length - 1
-                        ? 'border-b'
+                        ? 'md:border-b'
                         : ''
                     } ${
                       itemIndex >= section.items.length - 2

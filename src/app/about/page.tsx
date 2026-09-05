@@ -49,7 +49,7 @@ const principles = [
   },
   {
     number: '04',
-    title: 'Close the loop',
+    title: 'Learn from use',
     body: 'The first version is a question, not a conclusion. Ship it, pay attention to what happens, and let real use inform what comes next.',
   },
 ];
@@ -72,7 +72,8 @@ export default function About() {
         <TerrainHero
           eyebrow="Profile / About"
           compact
-          contentClassName="pb-20 md:pb-28"
+          contentClassName="pb-12 md:pb-28"
+          minHeightClassName="min-h-80 md:min-h-128"
         >
           <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
             <div className="md:col-span-8 lg:col-span-9">

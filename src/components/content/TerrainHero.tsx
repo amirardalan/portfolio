@@ -7,6 +7,7 @@ interface TerrainHeroProps {
   showTerrainCanvas?: boolean;
   compact?: boolean;
   contentClassName?: string;
+  minHeightClassName?: string;
   children: React.ReactNode;
 }
 
@@ -16,11 +17,16 @@ export default function TerrainHero({
   showTerrainCanvas = false,
   compact = false,
   contentClassName = 'pb-10 md:pb-16',
+  minHeightClassName,
   children,
 }: TerrainHeroProps) {
+  const minHeightClass =
+    minHeightClassName ??
+    (compact ? 'min-h-96 md:min-h-128' : 'min-h-128 md:min-h-180');
+
   return (
     <section
-      className={`relative isolate flex overflow-hidden ${compact ? 'min-h-96 md:min-h-128' : 'min-h-128 md:min-h-180'}`}
+      className={`relative isolate flex overflow-hidden ${minHeightClass}`}
     >
       <TerrainBackground showTerrainCanvas={showTerrainCanvas} />
 
