@@ -22,7 +22,7 @@
     "js-cookie": "^3.0.5",
     "next": "^16.2.11",
     "next-auth": "^5.0.0-beta.32",
-    "next-cloudinary": "^6.16.0",
+    "next-cloudinary": "^7.0.0",
     "next-mdx-remote": "^6.0.0",
     "pg": "^8.16.0",
     "posthog-js": "^1.248.1",
