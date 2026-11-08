@@ -74,7 +74,7 @@ export const selectedProjects: Project[] = [
     role: ['Product design', 'Interaction design', 'Frontend engineering'],
     status: 'Independent project',
     liveUrl: 'https://between.cards/',
-    caseStudyUrl: '/blog/between',
+    caseStudyUrl: '/blog/building-between',
     visual: {
       src: 'https://res.cloudinary.com/amir-ardalan/image/upload/v1785437862/Work/between-hero_dpetb6.png',
       alt: 'An ivory between field with connected cards containing photographs, notes, audio waveforms, drawings, and locations.',
